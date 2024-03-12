@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Versioning;
+using System.Resources;
 
 
 namespace Frontend.Forms
@@ -31,7 +32,6 @@ namespace Frontend.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStart));
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
@@ -50,7 +50,7 @@ namespace Frontend.Forms
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Image = Resources.SharedResources.Logo;
             pictureBox1.Location = new Point(25, 16);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(176, 174);
