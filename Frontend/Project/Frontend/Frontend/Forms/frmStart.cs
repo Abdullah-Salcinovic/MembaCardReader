@@ -19,7 +19,7 @@ namespace Frontend.Forms
 
         private void frmStart_Load(object sender, EventArgs e)
         {
-
+           
         }
     }
 }
