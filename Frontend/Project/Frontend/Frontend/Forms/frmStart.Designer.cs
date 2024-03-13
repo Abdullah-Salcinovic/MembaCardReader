@@ -32,7 +32,7 @@ namespace Frontend.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
+            pnlButtons = new Panel();
             pictureBox1 = new PictureBox();
             lblConnectionStatus = new Label();
             lblConnectionText = new Label();
@@ -42,26 +42,33 @@ namespace Frontend.Forms
             btnScanCard = new Button();
             btnConnection = new Button();
             pbLogo = new PictureBox();
-            panel1.SuspendLayout();
+            pnlConnection = new Panel();
+            cmbBaud = new ComboBox();
+            cmbPort = new ComboBox();
+            btnConnect = new Button();
+            lblBaud = new Label();
+            btnScanPort = new Button();
+            pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbLogo).BeginInit();
+            pnlConnection.SuspendLayout();
             SuspendLayout();
             // 
-            // panel1
+            // pnlButtons
             // 
-            panel1.Controls.Add(pictureBox1);
-            panel1.Controls.Add(lblConnectionStatus);
-            panel1.Controls.Add(lblConnectionText);
-            panel1.Controls.Add(btnUpdateUserResources);
-            panel1.Controls.Add(btnViewUsers);
-            panel1.Controls.Add(btnRegistration);
-            panel1.Controls.Add(btnScanCard);
-            panel1.Controls.Add(btnConnection);
-            panel1.Controls.Add(pbLogo);
-            panel1.Location = new Point(12, 12);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(230, 426);
-            panel1.TabIndex = 0;
+            pnlButtons.Controls.Add(pictureBox1);
+            pnlButtons.Controls.Add(lblConnectionStatus);
+            pnlButtons.Controls.Add(lblConnectionText);
+            pnlButtons.Controls.Add(btnUpdateUserResources);
+            pnlButtons.Controls.Add(btnViewUsers);
+            pnlButtons.Controls.Add(btnRegistration);
+            pnlButtons.Controls.Add(btnScanCard);
+            pnlButtons.Controls.Add(btnConnection);
+            pnlButtons.Controls.Add(pbLogo);
+            pnlButtons.Location = new Point(12, 12);
+            pnlButtons.Name = "pnlButtons";
+            pnlButtons.Size = new Size(230, 426);
+            pnlButtons.TabIndex = 0;
             // 
             // pictureBox1
             // 
@@ -167,28 +174,102 @@ namespace Frontend.Forms
             pbLogo.TabIndex = 0;
             pbLogo.TabStop = false;
             // 
+            // pnlConnection
+            // 
+            pnlConnection.BackColor = Color.Silver;
+            pnlConnection.Controls.Add(cmbBaud);
+            pnlConnection.Controls.Add(cmbPort);
+            pnlConnection.Controls.Add(btnConnect);
+            pnlConnection.Controls.Add(lblBaud);
+            pnlConnection.Controls.Add(btnScanPort);
+            pnlConnection.Location = new Point(248, 12);
+            pnlConnection.Name = "pnlConnection";
+            pnlConnection.Size = new Size(540, 426);
+            pnlConnection.TabIndex = 1;
+            // 
+            // cmbBaud
+            // 
+            cmbBaud.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbBaud.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cmbBaud.FormattingEnabled = true;
+            cmbBaud.Location = new Point(269, 62);
+            cmbBaud.Name = "cmbBaud";
+            cmbBaud.Size = new Size(156, 25);
+            cmbBaud.TabIndex = 6;
+            // 
+            // cmbPort
+            // 
+            cmbPort.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPort.Enabled = false;
+            cmbPort.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cmbPort.FormattingEnabled = true;
+            cmbPort.Location = new Point(269, 18);
+            cmbPort.Name = "cmbPort";
+            cmbPort.Size = new Size(156, 25);
+            cmbPort.TabIndex = 5;
+            // 
+            // btnConnect
+            // 
+            btnConnect.BackColor = Color.Gold;
+            btnConnect.Enabled = false;
+            btnConnect.FlatStyle = FlatStyle.Flat;
+            btnConnect.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnConnect.Location = new Point(20, 115);
+            btnConnect.Name = "btnConnect";
+            btnConnect.Size = new Size(176, 28);
+            btnConnect.TabIndex = 4;
+            btnConnect.Text = "Connect";
+            btnConnect.UseVisualStyleBackColor = false;
+            btnConnect.Click += btnConnect_Click;
+            // 
+            // lblBaud
+            // 
+            lblBaud.AutoSize = true;
+            lblBaud.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblBaud.Location = new Point(20, 65);
+            lblBaud.Name = "lblBaud";
+            lblBaud.Size = new Size(74, 17);
+            lblBaud.TabIndex = 3;
+            lblBaud.Text = "Baud Rate:";
+            // 
+            // btnScanPort
+            // 
+            btnScanPort.BackColor = Color.Gold;
+            btnScanPort.FlatStyle = FlatStyle.Flat;
+            btnScanPort.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnScanPort.Location = new Point(20, 15);
+            btnScanPort.Name = "btnScanPort";
+            btnScanPort.Size = new Size(176, 28);
+            btnScanPort.TabIndex = 2;
+            btnScanPort.Text = "Scan Port";
+            btnScanPort.UseVisualStyleBackColor = false;
+            btnScanPort.Click += btnScanPort_Click;
+            // 
             // frmStart
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(800, 450);
-            Controls.Add(panel1);
+            Controls.Add(pnlConnection);
+            Controls.Add(pnlButtons);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "frmStart";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Garaža Makerspace";
             Load += frmStart_Load;
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            pnlButtons.ResumeLayout(false);
+            pnlButtons.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbLogo).EndInit();
+            pnlConnection.ResumeLayout(false);
+            pnlConnection.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel panel1;
+        private Panel pnlButtons;
         private PictureBox pbLogo;
         private Button btnConnection;
         private Button btnUpdateUserResources;
@@ -198,5 +279,11 @@ namespace Frontend.Forms
         private Label lblConnectionText;
         private Label lblConnectionStatus;
         private PictureBox pictureBox1;
+        private Panel pnlConnection;
+        private Label lblBaud;
+        private Button btnScanPort;
+        private Button btnConnect;
+        private ComboBox cmbPort;
+        private ComboBox cmbBaud;
     }
 }
