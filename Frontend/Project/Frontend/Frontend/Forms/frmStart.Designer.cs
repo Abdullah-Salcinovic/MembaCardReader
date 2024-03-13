@@ -114,6 +114,7 @@ namespace Frontend.Forms
             btnUpdateUserResources.TabIndex = 5;
             btnUpdateUserResources.Text = "Update User Resources";
             btnUpdateUserResources.UseVisualStyleBackColor = false;
+            btnUpdateUserResources.Click += btnUpdateUserResources_Click;
             // 
             // btnViewUsers
             // 
@@ -126,6 +127,7 @@ namespace Frontend.Forms
             btnViewUsers.TabIndex = 4;
             btnViewUsers.Text = "View Users";
             btnViewUsers.UseVisualStyleBackColor = false;
+            btnViewUsers.Click += btnViewUsers_Click;
             // 
             // btnRegistration
             // 
@@ -138,6 +140,7 @@ namespace Frontend.Forms
             btnRegistration.TabIndex = 3;
             btnRegistration.Text = "Registration";
             btnRegistration.UseVisualStyleBackColor = false;
+            btnRegistration.Click += btnRegistration_Click;
             // 
             // btnScanCard
             // 
@@ -150,6 +153,7 @@ namespace Frontend.Forms
             btnScanCard.TabIndex = 2;
             btnScanCard.Text = "Scan Card";
             btnScanCard.UseVisualStyleBackColor = false;
+            btnScanCard.Click += btnScanCard_Click;
             // 
             // btnConnection
             // 
@@ -162,6 +166,7 @@ namespace Frontend.Forms
             btnConnection.TabIndex = 1;
             btnConnection.Text = "Connection";
             btnConnection.UseVisualStyleBackColor = false;
+            btnConnection.Click += btnConnection_Click;
             // 
             // pbLogo
             // 
@@ -196,6 +201,7 @@ namespace Frontend.Forms
             cmbBaud.Name = "cmbBaud";
             cmbBaud.Size = new Size(156, 25);
             cmbBaud.TabIndex = 6;
+            cmbBaud.SelectedIndexChanged += cmbBaud_SelectedIndexChanged;
             // 
             // cmbPort
             // 
@@ -207,6 +213,7 @@ namespace Frontend.Forms
             cmbPort.Name = "cmbPort";
             cmbPort.Size = new Size(156, 25);
             cmbPort.TabIndex = 5;
+            cmbPort.SelectedIndexChanged += cmbPort_SelectedIndexChanged;
             // 
             // btnConnect
             // 
@@ -241,7 +248,7 @@ namespace Frontend.Forms
             btnScanPort.Name = "btnScanPort";
             btnScanPort.Size = new Size(176, 28);
             btnScanPort.TabIndex = 2;
-            btnScanPort.Text = "Scan Port";
+            btnScanPort.Text = "Scan Ports";
             btnScanPort.UseVisualStyleBackColor = false;
             btnScanPort.Click += btnScanPort_Click;
             // 
