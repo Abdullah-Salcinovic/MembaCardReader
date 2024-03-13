@@ -13,9 +13,11 @@ namespace Frontend.Forms
 {
     public partial class frmStart : Form
     {
-        private List<UInt32> BaudRates;
+        private List<Int32> BaudRates;
 
         private List<string> PortNames;
+
+        private List<string> ValidPorts;
 
 
         public frmStart()
@@ -23,7 +25,7 @@ namespace Frontend.Forms
             InitializeComponent();
 
 
-            this.BaudRates  = new List<UInt32>() {
+            this.BaudRates  = new List<Int32>() {
              1200,
              2400,
              4800,
@@ -35,12 +37,12 @@ namespace Frontend.Forms
              115200};
 
             this.PortNames = new List<string>();
-
+            this.ValidPorts = new List<string>();
         }
 
         private void frmStart_Load(object sender, EventArgs e)
         {
-            this.cmbBaud.DataSource= BaudRates;
+            this.cmbBaud.DataSource = BaudRates;
             this.cmbBaud.SelectedIndex = 3;
             ScanPorts();
 
@@ -52,7 +54,51 @@ namespace Frontend.Forms
 
             this.PortNames = SerialPort.GetPortNames().ToList();
 
-            MessageBox.Show($"{this.PortNames.Count()}");
+            foreach (string portName in this.PortNames)
+            {
+                SerialPort tempSerialPort = new SerialPort(portName);
+
+                tempSerialPort.Open();
+
+                if (cmbBaud.SelectedItem!=null)
+                {
+
+                    tempSerialPort.BaudRate=(int)this.cmbBaud.SelectedItem;
+
+                }
+
+                else
+                {
+
+                    tempSerialPort.BaudRate = 9600;
+                }
+
+                
+
+                tempSerialPort.WriteLine("T\n");
+                MessageBox.Show(portName);
+
+
+                Thread.Sleep(500);
+                
+
+                string msg = tempSerialPort.ReadExisting();
+
+
+                
+                
+                
+
+                
+                
+
+                tempSerialPort.Close();
+
+                tempSerialPort.Dispose();
+            }
+
+
+
 
             if (this.cmbPort.Enabled==false && this.PortNames.Count>0)
             {
