@@ -14,6 +14,9 @@ using System.Drawing.Text;
 
 namespace Frontend.Forms
 {
+
+    //Panel Location : 248;12;
+
     public partial class frmStart : Form
     {
         private List<Int32> BaudRates;
@@ -25,8 +28,10 @@ namespace Frontend.Forms
         private SerialPort? OpenPort;
 
         private bool Connected;
-        
-        
+
+        private Panel CurrentPanel;
+
+        private bool EditMode;
 
         public frmStart()
         {
@@ -47,8 +52,9 @@ namespace Frontend.Forms
             this.PortNames = new List<string>();
             this.ValidPorts = new List<string>();
             this.Connected = false;
-            
-           
+            this.CurrentPanel=this.pnlConnection;
+            Panel_Switch(this.CurrentPanel);
+
         }
 
         private void frmStart_Load(object sender, EventArgs e)
@@ -57,6 +63,8 @@ namespace Frontend.Forms
             this.cmbBaud.SelectedIndex = 3;
             ScanPorts();
             ConnectionStatusLock();
+
+
         }
 
         private void ScanPorts()
@@ -83,34 +91,42 @@ namespace Frontend.Forms
                     tempSerialPort.BaudRate = 9600;
                 }
 
-                
-                tempSerialPort.Open();              
-
-                
-
-                tempSerialPort.WriteLine("Emrah\n");               
-
-
-                Thread.Sleep(100);
-                
-
-                string msg = tempSerialPort.ReadExisting();
-
-                if (msg=="Abdullah\n")
+                try
                 {
+                    tempSerialPort.Open();
 
-                    ValidPorts.Add(portName);
+
+
+                    tempSerialPort.WriteLine("Emrah\n");
+
+
+                    Thread.Sleep(100);
+
+
+                    string msg = tempSerialPort.ReadExisting();
+
+                    if (msg=="Abdullah\n")
+                    {
+
+                        ValidPorts.Add(portName);
+
+                    }
+
+
+
+                    tempSerialPort.Close();
+
+                    tempSerialPort.Dispose();
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show($"Device port not opening. Please check your connection at {portName}", "Error");
 
                 }
 
-                
 
-                tempSerialPort.Close();
-
-                tempSerialPort.Dispose();
             }
-
-           
 
 
             if (this.ValidPorts.Count>0)
@@ -124,7 +140,7 @@ namespace Frontend.Forms
             else
             {
                 this.cmbPort.Enabled=false;
-                MessageBox.Show("Please ensure your device can see a valid card reader.","No card readers found.");
+                MessageBox.Show("Please ensure your device can see a valid card reader.", "No card readers found.");
             }
             this.btnScanPort.Enabled = true;
         }
@@ -133,7 +149,7 @@ namespace Frontend.Forms
         private void btnScanPort_Click(object sender, EventArgs e)
         {
             ScanPorts();
-            
+
 
             Verify_Selection();
         }
@@ -183,6 +199,9 @@ namespace Frontend.Forms
                     {
                         this.btnConnect.Text="Disconnect";
                         this.lblConnectionStatus.Text="Connected";
+                        this.cmbBaud.Enabled=false;
+                        this.cmbPort.Enabled=false;
+                        this.btnScanPort.Enabled=false;
                         this.pbConnection.Image=Resources.SharedResources.Green;
                         this.Connected=true;
                         ConnectionStatusLock();
@@ -190,14 +209,14 @@ namespace Frontend.Forms
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show($"Device port not opening. Please check your connection at {cmbPort.SelectedItem}","Error");
-                    throw;
+                    MessageBox.Show($"Device port not opening. Please check your connection at {cmbPort.SelectedItem}", "Error");
+
                 }
 
-               
+
             }
 
-           
+
 
 
             else
@@ -212,11 +231,14 @@ namespace Frontend.Forms
                 this.btnConnect.Text="Connect";
                 this.lblConnectionStatus.Text="Disconnected";
                 this.Connected =false;
+                this.cmbBaud.Enabled=true;
+                this.cmbPort.Enabled=true;
+                this.btnScanPort.Enabled =true;
                 ConnectionStatusLock();
                 this.pbConnection.Image=Resources.SharedResources.Red;
             }
 
-            
+
 
         }
 
@@ -224,35 +246,29 @@ namespace Frontend.Forms
         {
             this.btnConnection.Enabled=this.Connected;
             this.btnScanCard.Enabled=this.Connected;
-            this.btnRegistration.Enabled=this.Connected;
             this.btnViewUsers.Enabled=this.Connected;
-            this.btnUpdateUserResources.Enabled=this.Connected;
+
         }
 
         private void btnConnection_Click(object sender, EventArgs e)
         {
-
+            this.CurrentPanel=pnlConnection;
+            Panel_Switch(this.CurrentPanel);
         }
 
         private void btnScanCard_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void btnRegistration_Click(object sender, EventArgs e)
-        {
-
+            this.CurrentPanel=this.pnlScan;
+            Panel_Switch(this.CurrentPanel);
         }
 
         private void btnViewUsers_Click(object sender, EventArgs e)
         {
-
+            //this.CurrentPanel=4;
+            Panel_Switch(this.CurrentPanel);
         }
 
-        private void btnUpdateUserResources_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void cmbPort_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -264,17 +280,63 @@ namespace Frontend.Forms
             Verify_Selection();
         }
 
+
+        private void Panel_Switch(Panel Selection)
+        {
+            foreach (Panel pnl in this.Controls)
+            {
+                if (pnl == Selection || pnl == this.pnlButtons)
+                {
+                    pnl.Visible =true;
+                }
+
+                else
+                {
+                    pnl.Visible=false;
+                }
+
+            }
+
+
+
+
+        }
+
+
+
+
+
         private void Verify_Selection()
         {
-            if(this.cmbBaud.SelectedItem!=null && this.cmbPort.SelectedItem!=null)
+            if (this.cmbBaud.SelectedItem!=null && this.cmbPort.SelectedItem!=null)
             {
                 this.btnConnect.Enabled = true;
             }
 
             else
             {
-                this.btnConnect.Enabled=false; 
+                this.btnConnect.Enabled=false;
             }
         }
+
+        private void cbEdit_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        private void btnScan_Click(object sender, EventArgs e)
+        {
+
+        
+        
+        }
+
+        private void ScanCard()
+        {
+
+        }
+
     }
 }
