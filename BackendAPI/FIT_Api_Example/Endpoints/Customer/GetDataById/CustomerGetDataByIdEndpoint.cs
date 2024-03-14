@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Endpoints.Customer.GetDataById
 {
-    [Route("api/[controller]")]
+    [Route("api/customer")]
     [ApiController]
     public class CustomerGetDataByIdEndpoint : ControllerBase
     {
@@ -16,9 +16,9 @@ namespace Backend.Endpoints.Customer.GetDataById
         }
 
         [HttpGet]
-        public ActionResult<CustomerGetDataByIdRes> GetUstanovaZdravstva([FromQuery] int id)
+        public ActionResult<CustomerGetDataByIdRes> GetCustomers([FromQuery] int id)
         {
-            var ustanovaZdravstva = _context.Customers.OrderByDescending(x => x.Id)
+            var customer = _context.Customers.OrderByDescending(x => x.Id)
                 .Where(x => x.Id == id)
                 .Select(x => new CustomerGetDataByIdRes()
                 {
@@ -32,12 +32,12 @@ namespace Backend.Endpoints.Customer.GetDataById
                     Memberships = x.Memberships
                 }).Single();
 
-            if (ustanovaZdravstva == null)
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return ustanovaZdravstva;
+            return customer;
         }
     }
 }

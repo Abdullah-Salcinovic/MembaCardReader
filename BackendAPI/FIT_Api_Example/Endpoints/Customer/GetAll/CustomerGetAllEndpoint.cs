@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Endpoints.Customer.GetAll
 {
-    [Route("api/[controller]")]
+    [Route("api/customers")]
     [ApiController]
     public class CustomerGetAllEndpoint : ControllerBase
     {
