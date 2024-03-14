@@ -26,3 +26,4 @@ C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Fronten
 C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.IO.Ports.dll
 C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-windows\Frontend.csproj.AssemblyReference.cache
 C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-windows\Frontend.csproj.Up2Date
+C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-windows\Frontend.Properties.Resources.resources

@@ -32,8 +32,9 @@ namespace Frontend.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStart));
             pnlButtons = new Panel();
-            pictureBox1 = new PictureBox();
+            pbConnection = new PictureBox();
             lblConnectionStatus = new Label();
             lblConnectionText = new Label();
             btnUpdateUserResources = new Button();
@@ -49,14 +50,14 @@ namespace Frontend.Forms
             lblBaud = new Label();
             btnScanPort = new Button();
             pnlButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbConnection).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbLogo).BeginInit();
             pnlConnection.SuspendLayout();
             SuspendLayout();
             // 
             // pnlButtons
             // 
-            pnlButtons.Controls.Add(pictureBox1);
+            pnlButtons.Controls.Add(pbConnection);
             pnlButtons.Controls.Add(lblConnectionStatus);
             pnlButtons.Controls.Add(lblConnectionText);
             pnlButtons.Controls.Add(btnUpdateUserResources);
@@ -70,16 +71,16 @@ namespace Frontend.Forms
             pnlButtons.Size = new Size(230, 426);
             pnlButtons.TabIndex = 0;
             // 
-            // pictureBox1
+            // pbConnection
             // 
-            pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.Image = Resources.SharedResources.Red;
-            pictureBox1.Location = new Point(201, 388);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(15, 15);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 8;
-            pictureBox1.TabStop = false;
+            pbConnection.BackColor = Color.Transparent;
+            pbConnection.Image = (Image)resources.GetObject("pbConnection.Image");
+            pbConnection.Location = new Point(201, 388);
+            pbConnection.Name = "pbConnection";
+            pbConnection.Size = new Size(15, 15);
+            pbConnection.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbConnection.TabIndex = 8;
+            pbConnection.TabStop = false;
             // 
             // lblConnectionStatus
             // 
@@ -108,7 +109,7 @@ namespace Frontend.Forms
             btnUpdateUserResources.BackColor = Color.Gold;
             btnUpdateUserResources.FlatStyle = FlatStyle.Flat;
             btnUpdateUserResources.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnUpdateUserResources.Location = new Point(25, 332);
+            btnUpdateUserResources.Location = new Point(25, 340);
             btnUpdateUserResources.Name = "btnUpdateUserResources";
             btnUpdateUserResources.Size = new Size(176, 28);
             btnUpdateUserResources.TabIndex = 5;
@@ -121,7 +122,7 @@ namespace Frontend.Forms
             btnViewUsers.BackColor = Color.Gold;
             btnViewUsers.FlatStyle = FlatStyle.Flat;
             btnViewUsers.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnViewUsers.Location = new Point(25, 298);
+            btnViewUsers.Location = new Point(25, 306);
             btnViewUsers.Name = "btnViewUsers";
             btnViewUsers.Size = new Size(176, 28);
             btnViewUsers.TabIndex = 4;
@@ -134,7 +135,7 @@ namespace Frontend.Forms
             btnRegistration.BackColor = Color.Gold;
             btnRegistration.FlatStyle = FlatStyle.Flat;
             btnRegistration.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnRegistration.Location = new Point(25, 264);
+            btnRegistration.Location = new Point(25, 272);
             btnRegistration.Name = "btnRegistration";
             btnRegistration.Size = new Size(176, 28);
             btnRegistration.TabIndex = 3;
@@ -147,7 +148,7 @@ namespace Frontend.Forms
             btnScanCard.BackColor = Color.Gold;
             btnScanCard.FlatStyle = FlatStyle.Flat;
             btnScanCard.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnScanCard.Location = new Point(25, 230);
+            btnScanCard.Location = new Point(25, 238);
             btnScanCard.Name = "btnScanCard";
             btnScanCard.Size = new Size(176, 28);
             btnScanCard.TabIndex = 2;
@@ -160,7 +161,7 @@ namespace Frontend.Forms
             btnConnection.BackColor = Color.Gold;
             btnConnection.FlatStyle = FlatStyle.Flat;
             btnConnection.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnConnection.Location = new Point(25, 196);
+            btnConnection.Location = new Point(25, 204);
             btnConnection.Name = "btnConnection";
             btnConnection.Size = new Size(176, 28);
             btnConnection.TabIndex = 1;
@@ -171,8 +172,8 @@ namespace Frontend.Forms
             // pbLogo
             // 
             pbLogo.BackColor = Color.Transparent;
-            pbLogo.Image = Resources.SharedResources.Logo;
-            pbLogo.Location = new Point(25, 16);
+            pbLogo.Image = (Image)resources.GetObject("pbLogo.Image");
+            pbLogo.Location = new Point(25, 15);
             pbLogo.Name = "pbLogo";
             pbLogo.Size = new Size(176, 174);
             pbLogo.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -267,7 +268,7 @@ namespace Frontend.Forms
             Load += frmStart_Load;
             pnlButtons.ResumeLayout(false);
             pnlButtons.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbConnection).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbLogo).EndInit();
             pnlConnection.ResumeLayout(false);
             pnlConnection.PerformLayout();
@@ -285,7 +286,7 @@ namespace Frontend.Forms
         private Button btnScanCard;
         private Label lblConnectionText;
         private Label lblConnectionStatus;
-        private PictureBox pictureBox1;
+        private PictureBox pbConnection;
         private Panel pnlConnection;
         private Label lblBaud;
         private Button btnScanPort;
