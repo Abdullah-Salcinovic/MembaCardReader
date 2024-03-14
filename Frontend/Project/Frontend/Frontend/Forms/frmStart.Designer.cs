@@ -32,6 +32,7 @@ namespace Frontend.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStart));
             pnlButtons = new Panel();
             pbConnection = new PictureBox();
@@ -51,10 +52,11 @@ namespace Frontend.Forms
             grpScan = new GroupBox();
             cbEdit = new CheckBox();
             lblId = new Label();
-            textBox4 = new TextBox();
-            pictureBox1 = new PictureBox();
+            txtId = new TextBox();
+            pbSubscription = new PictureBox();
             btnScan = new Button();
             grpInfo = new GroupBox();
+            pbValid = new PictureBox();
             btnClear = new Button();
             btnSaveChanges = new Button();
             lblValid = new Label();
@@ -63,22 +65,25 @@ namespace Frontend.Forms
             lblPhone = new Label();
             lblDoB = new Label();
             lblSex = new Label();
-            dateTimePicker2 = new DateTimePicker();
-            comboBox2 = new ComboBox();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
-            dateTimePicker1 = new DateTimePicker();
-            comboBox1 = new ComboBox();
-            textBox1 = new TextBox();
+            dtpValid = new DateTimePicker();
+            cmbSubscription = new ComboBox();
+            txtEmail = new TextBox();
+            txtNumber = new TextBox();
+            dtpDoB = new DateTimePicker();
+            cmbSex = new ComboBox();
+            txtName = new TextBox();
             lblName = new Label();
+            err = new ErrorProvider(components);
             pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbConnection).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbLogo).BeginInit();
             pnlConnection.SuspendLayout();
             pnlScan.SuspendLayout();
             grpScan.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbSubscription).BeginInit();
             grpInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbValid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)err).BeginInit();
             SuspendLayout();
             // 
             // pnlButtons
@@ -267,8 +272,8 @@ namespace Frontend.Forms
             // 
             grpScan.Controls.Add(cbEdit);
             grpScan.Controls.Add(lblId);
-            grpScan.Controls.Add(textBox4);
-            grpScan.Controls.Add(pictureBox1);
+            grpScan.Controls.Add(txtId);
+            grpScan.Controls.Add(pbSubscription);
             grpScan.Controls.Add(btnScan);
             grpScan.Location = new Point(3, 9);
             grpScan.Name = "grpScan";
@@ -282,9 +287,9 @@ namespace Frontend.Forms
             cbEdit.AutoSize = true;
             cbEdit.Location = new Point(8, 59);
             cbEdit.Name = "cbEdit";
-            cbEdit.Size = new Size(93, 19);
+            cbEdit.Size = new Size(80, 19);
             cbEdit.TabIndex = 19;
-            cbEdit.Text = "Existing User";
+            cbEdit.Text = "Edit Mode";
             cbEdit.UseVisualStyleBackColor = true;
             cbEdit.CheckedChanged += cbEdit_CheckedChanged;
             // 
@@ -297,23 +302,23 @@ namespace Frontend.Forms
             lblId.TabIndex = 18;
             lblId.Text = "Id:";
             // 
-            // textBox4
+            // txtId
             // 
-            textBox4.Location = new Point(6, 140);
-            textBox4.Name = "textBox4";
-            textBox4.ReadOnly = true;
-            textBox4.Size = new Size(113, 23);
-            textBox4.TabIndex = 17;
+            txtId.Location = new Point(6, 140);
+            txtId.Name = "txtId";
+            txtId.ReadOnly = true;
+            txtId.Size = new Size(113, 23);
+            txtId.TabIndex = 17;
             // 
-            // pictureBox1
+            // pbSubscription
             // 
-            pictureBox1.BackColor = Color.DarkGray;
-            pictureBox1.Location = new Point(125, 22);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(403, 152);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 16;
-            pictureBox1.TabStop = false;
+            pbSubscription.BackColor = Color.DarkGray;
+            pbSubscription.Location = new Point(125, 22);
+            pbSubscription.Name = "pbSubscription";
+            pbSubscription.Size = new Size(403, 152);
+            pbSubscription.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbSubscription.TabIndex = 16;
+            pbSubscription.TabStop = false;
             // 
             // btnScan
             // 
@@ -330,6 +335,7 @@ namespace Frontend.Forms
             // 
             // grpInfo
             // 
+            grpInfo.Controls.Add(pbValid);
             grpInfo.Controls.Add(btnClear);
             grpInfo.Controls.Add(btnSaveChanges);
             grpInfo.Controls.Add(lblValid);
@@ -338,13 +344,13 @@ namespace Frontend.Forms
             grpInfo.Controls.Add(lblPhone);
             grpInfo.Controls.Add(lblDoB);
             grpInfo.Controls.Add(lblSex);
-            grpInfo.Controls.Add(dateTimePicker2);
-            grpInfo.Controls.Add(comboBox2);
-            grpInfo.Controls.Add(textBox3);
-            grpInfo.Controls.Add(textBox2);
-            grpInfo.Controls.Add(dateTimePicker1);
-            grpInfo.Controls.Add(comboBox1);
-            grpInfo.Controls.Add(textBox1);
+            grpInfo.Controls.Add(dtpValid);
+            grpInfo.Controls.Add(cmbSubscription);
+            grpInfo.Controls.Add(txtEmail);
+            grpInfo.Controls.Add(txtNumber);
+            grpInfo.Controls.Add(dtpDoB);
+            grpInfo.Controls.Add(cmbSex);
+            grpInfo.Controls.Add(txtName);
             grpInfo.Controls.Add(lblName);
             grpInfo.Location = new Point(3, 194);
             grpInfo.Name = "grpInfo";
@@ -352,6 +358,16 @@ namespace Frontend.Forms
             grpInfo.TabIndex = 0;
             grpInfo.TabStop = false;
             grpInfo.Text = "Info";
+            // 
+            // pbValid
+            // 
+            pbValid.BackColor = Color.Silver;
+            pbValid.Location = new Point(406, 126);
+            pbValid.Name = "pbValid";
+            pbValid.Size = new Size(111, 89);
+            pbValid.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbValid.TabIndex = 16;
+            pbValid.TabStop = false;
             // 
             // btnClear
             // 
@@ -364,6 +380,7 @@ namespace Frontend.Forms
             btnClear.TabIndex = 15;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = false;
+            btnClear.Click += btnClear_Click;
             // 
             // btnSaveChanges
             // 
@@ -376,6 +393,7 @@ namespace Frontend.Forms
             btnSaveChanges.TabIndex = 14;
             btnSaveChanges.Text = "Save Changes";
             btnSaveChanges.UseVisualStyleBackColor = false;
+            btnSaveChanges.Click += btnSaveChanges_Click;
             // 
             // lblValid
             // 
@@ -431,58 +449,59 @@ namespace Frontend.Forms
             lblSex.TabIndex = 8;
             lblSex.Text = "Sex:";
             // 
-            // dateTimePicker2
+            // dtpValid
             // 
-            dateTimePicker2.Location = new Point(176, 192);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(200, 23);
-            dateTimePicker2.TabIndex = 7;
+            dtpValid.Location = new Point(144, 194);
+            dtpValid.Name = "dtpValid";
+            dtpValid.Size = new Size(200, 23);
+            dtpValid.TabIndex = 7;
+            dtpValid.ValueChanged += dtpValid_ValueChanged;
             // 
-            // comboBox2
+            // cmbSubscription
             // 
-            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(176, 163);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(200, 23);
-            comboBox2.TabIndex = 6;
+            cmbSubscription.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSubscription.FormattingEnabled = true;
+            cmbSubscription.Location = new Point(144, 165);
+            cmbSubscription.Name = "cmbSubscription";
+            cmbSubscription.Size = new Size(200, 23);
+            cmbSubscription.TabIndex = 6;
             // 
-            // textBox3
+            // txtEmail
             // 
-            textBox3.Location = new Point(176, 134);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(200, 23);
-            textBox3.TabIndex = 5;
+            txtEmail.Location = new Point(144, 136);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(200, 23);
+            txtEmail.TabIndex = 5;
             // 
-            // textBox2
+            // txtNumber
             // 
-            textBox2.Location = new Point(176, 105);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(200, 23);
-            textBox2.TabIndex = 4;
+            txtNumber.Location = new Point(144, 107);
+            txtNumber.Name = "txtNumber";
+            txtNumber.Size = new Size(200, 23);
+            txtNumber.TabIndex = 4;
             // 
-            // dateTimePicker1
+            // dtpDoB
             // 
-            dateTimePicker1.Location = new Point(176, 76);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
-            dateTimePicker1.TabIndex = 3;
+            dtpDoB.Location = new Point(144, 78);
+            dtpDoB.Name = "dtpDoB";
+            dtpDoB.Size = new Size(200, 23);
+            dtpDoB.TabIndex = 3;
             // 
-            // comboBox1
+            // cmbSex
             // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(176, 47);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(200, 23);
-            comboBox1.TabIndex = 2;
+            cmbSex.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSex.FormattingEnabled = true;
+            cmbSex.Location = new Point(144, 49);
+            cmbSex.Name = "cmbSex";
+            cmbSex.Size = new Size(200, 23);
+            cmbSex.TabIndex = 2;
             // 
-            // textBox1
+            // txtName
             // 
-            textBox1.Location = new Point(176, 18);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(200, 23);
-            textBox1.TabIndex = 1;
+            txtName.Location = new Point(144, 20);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(200, 23);
+            txtName.TabIndex = 1;
             // 
             // lblName
             // 
@@ -492,6 +511,10 @@ namespace Frontend.Forms
             lblName.Size = new Size(42, 15);
             lblName.TabIndex = 0;
             lblName.Text = "Name:";
+            // 
+            // err
+            // 
+            err.ContainerControl = this;
             // 
             // frmStart
             // 
@@ -516,9 +539,11 @@ namespace Frontend.Forms
             pnlScan.ResumeLayout(false);
             grpScan.ResumeLayout(false);
             grpScan.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbSubscription).EndInit();
             grpInfo.ResumeLayout(false);
             grpInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbValid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)err).EndInit();
             ResumeLayout(false);
         }
 
@@ -540,14 +565,14 @@ namespace Frontend.Forms
         private ComboBox cmbBaud;
         private Panel pnlScan;
         private GroupBox grpInfo;
-        private TextBox textBox1;
+        private TextBox txtName;
         private Label lblName;
-        private ComboBox comboBox1;
-        private DateTimePicker dateTimePicker2;
-        private ComboBox comboBox2;
-        private TextBox textBox3;
-        private TextBox textBox2;
-        private DateTimePicker dateTimePicker1;
+        private ComboBox cmbSex;
+        private DateTimePicker dtpValid;
+        private ComboBox cmbSubscription;
+        private TextBox txtEmail;
+        private TextBox txtNumber;
+        private DateTimePicker dtpDoB;
         private Label lblValid;
         private Label lblSubscription;
         private Label lblEMail;
@@ -558,9 +583,11 @@ namespace Frontend.Forms
         private Button btnClear;
         private GroupBox grpScan;
         private Button btnScan;
-        private PictureBox pictureBox1;
-        private TextBox textBox4;
+        private PictureBox pbSubscription;
+        private TextBox txtId;
         private Label lblId;
         private CheckBox cbEdit;
+        private PictureBox pbValid;
+        private ErrorProvider err;
     }
 }
