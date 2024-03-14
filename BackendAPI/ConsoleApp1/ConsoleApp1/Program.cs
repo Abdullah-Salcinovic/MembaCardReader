@@ -1,27 +1,29 @@
-﻿using System.IO.Ports;
-using System.Security.Principal;
+﻿using System;
+using System.Text.RegularExpressions;
 
 class Program
 {
-    public static async Task Main()
+    static void Main(string[] args)
     {
-        using var httpClient = new HttpClient();
+        string phoneNumberPattern = @"^\+?[0-9]{1,3}-?[0-9]{2,3}-?[0-9]{2,3}-?[0-9]{2,3}$";
+        string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
 
-        string baseUrl = "http://192.168.1.203:5174/api";
+        string phoneNumber = "+360-3411151";
+        string num1 = "060-341-1151";
+        string num2 = "060-341-11-51";
+        string num3 = "061-824-259";
+        string email = "example@example.com";
 
-        string endpoint = "/customer?id=1";
+        bool isPhoneNumberValid = Regex.IsMatch(phoneNumber, phoneNumberPattern);
+        bool valid = Regex.IsMatch(num1, phoneNumberPattern);
+        bool valid2 = Regex.IsMatch(num2, phoneNumberPattern);
+        bool valid3 = Regex.IsMatch(num3, phoneNumberPattern);
+        bool isEmailValid = Regex.IsMatch(email, emailPattern);
 
-        string requestUrl = baseUrl + endpoint;
-
-        static async Task GetAsync(HttpClient httpClient, string uri)
-        {
-            using HttpResponseMessage response = await httpClient.GetAsync(uri);
-
-
-            var jsonResponse = await response.Content.ReadAsStringAsync();
-            Console.WriteLine($"{jsonResponse}\n");
-        }
-
-        await GetAsync(httpClient, requestUrl);
+        Console.WriteLine($"Is phone number 1 valid? {isPhoneNumberValid}");
+        Console.WriteLine($"Is phone number 2 valid? {valid}");
+        Console.WriteLine($"Is phone number 3 valid? {valid2}");
+        Console.WriteLine($"Is phone number 4 valid? {valid3}");
+        Console.WriteLine($"Is email valid? {isEmailValid}");
     }
 }
