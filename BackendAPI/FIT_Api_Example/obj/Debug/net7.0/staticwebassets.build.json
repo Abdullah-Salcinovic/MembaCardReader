@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "Hash": "zUgsEnOUPvR2uHj5k3D08a94uzx5oIlV5pZTh9BEC3o=",
+  "Source": "Backend",
+  "BasePath": "_content/Backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Backend\\wwwroot",
+      "Source": "Backend",
+      "ContentRoot": "C:\\rs1v10\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\rs1v10\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\profile_images\\0e3d05f1-a543-4e81-b3b3-3b13c6fded19.png",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\rs1v10\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "profile_images/0e3d05f1-a543-4e81-b3b3-3b13c6fded19.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profile_images\\0e3d05f1-a543-4e81-b3b3-3b13c6fded19.png"
+    },
+    {
+      "Identity": "C:\\rs1v10\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\profile_images\\empty.png",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\rs1v10\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "profile_images/empty.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profile_images\\empty.png"
+    }
+  ]
+}
