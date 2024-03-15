@@ -86,11 +86,14 @@ namespace Frontend.Forms
         private void frmStart_Load(object sender, EventArgs e)
         {
 
-            ScanPorts();
+            
             ConnectionStatusLock();
             this.cmbSex.DataSource= Sexes;
             this.cmbSubscription.DataSource=Subscriptions;
             HandleEdit();
+
+
+            ScanPorts();
         }
 
         private void ScanPorts()
@@ -219,7 +222,7 @@ namespace Frontend.Forms
                     Thread.Sleep(SCN.ID_DELAY);
 
 
-                    string msg = this.OpenPort.ReadExisting();
+                    string msg = this.OpenPort!.ReadExisting();
 
 
 
@@ -388,31 +391,47 @@ namespace Frontend.Forms
 
             try
             {
+                
 
-                this.OpenPort!.WriteLine(CardReader.SCN.ID);
+                this.OpenPort!.WriteLine(SCN.ID);
 
 
                 Thread.Sleep(SCN.ID_DELAY);
 
 
-                string msg = OpenPort.ReadExisting();
+                string msg = this.OpenPort!.ReadExisting();
 
+                
 
 
                 if (msg != SCN.RESPONSE)
                 {
                     MessageBox.Show($"The device at port {this.cmbPort.SelectedItem} may be unresponsive or not valid.", "Timeout");
-                }
+                }                
+
 
                 else
                 {
+                
+
                     this.OpenPort!.WriteLine(SCN.SCAN);
 
                     Thread.Sleep(SCN.SCAN_DELAY);
 
-                    string rez = OpenPort.ReadExisting();
+                    string rez = this.OpenPort!.ReadExisting();
 
-                    this.txtId.Text = rez;
+
+                    if (rez!=String.Empty)
+                    {
+
+                        this.txtId.Text = rez;
+                    }
+
+
+                    else
+                    {
+                        MessageBox.Show($"The device at port {cmbPort.SelectedItem} was unable to scan a card.","Timeout");
+                    }
 
                 }
 
