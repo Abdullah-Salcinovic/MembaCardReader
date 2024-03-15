@@ -73,6 +73,36 @@ namespace Frontend.Forms
             lblName = new Label();
             err = new ErrorProvider(components);
             tmr = new System.Windows.Forms.Timer(components);
+            pnlPerms = new Panel();
+            cmbValue = new ComboBox();
+            txtValue = new TextBox();
+            dgvData = new DataGridView();
+            grpPermissions = new GroupBox();
+            lblPremFilCurrent = new Label();
+            lblLaserCutterCurrent = new Label();
+            lblCNCMillCurrent = new Label();
+            lblResinCurrent = new Label();
+            lblStdFilCurrent = new Label();
+            lblSelection = new Label();
+            cbElectronics = new CheckBox();
+            cbLCDPrinters = new CheckBox();
+            cbComputers = new CheckBox();
+            cbRaise3D = new CheckBox();
+            cbTools = new CheckBox();
+            cbCrealityPrinters = new CheckBox();
+            numResin = new NumericUpDown();
+            numPremFil = new NumericUpDown();
+            numLsrCut = new NumericUpDown();
+            numCNCMill = new NumericUpDown();
+            numStdFil = new NumericUpDown();
+            txtSelect = new TextBox();
+            lblPremFil = new Label();
+            lblLsrCut = new Label();
+            lblCNCMill = new Label();
+            lblRes = new Label();
+            lblStdFil = new Label();
+            cbPermEdit = new CheckBox();
+            btnSavePerms = new Button();
             pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbConnection).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbLogo).BeginInit();
@@ -83,6 +113,14 @@ namespace Frontend.Forms
             grpInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbValid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)err).BeginInit();
+            pnlPerms.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
+            grpPermissions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numResin).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numPremFil).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numLsrCut).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numCNCMill).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numStdFil).BeginInit();
             SuspendLayout();
             // 
             // pnlButtons
@@ -498,12 +536,323 @@ namespace Frontend.Forms
             tmr.Interval = 350;
             tmr.Tick += tmr_Tick;
             // 
+            // pnlPerms
+            // 
+            pnlPerms.BackColor = Color.Silver;
+            pnlPerms.Controls.Add(cmbValue);
+            pnlPerms.Controls.Add(txtValue);
+            pnlPerms.Controls.Add(dgvData);
+            pnlPerms.Controls.Add(grpPermissions);
+            pnlPerms.Controls.Add(cbPermEdit);
+            pnlPerms.Controls.Add(btnSavePerms);
+            pnlPerms.Location = new Point(248, 12);
+            pnlPerms.Name = "pnlPerms";
+            pnlPerms.Size = new Size(540, 426);
+            pnlPerms.TabIndex = 20;
+            // 
+            // cmbValue
+            // 
+            cmbValue.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbValue.FormattingEnabled = true;
+            cmbValue.Location = new Point(3, 31);
+            cmbValue.Name = "cmbValue";
+            cmbValue.Size = new Size(182, 23);
+            cmbValue.TabIndex = 3;
+            // 
+            // txtValue
+            // 
+            txtValue.Location = new Point(3, 3);
+            txtValue.Name = "txtValue";
+            txtValue.Size = new Size(182, 23);
+            txtValue.TabIndex = 2;
+            txtValue.TextChanged += txtValue_TextChanged;
+            // 
+            // dgvData
+            // 
+            dgvData.AllowUserToAddRows = false;
+            dgvData.AllowUserToDeleteRows = false;
+            dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvData.Location = new Point(3, 68);
+            dgvData.Name = "dgvData";
+            dgvData.ReadOnly = true;
+            dgvData.Size = new Size(182, 355);
+            dgvData.TabIndex = 1;
+            dgvData.CellContentClick += dgvData_CellContentClick;
+            // 
+            // grpPermissions
+            // 
+            grpPermissions.Controls.Add(lblPremFilCurrent);
+            grpPermissions.Controls.Add(lblLaserCutterCurrent);
+            grpPermissions.Controls.Add(lblCNCMillCurrent);
+            grpPermissions.Controls.Add(lblResinCurrent);
+            grpPermissions.Controls.Add(lblStdFilCurrent);
+            grpPermissions.Controls.Add(lblSelection);
+            grpPermissions.Controls.Add(cbElectronics);
+            grpPermissions.Controls.Add(cbLCDPrinters);
+            grpPermissions.Controls.Add(cbComputers);
+            grpPermissions.Controls.Add(cbRaise3D);
+            grpPermissions.Controls.Add(cbTools);
+            grpPermissions.Controls.Add(cbCrealityPrinters);
+            grpPermissions.Controls.Add(numResin);
+            grpPermissions.Controls.Add(numPremFil);
+            grpPermissions.Controls.Add(numLsrCut);
+            grpPermissions.Controls.Add(numCNCMill);
+            grpPermissions.Controls.Add(numStdFil);
+            grpPermissions.Controls.Add(txtSelect);
+            grpPermissions.Controls.Add(lblPremFil);
+            grpPermissions.Controls.Add(lblLsrCut);
+            grpPermissions.Controls.Add(lblCNCMill);
+            grpPermissions.Controls.Add(lblRes);
+            grpPermissions.Controls.Add(lblStdFil);
+            grpPermissions.Enabled = false;
+            grpPermissions.Location = new Point(191, 3);
+            grpPermissions.Name = "grpPermissions";
+            grpPermissions.Size = new Size(346, 374);
+            grpPermissions.TabIndex = 0;
+            grpPermissions.TabStop = false;
+            grpPermissions.Text = "Info";
+            // 
+            // lblPremFilCurrent
+            // 
+            lblPremFilCurrent.AutoSize = true;
+            lblPremFilCurrent.Location = new Point(235, 214);
+            lblPremFilCurrent.Name = "lblPremFilCurrent";
+            lblPremFilCurrent.Size = new Size(59, 15);
+            lblPremFilCurrent.TabIndex = 40;
+            lblPremFilCurrent.Text = "Currently:";
+            // 
+            // lblLaserCutterCurrent
+            // 
+            lblLaserCutterCurrent.AutoSize = true;
+            lblLaserCutterCurrent.Location = new Point(235, 176);
+            lblLaserCutterCurrent.Name = "lblLaserCutterCurrent";
+            lblLaserCutterCurrent.Size = new Size(59, 15);
+            lblLaserCutterCurrent.TabIndex = 39;
+            lblLaserCutterCurrent.Text = "Currently:";
+            // 
+            // lblCNCMillCurrent
+            // 
+            lblCNCMillCurrent.AutoSize = true;
+            lblCNCMillCurrent.Location = new Point(235, 142);
+            lblCNCMillCurrent.Name = "lblCNCMillCurrent";
+            lblCNCMillCurrent.Size = new Size(59, 15);
+            lblCNCMillCurrent.TabIndex = 38;
+            lblCNCMillCurrent.Text = "Currently:";
+            // 
+            // lblResinCurrent
+            // 
+            lblResinCurrent.AutoSize = true;
+            lblResinCurrent.Location = new Point(235, 103);
+            lblResinCurrent.Name = "lblResinCurrent";
+            lblResinCurrent.Size = new Size(59, 15);
+            lblResinCurrent.TabIndex = 37;
+            lblResinCurrent.Text = "Currently:";
+            // 
+            // lblStdFilCurrent
+            // 
+            lblStdFilCurrent.AutoSize = true;
+            lblStdFilCurrent.Location = new Point(235, 69);
+            lblStdFilCurrent.Name = "lblStdFilCurrent";
+            lblStdFilCurrent.Size = new Size(59, 15);
+            lblStdFilCurrent.TabIndex = 36;
+            lblStdFilCurrent.Text = "Currently:";
+            // 
+            // lblSelection
+            // 
+            lblSelection.AutoSize = true;
+            lblSelection.Location = new Point(9, 25);
+            lblSelection.Name = "lblSelection";
+            lblSelection.Size = new Size(58, 15);
+            lblSelection.TabIndex = 35;
+            lblSelection.Text = "Selection:";
+            // 
+            // cbElectronics
+            // 
+            cbElectronics.AutoSize = true;
+            cbElectronics.Location = new Point(211, 331);
+            cbElectronics.Name = "cbElectronics";
+            cbElectronics.Size = new Size(83, 19);
+            cbElectronics.TabIndex = 34;
+            cbElectronics.Text = "Electronics";
+            cbElectronics.UseVisualStyleBackColor = true;
+            // 
+            // cbLCDPrinters
+            // 
+            cbLCDPrinters.AutoSize = true;
+            cbLCDPrinters.Location = new Point(34, 331);
+            cbLCDPrinters.Name = "cbLCDPrinters";
+            cbLCDPrinters.Size = new Size(91, 19);
+            cbLCDPrinters.TabIndex = 33;
+            cbLCDPrinters.Text = "LCD Printers";
+            cbLCDPrinters.UseVisualStyleBackColor = true;
+            // 
+            // cbComputers
+            // 
+            cbComputers.AutoSize = true;
+            cbComputers.Location = new Point(211, 306);
+            cbComputers.Name = "cbComputers";
+            cbComputers.Size = new Size(85, 19);
+            cbComputers.TabIndex = 32;
+            cbComputers.Text = "Computers";
+            cbComputers.UseVisualStyleBackColor = true;
+            // 
+            // cbRaise3D
+            // 
+            cbRaise3D.AutoSize = true;
+            cbRaise3D.Location = new Point(34, 306);
+            cbRaise3D.Name = "cbRaise3D";
+            cbRaise3D.Size = new Size(70, 19);
+            cbRaise3D.TabIndex = 31;
+            cbRaise3D.Text = "Raise 3D";
+            cbRaise3D.UseVisualStyleBackColor = true;
+            // 
+            // cbTools
+            // 
+            cbTools.AutoSize = true;
+            cbTools.Location = new Point(211, 281);
+            cbTools.Name = "cbTools";
+            cbTools.Size = new Size(53, 19);
+            cbTools.TabIndex = 30;
+            cbTools.Text = "Tools";
+            cbTools.UseVisualStyleBackColor = true;
+            // 
+            // cbCrealityPrinters
+            // 
+            cbCrealityPrinters.AutoSize = true;
+            cbCrealityPrinters.Location = new Point(34, 281);
+            cbCrealityPrinters.Name = "cbCrealityPrinters";
+            cbCrealityPrinters.Size = new Size(109, 19);
+            cbCrealityPrinters.TabIndex = 29;
+            cbCrealityPrinters.Text = "Creality Printers";
+            cbCrealityPrinters.UseVisualStyleBackColor = true;
+            // 
+            // numResin
+            // 
+            numResin.Location = new Point(138, 101);
+            numResin.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            numResin.Name = "numResin";
+            numResin.Size = new Size(96, 23);
+            numResin.TabIndex = 28;
+            // 
+            // numPremFil
+            // 
+            numPremFil.Location = new Point(138, 212);
+            numPremFil.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            numPremFil.Name = "numPremFil";
+            numPremFil.Size = new Size(96, 23);
+            numPremFil.TabIndex = 27;
+            // 
+            // numLsrCut
+            // 
+            numLsrCut.DecimalPlaces = 2;
+            numLsrCut.Location = new Point(138, 174);
+            numLsrCut.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            numLsrCut.Name = "numLsrCut";
+            numLsrCut.Size = new Size(96, 23);
+            numLsrCut.TabIndex = 26;
+            // 
+            // numCNCMill
+            // 
+            numCNCMill.DecimalPlaces = 2;
+            numCNCMill.Location = new Point(138, 138);
+            numCNCMill.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            numCNCMill.Name = "numCNCMill";
+            numCNCMill.Size = new Size(96, 23);
+            numCNCMill.TabIndex = 25;
+            // 
+            // numStdFil
+            // 
+            numStdFil.Location = new Point(138, 67);
+            numStdFil.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            numStdFil.Name = "numStdFil";
+            numStdFil.Size = new Size(96, 23);
+            numStdFil.TabIndex = 24;
+            // 
+            // txtSelect
+            // 
+            txtSelect.Location = new Point(73, 22);
+            txtSelect.Name = "txtSelect";
+            txtSelect.ReadOnly = true;
+            txtSelect.Size = new Size(267, 23);
+            txtSelect.TabIndex = 23;
+            // 
+            // lblPremFil
+            // 
+            lblPremFil.AutoSize = true;
+            lblPremFil.Location = new Point(6, 214);
+            lblPremFil.Name = "lblPremFil";
+            lblPremFil.Size = new Size(126, 15);
+            lblPremFil.TabIndex = 22;
+            lblPremFil.Text = "Premium Filament (g):";
+            // 
+            // lblLsrCut
+            // 
+            lblLsrCut.AutoSize = true;
+            lblLsrCut.Location = new Point(6, 176);
+            lblLsrCut.Name = "lblLsrCut";
+            lblLsrCut.Size = new Size(91, 15);
+            lblLsrCut.TabIndex = 21;
+            lblLsrCut.Text = "Laser Cutter (h):";
+            // 
+            // lblCNCMill
+            // 
+            lblCNCMill.AutoSize = true;
+            lblCNCMill.Location = new Point(6, 140);
+            lblCNCMill.Name = "lblCNCMill";
+            lblCNCMill.Size = new Size(76, 15);
+            lblCNCMill.TabIndex = 20;
+            lblCNCMill.Text = "CNC Mill (h):";
+            // 
+            // lblRes
+            // 
+            lblRes.AutoSize = true;
+            lblRes.Location = new Point(6, 103);
+            lblRes.Name = "lblRes";
+            lblRes.Size = new Size(56, 15);
+            lblRes.TabIndex = 19;
+            lblRes.Text = "Resin (g):";
+            // 
+            // lblStdFil
+            // 
+            lblStdFil.AutoSize = true;
+            lblStdFil.Location = new Point(6, 69);
+            lblStdFil.Name = "lblStdFil";
+            lblStdFil.Size = new Size(124, 15);
+            lblStdFil.TabIndex = 18;
+            lblStdFil.Text = "Standard Filament (g):";
+            // 
+            // cbPermEdit
+            // 
+            cbPermEdit.AutoSize = true;
+            cbPermEdit.Location = new Point(191, 387);
+            cbPermEdit.Name = "cbPermEdit";
+            cbPermEdit.Size = new Size(83, 19);
+            cbPermEdit.TabIndex = 17;
+            cbPermEdit.Text = "Edit Mode:";
+            cbPermEdit.UseVisualStyleBackColor = true;
+            cbPermEdit.CheckedChanged += cbPermEdit_CheckedChanged;
+            // 
+            // btnSavePerms
+            // 
+            btnSavePerms.BackColor = Color.Gold;
+            btnSavePerms.Enabled = false;
+            btnSavePerms.FlatStyle = FlatStyle.Flat;
+            btnSavePerms.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnSavePerms.Location = new Point(420, 384);
+            btnSavePerms.Name = "btnSavePerms";
+            btnSavePerms.Size = new Size(111, 23);
+            btnSavePerms.TabIndex = 16;
+            btnSavePerms.Text = "Save Changes";
+            btnSavePerms.UseVisualStyleBackColor = false;
+            btnSavePerms.Click += btnSavePerms_Click;
+            // 
             // frmStart
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(800, 450);
+            Controls.Add(pnlPerms);
             Controls.Add(pnlScan);
             Controls.Add(pnlConnection);
             Controls.Add(pnlButtons);
@@ -525,6 +874,16 @@ namespace Frontend.Forms
             grpInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbValid).EndInit();
             ((System.ComponentModel.ISupportInitialize)err).EndInit();
+            pnlPerms.ResumeLayout(false);
+            pnlPerms.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
+            grpPermissions.ResumeLayout(false);
+            grpPermissions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numResin).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numPremFil).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numLsrCut).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numCNCMill).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numStdFil).EndInit();
             ResumeLayout(false);
         }
 
@@ -569,5 +928,35 @@ namespace Frontend.Forms
         private PictureBox pbValid;
         private ErrorProvider err;
         private System.Windows.Forms.Timer tmr;
+        private Panel pnlPerms;
+        private DataGridView dgvData;
+        private GroupBox grpPermissions;
+        private ComboBox cmbValue;
+        private TextBox txtValue;
+        private Button btnSavePerms;
+        private CheckBox cbPermEdit;
+        private Label lblRes;
+        private Label lblStdFil;
+        private Label lblPremFil;
+        private Label lblLsrCut;
+        private Label lblCNCMill;
+        private TextBox txtSelect;
+        private NumericUpDown numStdFil;
+        private NumericUpDown numResin;
+        private NumericUpDown numPremFil;
+        private NumericUpDown numLsrCut;
+        private NumericUpDown numCNCMill;
+        private CheckBox cbElectronics;
+        private CheckBox cbLCDPrinters;
+        private CheckBox cbComputers;
+        private CheckBox cbRaise3D;
+        private CheckBox cbTools;
+        private CheckBox cbCrealityPrinters;
+        private Label lblSelection;
+        private Label lblPremFilCurrent;
+        private Label lblLaserCutterCurrent;
+        private Label lblCNCMillCurrent;
+        private Label lblResinCurrent;
+        private Label lblStdFilCurrent;
     }
 }
