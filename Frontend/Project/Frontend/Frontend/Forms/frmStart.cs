@@ -32,8 +32,8 @@ namespace Frontend.Forms
 
         private bool Connected;
 
-        private Panel CurrentPanel;        
-        
+        private Panel CurrentPanel;
+
 
         private List<string> Sexes;
 
@@ -52,7 +52,7 @@ namespace Frontend.Forms
                 9600,
                 1200,
                 2400,
-                4800,                
+                4800,
                 14400,
                 19200,
                 38400,
@@ -80,12 +80,12 @@ namespace Frontend.Forms
             this.Connected = false;
             this.CurrentPanel=this.pnlConnection;
             Panel_Switch(this.CurrentPanel);
-           
+
         }
 
         private void frmStart_Load(object sender, EventArgs e)
         {
-           
+
             ScanPorts();
             ConnectionStatusLock();
             this.cmbSex.DataSource= Sexes;
@@ -105,7 +105,7 @@ namespace Frontend.Forms
 
             foreach (string portName in this.PortNames)
             {
-                
+                SerialPort tempSerialPort = new SerialPort(portName);
 
 
 
@@ -114,11 +114,16 @@ namespace Frontend.Forms
 
                     foreach (int baud in BaudRates)
                     {
+                        if (tempSerialPort.IsOpen)
+                        {
+                            tempSerialPort.Close();
+                        }
 
-                        SerialPort tempSerialPort = new SerialPort(portName);
+
 
 
                         tempSerialPort.BaudRate=baud;
+
 
                         tempSerialPort.Open();
 
@@ -135,23 +140,24 @@ namespace Frontend.Forms
 
                         if (msg == SCN.RESPONSE)
                         {
-                                                        
+
 
                             this.ValidPorts.Add(portName);
                             this.BaudIdeal.Add(baud);
                             break;
-                            
+
                         }
 
-                        
+
 
                         tempSerialPort.Close();
 
-                        tempSerialPort.Dispose();
+
 
                     }
 
-                    
+
+                    tempSerialPort.Dispose();
 
                 }
 
@@ -161,7 +167,7 @@ namespace Frontend.Forms
 
                 }
 
-                
+
             }
 
 
@@ -226,7 +232,7 @@ namespace Frontend.Forms
                     {
                         this.btnConnect.Text="Disconnect";
                         this.lblConnectionStatus.Text="Connected";
-                        
+
                         this.cmbPort.Enabled=false;
                         this.btnScanPort.Enabled=false;
                         this.pbConnection.Image= Resources.SharedResources.Green;
@@ -258,7 +264,7 @@ namespace Frontend.Forms
                 this.btnConnect.Text="Connect";
                 this.lblConnectionStatus.Text="Disconnected";
                 this.Connected =false;
-                
+
                 this.cmbPort.Enabled=true;
                 this.btnScanPort.Enabled =true;
                 ConnectionStatusLock();
@@ -349,7 +355,7 @@ namespace Frontend.Forms
         private void cbEdit_CheckedChanged(object sender, EventArgs e)
         {
             HandleEdit();
-            
+
         }
 
         private void HandleEdit()
@@ -370,8 +376,8 @@ namespace Frontend.Forms
         private void btnScan_Click(object sender, EventArgs e)
         {
             ScanCard();
-            
-           
+
+
 
 
         }
@@ -380,7 +386,8 @@ namespace Frontend.Forms
         {
             this.btnScan.Enabled = false;
 
-            try{
+            try
+            {
 
                 this.OpenPort!.WriteLine(CardReader.SCN.ID);
 
@@ -403,7 +410,7 @@ namespace Frontend.Forms
 
                     Thread.Sleep(SCN.SCAN_DELAY);
 
-                    string rez = OpenPort.ReadExisting();                    
+                    string rez = OpenPort.ReadExisting();
 
                     this.txtId.Text = rez;
 
@@ -413,7 +420,8 @@ namespace Frontend.Forms
             }
 
 
-            catch (Exception){
+            catch (Exception)
+            {
                 MessageBox.Show($"Device communication error. Please check your connection at {this.cmbPort.SelectedItem}", "Error");
 
             }
@@ -437,7 +445,7 @@ namespace Frontend.Forms
         private void btnClear_Click(object sender, EventArgs e)
         {
             Clear();
-            
+
 
         }
 
@@ -448,14 +456,14 @@ namespace Frontend.Forms
 
                 SaveChanges();
             }
-            
+
         }
 
         private void Clear()
         {
             this.cbEdit.Checked=false;
-           
-           
+
+
             this.pbSubscription.Image=null;
 
             this.txtId.Text=string.Empty;
@@ -495,7 +503,8 @@ namespace Frontend.Forms
                 return false;
             }
 
-            else if (this.dtpDoB.Value.AddYears(DateTime.Now.Year-this.dtpDoB.Value.Year)<DateTime.Now && DateTime.Now.Year -this.dtpDoB.Value.Year<=18){
+            else if (this.dtpDoB.Value.AddYears(DateTime.Now.Year-this.dtpDoB.Value.Year)<DateTime.Now && DateTime.Now.Year -this.dtpDoB.Value.Year<=18)
+            {
                 this.err.SetError(this.dtpDoB, "The user needs to be a person born prior to this moment.");
                 return false;
             }
@@ -524,7 +533,30 @@ namespace Frontend.Forms
                 return true;
             }
 
-           
+
+        }
+
+        private void tmr_Tick(object sender, EventArgs e)
+        {
+            if (this.Connected==false)
+            {
+                if (this.pbConnection.Visible==true)
+                {
+                    this.pbConnection.Visible = false;
+                }
+                else
+                {
+                    this.pbConnection.Visible=true;
+                }
+            }
+
+            else
+            {
+                if (this.pbConnection.Visible==false)
+                {
+                    this.pbConnection.Visible=true;
+                }
+            }
         }
     }
 }
