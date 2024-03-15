@@ -11,6 +11,7 @@ using System.IO.Ports;
 using System.Resources;
 using System.Security.Cryptography.X509Certificates;
 using System.Drawing.Text;
+using Frontend.CardReader;
 
 namespace Frontend.Forms
 {
@@ -27,11 +28,12 @@ namespace Frontend.Forms
 
         private SerialPort? OpenPort;
 
+        private List<int> BaudIdeal;
+
         private bool Connected;
 
-        private Panel CurrentPanel;
-
-      
+        private Panel CurrentPanel;        
+        
 
         private List<string> Sexes;
 
@@ -41,17 +43,23 @@ namespace Frontend.Forms
         {
             InitializeComponent();
 
+            this.BaudIdeal=new List<int>();
 
-            this.BaudRates  = new List<Int32>() {
-             1200,
-             2400,
-             4800,
-             9600,
-             14400,
-             19200,
-             38400,
-             57600,
-             115200};
+
+
+            this.BaudRates  = new List<int>() {
+
+                9600,
+                1200,
+                2400,
+                4800,                
+                14400,
+                19200,
+                38400,
+                57600,
+                115200
+
+            };
 
             this.Sexes= new List<string>()
             {
@@ -77,8 +85,7 @@ namespace Frontend.Forms
 
         private void frmStart_Load(object sender, EventArgs e)
         {
-            this.cmbBaud.DataSource = BaudRates;
-            this.cmbBaud.SelectedIndex = 3;
+           
             ScanPorts();
             ConnectionStatusLock();
             this.cmbSex.DataSource= Sexes;
@@ -98,53 +105,63 @@ namespace Frontend.Forms
 
             foreach (string portName in this.PortNames)
             {
-                SerialPort tempSerialPort = new SerialPort(portName);
+                
 
-                if (cmbBaud.SelectedItem!=null)
-                {
-                    tempSerialPort.BaudRate=(int)this.cmbBaud.SelectedItem;
-                }
 
-                else
-                {
-                    tempSerialPort.BaudRate = 9600;
-                }
 
                 try
                 {
-                    tempSerialPort.Open();
 
-
-
-                    tempSerialPort.WriteLine("Emrah\n");
-
-
-                    Thread.Sleep(100);
-
-
-                    string msg = tempSerialPort.ReadExisting();
-
-                    if (msg=="Abdullah\n")
+                    foreach (int baud in BaudRates)
                     {
 
-                        ValidPorts.Add(portName);
+                        SerialPort tempSerialPort = new SerialPort(portName);
+
+
+                        tempSerialPort.BaudRate=baud;
+
+                        tempSerialPort.Open();
+
+
+                        tempSerialPort.WriteLine(SCN.ID);
+
+
+                        Thread.Sleep(SCN.ID_DELAY);
+
+
+
+
+                        string msg = tempSerialPort.ReadExisting();
+
+                        if (msg == SCN.RESPONSE)
+                        {
+                                                        
+
+                            this.ValidPorts.Add(portName);
+                            this.BaudIdeal.Add(baud);
+                            break;
+                            
+                        }
+
+                        
+
+                        tempSerialPort.Close();
+
+                        tempSerialPort.Dispose();
 
                     }
 
-                    MessageBox.Show(msg.ToString());
-
-                    tempSerialPort.Close();
-
-                    tempSerialPort.Dispose();
+                    
 
                 }
+
                 catch (Exception)
                 {
                     MessageBox.Show($"Device port not opening. Please check your connection at {portName}", "Error");
 
                 }
 
-
+                
             }
 
 
@@ -184,32 +201,23 @@ namespace Frontend.Forms
                 }
                 this.OpenPort = new SerialPort(cmbPort.SelectedItem!.ToString());
 
-
-                if (cmbBaud.SelectedItem!=null)
-                {
-                    OpenPort.BaudRate=(int)this.cmbBaud.SelectedItem;
-                }
-
-                else
-                {
-                    OpenPort.BaudRate = 9600;
-                }
+                this.OpenPort.BaudRate=BaudIdeal[cmbPort.SelectedIndex];
 
                 try
                 {
                     this.OpenPort.Open();
 
-                    this.OpenPort.WriteLine("Emrah\n");
+                    this.OpenPort.WriteLine(SCN.ID);
 
 
-                    Thread.Sleep(100);
+                    Thread.Sleep(SCN.ID_DELAY);
 
 
                     string msg = this.OpenPort.ReadExisting();
 
 
 
-                    if (msg!="Abdullah\n")
+                    if (msg != SCN.RESPONSE)
                     {
                         MessageBox.Show($"The device at port {this.cmbPort.SelectedItem} may be unresponsive or not valid.", "Timeout");
                     }
@@ -218,10 +226,10 @@ namespace Frontend.Forms
                     {
                         this.btnConnect.Text="Disconnect";
                         this.lblConnectionStatus.Text="Connected";
-                        this.cmbBaud.Enabled=false;
+                        
                         this.cmbPort.Enabled=false;
                         this.btnScanPort.Enabled=false;
-                        this.pbConnection.Image=Resources.SharedResources.Green;
+                        this.pbConnection.Image= Resources.SharedResources.Green;
                         this.Connected=true;
                         ConnectionStatusLock();
                     }
@@ -250,7 +258,7 @@ namespace Frontend.Forms
                 this.btnConnect.Text="Connect";
                 this.lblConnectionStatus.Text="Disconnected";
                 this.Connected =false;
-                this.cmbBaud.Enabled=true;
+                
                 this.cmbPort.Enabled=true;
                 this.btnScanPort.Enabled =true;
                 ConnectionStatusLock();
@@ -327,7 +335,7 @@ namespace Frontend.Forms
 
         private void Verify_Selection()
         {
-            if (this.cmbBaud.SelectedItem!=null && this.cmbPort.SelectedItem!=null)
+            if (this.cmbPort.SelectedItem!=null)
             {
                 this.btnConnect.Enabled = true;
             }
@@ -374,30 +382,28 @@ namespace Frontend.Forms
 
             try{
 
-                this.OpenPort!.WriteLine("Emrah\n");
+                this.OpenPort!.WriteLine(CardReader.SCN.ID);
 
 
-                Thread.Sleep(100);
+                Thread.Sleep(SCN.ID_DELAY);
 
 
                 string msg = OpenPort.ReadExisting();
 
 
 
-                if (msg!="Abdullah\n")
+                if (msg != SCN.RESPONSE)
                 {
                     MessageBox.Show($"The device at port {this.cmbPort.SelectedItem} may be unresponsive or not valid.", "Timeout");
                 }
 
                 else
                 {
-                    this.OpenPort!.WriteLine("SCN_CRD\n");
+                    this.OpenPort!.WriteLine(SCN.SCAN);
 
-                    Thread.Sleep(5000);
+                    Thread.Sleep(SCN.SCAN_DELAY);
 
-                    string rez = OpenPort.ReadExisting();
-
-                    
+                    string rez = OpenPort.ReadExisting();                    
 
                     this.txtId.Text = rez;
 
@@ -408,7 +414,7 @@ namespace Frontend.Forms
 
 
             catch (Exception){
-                MessageBox.Show($"Device port not opening. Please check your connection at {this.cmbPort.SelectedItem}", "Error");
+                MessageBox.Show($"Device communication error. Please check your connection at {this.cmbPort.SelectedItem}", "Error");
 
             }
 
@@ -473,18 +479,52 @@ namespace Frontend.Forms
 
         private bool ValidateInput()
         {
+            if (this.txtId.Text==null||this.txtId.Text==String.Empty)
+            {
+                this.err.SetError(this.txtId, "A card needs to be scanned to continue.");
+                return false;
+            }
+            else if (this.txtName.Text==null||this.txtName.Text==String.Empty)
+            {
+                this.err.SetError(this.txtName, "The user entry requires a name.");
+                return false;
+            }
+            else if (this.cmbSex.SelectedItem==null)
+            {
+                this.err.SetError(this.cmbSex, "The user entry requires a sex.");
+                return false;
+            }
 
-            
-            return (
-                    
-                !this.txtId.Text.Equals(string.Empty) &&
-                this.cmbSex.SelectedItem!=null &&
-                this.dtpDoB.Value<DateTime.Now &&
-                !this.txtNumber.Text.Equals(string.Empty) &&
-                !this.txtEmail.Text.Equals(string.Empty) &&
-                this.cmbSubscription.SelectedItem!=null
+            else if (this.dtpDoB.Value.AddYears(DateTime.Now.Year-this.dtpDoB.Value.Year)<DateTime.Now && DateTime.Now.Year -this.dtpDoB.Value.Year<=18){
+                this.err.SetError(this.dtpDoB, "The user needs to be a person born prior to this moment.");
+                return false;
+            }
+            else if (this.txtNumber.Text==null||this.txtNumber.Text==String.Empty)
+            {
+                this.err.SetError(this.txtNumber, "The user needs to have a phone number.");
+                return false;
+            }
+            else if (this.txtEmail.Text==null||this.txtEmail.Text==String.Empty)
+            {
+                this.err.SetError(this.txtEmail, "The user needs to have an E-Mail address.");
+                return false;
+            }
+            else if (this.cmbSubscription.SelectedItem==null)
+            {
+                this.err.SetError(this.cmbSubscription, "Invalid subscription type.");
+                return false;
+            }
+            else if (this.dtpValid.Value<=DateTime.Now)
+            {
+                this.err.SetError(this.dtpValid, "User cannot have an expired membership.");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
 
-                );
+           
         }
     }
 }

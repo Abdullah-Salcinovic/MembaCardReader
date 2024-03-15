@@ -43,11 +43,6 @@ namespace Frontend.Forms
             btnConnection = new Button();
             pbLogo = new PictureBox();
             pnlConnection = new Panel();
-            cmbBaud = new ComboBox();
-            cmbPort = new ComboBox();
-            btnConnect = new Button();
-            lblBaud = new Label();
-            btnScanPort = new Button();
             pnlScan = new Panel();
             grpScan = new GroupBox();
             cbEdit = new CheckBox();
@@ -73,6 +68,9 @@ namespace Frontend.Forms
             cmbSex = new ComboBox();
             txtName = new TextBox();
             lblName = new Label();
+            cmbPort = new ComboBox();
+            btnConnect = new Button();
+            btnScanPort = new Button();
             err = new ErrorProvider(components);
             pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbConnection).BeginInit();
@@ -187,76 +185,14 @@ namespace Frontend.Forms
             // pnlConnection
             // 
             pnlConnection.BackColor = Color.Silver;
-            pnlConnection.Controls.Add(cmbBaud);
             pnlConnection.Controls.Add(cmbPort);
             pnlConnection.Controls.Add(btnConnect);
-            pnlConnection.Controls.Add(lblBaud);
             pnlConnection.Controls.Add(btnScanPort);
             pnlConnection.Location = new Point(248, 12);
             pnlConnection.Name = "pnlConnection";
             pnlConnection.Size = new Size(540, 426);
             pnlConnection.TabIndex = 1;
             pnlConnection.Tag = "";
-            // 
-            // cmbBaud
-            // 
-            cmbBaud.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbBaud.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cmbBaud.FormattingEnabled = true;
-            cmbBaud.Location = new Point(269, 62);
-            cmbBaud.Name = "cmbBaud";
-            cmbBaud.Size = new Size(156, 25);
-            cmbBaud.TabIndex = 6;
-            cmbBaud.SelectedIndexChanged += cmbBaud_SelectedIndexChanged;
-            // 
-            // cmbPort
-            // 
-            cmbPort.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbPort.Enabled = false;
-            cmbPort.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cmbPort.FormattingEnabled = true;
-            cmbPort.Location = new Point(269, 18);
-            cmbPort.Name = "cmbPort";
-            cmbPort.Size = new Size(156, 25);
-            cmbPort.TabIndex = 5;
-            cmbPort.SelectedIndexChanged += cmbPort_SelectedIndexChanged;
-            // 
-            // btnConnect
-            // 
-            btnConnect.BackColor = Color.Gold;
-            btnConnect.Enabled = false;
-            btnConnect.FlatStyle = FlatStyle.Flat;
-            btnConnect.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnConnect.Location = new Point(20, 115);
-            btnConnect.Name = "btnConnect";
-            btnConnect.Size = new Size(176, 28);
-            btnConnect.TabIndex = 4;
-            btnConnect.Text = "Connect";
-            btnConnect.UseVisualStyleBackColor = false;
-            btnConnect.Click += btnConnect_Click;
-            // 
-            // lblBaud
-            // 
-            lblBaud.AutoSize = true;
-            lblBaud.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblBaud.Location = new Point(20, 65);
-            lblBaud.Name = "lblBaud";
-            lblBaud.Size = new Size(74, 17);
-            lblBaud.TabIndex = 3;
-            lblBaud.Text = "Baud Rate:";
-            // 
-            // btnScanPort
-            // 
-            btnScanPort.BackColor = Color.Gold;
-            btnScanPort.FlatStyle = FlatStyle.Flat;
-            btnScanPort.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnScanPort.Location = new Point(20, 15);
-            btnScanPort.Name = "btnScanPort";
-            btnScanPort.Size = new Size(176, 28);
-            btnScanPort.TabIndex = 2;
-            btnScanPort.Text = "Scan Ports";
-            btnScanPort.UseVisualStyleBackColor = false;
-            btnScanPort.Click += btnScanPort_Click;
             // 
             // pnlScan
             // 
@@ -512,6 +448,45 @@ namespace Frontend.Forms
             lblName.TabIndex = 0;
             lblName.Text = "Name:";
             // 
+            // cmbPort
+            // 
+            cmbPort.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPort.Enabled = false;
+            cmbPort.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cmbPort.FormattingEnabled = true;
+            cmbPort.Location = new Point(269, 18);
+            cmbPort.Name = "cmbPort";
+            cmbPort.Size = new Size(156, 25);
+            cmbPort.TabIndex = 5;
+            cmbPort.SelectedIndexChanged += cmbPort_SelectedIndexChanged;
+            // 
+            // btnConnect
+            // 
+            btnConnect.BackColor = Color.Gold;
+            btnConnect.Enabled = false;
+            btnConnect.FlatStyle = FlatStyle.Flat;
+            btnConnect.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnConnect.Location = new Point(20, 115);
+            btnConnect.Name = "btnConnect";
+            btnConnect.Size = new Size(176, 28);
+            btnConnect.TabIndex = 4;
+            btnConnect.Text = "Connect";
+            btnConnect.UseVisualStyleBackColor = false;
+            btnConnect.Click += btnConnect_Click;
+            // 
+            // btnScanPort
+            // 
+            btnScanPort.BackColor = Color.Gold;
+            btnScanPort.FlatStyle = FlatStyle.Flat;
+            btnScanPort.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnScanPort.Location = new Point(20, 15);
+            btnScanPort.Name = "btnScanPort";
+            btnScanPort.Size = new Size(176, 28);
+            btnScanPort.TabIndex = 2;
+            btnScanPort.Text = "Scan Ports";
+            btnScanPort.UseVisualStyleBackColor = false;
+            btnScanPort.Click += btnScanPort_Click;
+            // 
             // err
             // 
             err.ContainerControl = this;
@@ -535,7 +510,6 @@ namespace Frontend.Forms
             ((System.ComponentModel.ISupportInitialize)pbConnection).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbLogo).EndInit();
             pnlConnection.ResumeLayout(false);
-            pnlConnection.PerformLayout();
             pnlScan.ResumeLayout(false);
             grpScan.ResumeLayout(false);
             grpScan.PerformLayout();
@@ -558,11 +532,9 @@ namespace Frontend.Forms
         private Label lblConnectionStatus;
         private PictureBox pbConnection;
         private Panel pnlConnection;
-        private Label lblBaud;
         private Button btnScanPort;
         private Button btnConnect;
         private ComboBox cmbPort;
-        private ComboBox cmbBaud;
         private Panel pnlScan;
         private GroupBox grpInfo;
         private TextBox txtName;
