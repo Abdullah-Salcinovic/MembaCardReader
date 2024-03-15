@@ -7,24 +7,24 @@
       "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\forms\\frmstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\forms\\frmstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|c:\\users\\user\\documents\\github\\membacardreader\\frontend\\project\\frontend\\frontend\\forms\\frmstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\forms\\frmstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\cardreader\\scn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\cardreader\\scn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\forms\\frmstart.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\forms\\frmstart.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\properties\\resources.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
-      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\properties\\resources.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\forms\\frmstart.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
-      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\forms\\frmstart.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\models\\registration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\models\\registration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,27 +38,27 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Resources.resx",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Properties\\Resources.resx",
-              "RelativeDocumentMoniker": "Frontend\\Properties\\Resources.resx",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Properties\\Resources.resx",
-              "RelativeToolTip": "Frontend\\Properties\\Resources.resx",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2024-03-14T10:16:43.513Z",
-              "EditorCaption": ""
+              "DocumentIndex": 2,
+              "Title": "SCN.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\CardReader\\SCN.cs",
+              "RelativeDocumentMoniker": "Frontend\\CardReader\\SCN.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\CardReader\\SCN.cs",
+              "RelativeToolTip": "Frontend\\CardReader\\SCN.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-15T09:29:36.999Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "frmStart.resx",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.resx",
-              "RelativeDocumentMoniker": "Frontend\\Forms\\frmStart.resx",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.resx",
-              "RelativeToolTip": "Frontend\\Forms\\frmStart.resx",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2024-03-14T10:04:10.957Z",
-              "EditorCaption": ""
+              "DocumentIndex": 5,
+              "Title": "Registration.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\Registration.cs",
+              "RelativeDocumentMoniker": "Frontend\\Models\\Registration.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\Registration.cs",
+              "RelativeToolTip": "Frontend\\Models\\Registration.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAAIwCIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-14T13:18:01.738Z"
             },
             {
               "$type": "Document",
@@ -74,13 +74,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "frmStart.Designer.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.Designer.cs",
               "RelativeDocumentMoniker": "Frontend\\Forms\\frmStart.Designer.cs",
               "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.Designer.cs",
               "RelativeToolTip": "Frontend\\Forms\\frmStart.Designer.cs",
-              "ViewState": "AQIAADoAAAAAAAAAAAAIwEwAAAAxAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-12T10:46:15.481Z",
               "EditorCaption": ""
@@ -93,14 +93,14 @@
               "RelativeDocumentMoniker": "Frontend\\Forms\\frmStart.cs",
               "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.cs",
               "RelativeToolTip": "Frontend\\Forms\\frmStart.cs",
-              "ViewState": "AQIAAN4AAAAAAAAAAAAowOkAAAAAAAAA",
+              "ViewState": "AQIAAA0CAAAAAAAAAAAowCwCAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-12T10:20:20.615Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Program.cs",
               "RelativeDocumentMoniker": "Frontend\\Program.cs",
