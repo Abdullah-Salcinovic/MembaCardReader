@@ -202,6 +202,13 @@ namespace Frontend.Forms
         private void btnConnect_Click(object sender, EventArgs e)
         {
 
+            ManageConnection();
+
+
+        }
+
+        private void ManageConnection()
+        {
             if (!Connected)
             {
                 if (this.OpenPort!=null)
@@ -267,14 +274,14 @@ namespace Frontend.Forms
                 this.btnConnect.Text="Connect";
                 this.lblConnectionStatus.Text="Disconnected";
                 this.Connected =false;
+                this.CurrentPanel=pnlConnection;
+                Panel_Switch(this.CurrentPanel);
 
                 this.cmbPort.Enabled=true;
                 this.btnScanPort.Enabled =true;
                 ConnectionStatusLock();
                 this.pbConnection.Image=Resources.SharedResources.Red;
             }
-
-
 
         }
 
@@ -407,6 +414,7 @@ namespace Frontend.Forms
                 if (msg != SCN.RESPONSE)
                 {
                     MessageBox.Show($"The device at port {this.cmbPort.SelectedItem} may be unresponsive or not valid.", "Timeout");
+                    ManageConnection();
                 }                
 
 
@@ -442,7 +450,7 @@ namespace Frontend.Forms
             catch (Exception)
             {
                 MessageBox.Show($"Device communication error. Please check your connection at {this.cmbPort.SelectedItem}", "Error");
-
+                ManageConnection();
             }
 
 
@@ -506,6 +514,9 @@ namespace Frontend.Forms
 
         private bool ValidateInput()
         {
+            this.err.Clear();
+
+
             if (this.txtId.Text==null||this.txtId.Text==String.Empty)
             {
                 this.err.SetError(this.txtId, "A card needs to be scanned to continue.");
