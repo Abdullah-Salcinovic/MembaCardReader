@@ -11,7 +11,7 @@ using System.IO.Ports;
 using System.Resources;
 using System.Security.Cryptography.X509Certificates;
 using System.Drawing.Text;
-using Frontend.CardReader;
+using Frontend.CodeReader;
 
 namespace Frontend.Forms
 {
@@ -20,7 +20,7 @@ namespace Frontend.Forms
 
     public partial class frmStart : Form
     {
-        private List<Int32> BaudRates;
+       
 
         private List<string> PortNames;
 
@@ -47,21 +47,9 @@ namespace Frontend.Forms
 
             this.BaudIdeal=new List<int>();
 
-            
 
-            this.BaudRates  = new List<int>() {
 
-                9600,
-                1200,
-                2400,
-                4800,
-                14400,
-                19200,
-                38400,
-                57600,
-                115200
-
-            };
+           
 
             this.Sexes= new List<string>()
             {
@@ -124,14 +112,12 @@ namespace Frontend.Forms
                 try
                 {
 
-                    foreach (int baud in BaudRates)
+                    foreach (int baud in SCN.BaudRates)
                     {
                         if (tempSerialPort.IsOpen)
                         {
                             tempSerialPort.Close();
                         }
-
-
 
 
                         tempSerialPort.BaudRate=baud;
@@ -143,12 +129,13 @@ namespace Frontend.Forms
                         tempSerialPort.WriteLine(SCN.ID);
 
 
-                        Thread.Sleep(SCN.ID_DELAY);
-
-
+                        Wait(SCN.ID_DELAY);
 
 
                         string msg = tempSerialPort.ReadExisting();
+
+                        tempSerialPort.DiscardInBuffer();
+                        tempSerialPort.DiscardOutBuffer();
 
                         if (msg == SCN.RESPONSE)
                         {
@@ -194,7 +181,7 @@ namespace Frontend.Forms
             else
             {
                 this.cmbPort.Enabled=false;
-                MessageBox.Show("Please ensure your device can see a valid card reader.", "No card readers found.");
+                MessageBox.Show("Please ensure your device can see a valid scanner.", "No scanners found.");
             }
             this.btnScanPort.Enabled = true;
         }
@@ -235,11 +222,10 @@ namespace Frontend.Forms
                     this.OpenPort.WriteLine(SCN.ID);
 
 
-                    Thread.Sleep(SCN.ID_DELAY);
+                    Wait(SCN.ID_DELAY);
 
 
                     string msg = this.OpenPort!.ReadExisting();
-
 
 
                     if (msg != SCN.RESPONSE)
@@ -297,7 +283,7 @@ namespace Frontend.Forms
         private void ConnectionStatusLock()
         {
             this.btnConnection.Enabled=this.Connected;
-            this.btnScanCard.Enabled=this.Connected;
+            this.btnRegistrations.Enabled=this.Connected;
             this.btnViewUsers.Enabled=this.Connected;
 
         }
@@ -390,18 +376,25 @@ namespace Frontend.Forms
                 this.grpScan.Enabled=true;
                 this.grpInfo.Enabled=false;
             }
+
+            this.cmbSex.SelectedItem = null;
+            this.cmbSubscription.SelectedItem=null;
+            this.pbSubscription.Image=null;
+            this.pbValid.Image=null;
+
+
         }
 
         private void btnScan_Click(object sender, EventArgs e)
         {
-            ScanCard();
+            ScanCode();
 
 
 
 
         }
 
-        private void ScanCard()
+        private void ScanCode()
         {
             this.btnScan.Enabled = false;
 
@@ -412,8 +405,7 @@ namespace Frontend.Forms
                 this.OpenPort!.WriteLine(SCN.ID);
 
 
-                Thread.Sleep(SCN.ID_DELAY);
-
+                Wait(SCN.ID_DELAY);
 
                 string msg = this.OpenPort!.ReadExisting();
 
@@ -433,7 +425,7 @@ namespace Frontend.Forms
 
                     this.OpenPort!.WriteLine(SCN.SCAN);
 
-                    Thread.Sleep(SCN.SCAN_DELAY);
+                    Wait(SCN.SCAN_DELAY);
 
                     string rez = this.OpenPort!.ReadExisting();
 
@@ -447,7 +439,7 @@ namespace Frontend.Forms
 
                     else
                     {
-                        MessageBox.Show($"The device at port {cmbPort.SelectedItem} was unable to scan a card.", "Timeout");
+                        MessageBox.Show($"The device at port {cmbPort.SelectedItem} was unable to scan a code.", "Timeout");
                     }
 
                 }
@@ -513,11 +505,13 @@ namespace Frontend.Forms
 
             this.pbValid.Image=null;
 
+
+
+
             HandleEdit();
         }
         private void SaveChanges()
         {
-
             Clear();
         }
 
@@ -528,7 +522,7 @@ namespace Frontend.Forms
 
             if (this.txtId.Text==null||this.txtId.Text==String.Empty)
             {
-                this.err.SetError(this.txtId, "A card needs to be scanned to continue.");
+                this.err.SetError(this.txtId, "A code needs to be scanned to continue.");
                 return false;
             }
             else if (this.txtName.Text==null||this.txtName.Text==String.Empty)
@@ -542,9 +536,14 @@ namespace Frontend.Forms
                 return false;
             }
 
-            else if (this.dtpDoB.Value.AddYears(DateTime.Now.Year-this.dtpDoB.Value.Year)<DateTime.Now && DateTime.Now.Year -this.dtpDoB.Value.Year<=18)
+            else if (DateTime.Now.Year-this.dtpDoB.Value.Year<18||
+                (DateTime.Now.Year-this.dtpDoB.Value.Year==18 && DateTime.Now.Month<this.dtpDoB.Value.Month)||
+                (DateTime.Now.Year-this.dtpDoB.Value.Year==18 && DateTime.Now.Month==this.dtpDoB.Value.Month&&DateTime.Now.Day<this.dtpDoB.Value.Day)
+
+
+                )
             {
-                this.err.SetError(this.dtpDoB, "The user needs to be a person born prior to this moment.");
+                this.err.SetError(this.dtpDoB, "The user needs to be a person of age.");
                 return false;
             }
             else if (this.txtNumber.Text==null||this.txtNumber.Text==String.Empty)
@@ -621,6 +620,38 @@ namespace Frontend.Forms
         private void txtValue_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+
+
+        private void ChangeBanner()
+        {
+            if (this.cmbSubscription.SelectedItem as String == "Basic")
+            {
+                this.pbSubscription.Image=Resources.SharedResources.Basic;
+            }
+            else if (this.cmbSubscription.SelectedItem as String == "Student" )
+            {
+                this.pbSubscription.Image=Resources.SharedResources.Student;
+            }
+            else if (this.cmbSubscription.SelectedItem as String == "Premium")
+            {
+                this.pbSubscription.Image=Resources.SharedResources.Premium;
+            }
+            else
+            {
+                this.pbSubscription.Image=Resources.SharedResources.Invalid;
+            }
+        }
+
+        private void cmbSubscription_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChangeBanner();
+        }
+
+        private void Wait(int time)
+        {
+            Thread.Sleep(time);
         }
     }
 }
