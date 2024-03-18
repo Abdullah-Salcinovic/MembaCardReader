@@ -2,12 +2,19 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
+
+#define DEVICE "RFID Scanner\0"
+
+
 #define ID "SCN_ID"
-#define RESPONSE "SCN_ACC\0"
-#define SCAN_CMD "SCN_CRD"
+#define TYPE "SCN_TYP"
+#define RESPONSE "SCN_ACK\0"
+
+#define SCAN_CMD "SCN_GET"
 #define INVALID "INVALID_CMD - "
 #define MAX_CMD_LEN 25
 #define NULL_TERM '\0'
+#define ATTEMPTS 150
 
 #define SS_PIN 10
 #define RST_PIN 5
@@ -43,8 +50,11 @@ void process_cmd(){
   respond();
   
   }
+  else if (Input.equals(TYPE)){
+  give_type();
+  }
   else if (Input.equals(SCAN_CMD)){
-  scan_card();
+  scan();
   
   }
   else{  
@@ -55,7 +65,9 @@ void process_cmd(){
 
   
 }
-
+void give_type(){
+  Serial.write(DEVICE);
+}
 void respond(){
   Serial.write(RESPONSE);
   
@@ -73,8 +85,8 @@ void err(String cmd){
   
 
 }
-void scan_card(){
-  for(int i =0; i< 500; i++){
+void scan(){
+  for(int i =0; i< ATTEMPTS; i++){
 
     if (reader.PICC_IsNewCardPresent()) {
       if (reader.PICC_ReadCardSerial()) {
