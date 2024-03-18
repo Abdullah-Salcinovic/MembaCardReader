@@ -21,19 +21,17 @@ namespace Frontend.CodeReader
                 9600,
                 14400,
 
-
-
         };
 
 
         public static int ID_DELAY = 100;
-        public static int SCAN_DELAY = 5000;
+        public static int SCAN_DELAY = 1500;
         public static int TYPE_DELAY = 500;
                
         public static string ID = "SCN_ID\0";
         public static string SCAN = "SCN_GET\0";
         public static string TYPE = "SCN_TYP\0";
-        public static string RESPONSE = "SCN_ACC";
+        public static string RESPONSE = "SCN_ACK";
         
     }
 }

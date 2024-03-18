@@ -24,7 +24,7 @@ namespace Frontend.Forms
 
         private List<string> PortNames;
 
-        private List<string> ValidPorts;
+        private List<COM_Scanner> ValidPorts;
 
         private SerialPort? OpenPort;
 
@@ -72,7 +72,7 @@ namespace Frontend.Forms
             };
 
             this.PortNames = new List<string>();
-            this.ValidPorts = new List<string>();
+            this.ValidPorts = new List<COM_Scanner>();
             this.Connected = false;
             this.CurrentPanel=this.pnlConnection;
             Panel_Switch(this.CurrentPanel);
@@ -139,9 +139,17 @@ namespace Frontend.Forms
 
                         if (msg == SCN.RESPONSE)
                         {
+                            tempSerialPort.WriteLine(SCN.TYPE);
+
+                            Wait(SCN.TYPE_DELAY);
+
+                            string typ = tempSerialPort.ReadExisting();
+
+                            COM_Scanner com = new COM_Scanner(typ,portName);
 
 
-                            this.ValidPorts.Add(portName);
+
+                            this.ValidPorts.Add(com);
                             this.BaudIdeal.Add(baud);
                             break;
 
@@ -210,8 +218,13 @@ namespace Frontend.Forms
                 if (this.OpenPort!=null)
                 {
                     this.OpenPort.Dispose();
+
                 }
-                this.OpenPort = new SerialPort(cmbPort.SelectedItem!.ToString());
+
+                COM_Scanner? tmp = this.cmbPort.SelectedItem as COM_Scanner;
+
+
+                this.OpenPort = new SerialPort(tmp!.COM);
 
                 this.OpenPort.BaudRate=BaudIdeal[cmbPort.SelectedIndex];
 
