@@ -176,7 +176,7 @@ namespace Frontend.Forms
             btnViewUsers.BackColor = Color.Gold;
             btnViewUsers.FlatStyle = FlatStyle.Flat;
             btnViewUsers.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnViewUsers.Location = new Point(25, 320);
+            btnViewUsers.Location = new Point(26, 320);
             btnViewUsers.Name = "btnViewUsers";
             btnViewUsers.Size = new Size(176, 28);
             btnViewUsers.TabIndex = 4;
@@ -189,7 +189,7 @@ namespace Frontend.Forms
             btnScanCard.BackColor = Color.Gold;
             btnScanCard.FlatStyle = FlatStyle.Flat;
             btnScanCard.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnScanCard.Location = new Point(25, 286);
+            btnScanCard.Location = new Point(26, 286);
             btnScanCard.Name = "btnScanCard";
             btnScanCard.Size = new Size(176, 28);
             btnScanCard.TabIndex = 2;
@@ -202,7 +202,7 @@ namespace Frontend.Forms
             btnConnection.BackColor = Color.Gold;
             btnConnection.FlatStyle = FlatStyle.Flat;
             btnConnection.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnConnection.Location = new Point(25, 252);
+            btnConnection.Location = new Point(26, 252);
             btnConnection.Name = "btnConnection";
             btnConnection.Size = new Size(176, 28);
             btnConnection.TabIndex = 1;
@@ -214,9 +214,9 @@ namespace Frontend.Forms
             // 
             pbLogo.BackColor = Color.Transparent;
             pbLogo.Image = (Image)resources.GetObject("pbLogo.Image");
-            pbLogo.Location = new Point(25, 15);
+            pbLogo.Location = new Point(26, 16);
             pbLogo.Name = "pbLogo";
-            pbLogo.Size = new Size(176, 174);
+            pbLogo.Size = new Size(176, 176);
             pbLogo.SizeMode = PictureBoxSizeMode.StretchImage;
             pbLogo.TabIndex = 0;
             pbLogo.TabStop = false;

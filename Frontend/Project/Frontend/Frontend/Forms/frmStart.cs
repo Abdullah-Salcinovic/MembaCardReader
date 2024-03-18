@@ -20,7 +20,7 @@ namespace Frontend.Forms
 
     public partial class frmStart : Form
     {
-
+       
 
         private List<string> PortNames;
 
@@ -82,7 +82,7 @@ namespace Frontend.Forms
         private void frmStart_Load(object sender, EventArgs e)
         {
 
-
+            
             ConnectionStatusLock();
             this.cmbSex.DataSource=this.Sexes;
             this.cmbSubscription.DataSource=this.Subscriptions;
@@ -425,7 +425,7 @@ namespace Frontend.Forms
 
                     this.OpenPort!.WriteLine(SCN.SCAN);
 
-                    Wait(SCN.SCAN_DELAY); 
+                    Wait(SCN.SCAN_DELAY);
 
                     string rez = this.OpenPort!.ReadExisting();
 
@@ -635,20 +635,18 @@ namespace Frontend.Forms
             {
                 this.pbSubscription.Image = Resources.SharedResources.Hand;
             }
-        }    
+        }
 
 
         private void Wait(int time)
         {
-           
-
+                     
 
 
             Thread.Sleep(time);
-
-
+                        
         }
 
-
+       
     }
 }
