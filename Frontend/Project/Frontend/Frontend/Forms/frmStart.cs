@@ -34,6 +34,8 @@ namespace Frontend.Forms
 
         private Panel CurrentPanel;
 
+        private List<string> SearchFilters;
+
 
         private List<string> Sexes;
 
@@ -45,7 +47,7 @@ namespace Frontend.Forms
 
             this.BaudIdeal=new List<int>();
 
-
+            
 
             this.BaudRates  = new List<int>() {
 
@@ -75,6 +77,12 @@ namespace Frontend.Forms
 
             };
 
+            this.SearchFilters = new List<string>()
+            {
+                "Filter by Id",
+                "Filter by Name"
+            };
+
             this.PortNames = new List<string>();
             this.ValidPorts = new List<string>();
             this.Connected = false;
@@ -86,10 +94,11 @@ namespace Frontend.Forms
         private void frmStart_Load(object sender, EventArgs e)
         {
 
-            
+
             ConnectionStatusLock();
-            this.cmbSex.DataSource= Sexes;
-            this.cmbSubscription.DataSource=Subscriptions;
+            this.cmbSex.DataSource=this.Sexes;
+            this.cmbSubscription.DataSource=this.Subscriptions;
+            this.cmbValue.DataSource=this.SearchFilters;
             HandleEdit();
 
 
@@ -307,7 +316,7 @@ namespace Frontend.Forms
 
         private void btnViewUsers_Click(object sender, EventArgs e)
         {
-            //this.CurrentPanel=4;
+            this.CurrentPanel=this.pnlPerms;
             Panel_Switch(this.CurrentPanel);
         }
 
@@ -398,7 +407,7 @@ namespace Frontend.Forms
 
             try
             {
-                
+
 
                 this.OpenPort!.WriteLine(SCN.ID);
 
@@ -408,19 +417,19 @@ namespace Frontend.Forms
 
                 string msg = this.OpenPort!.ReadExisting();
 
-                
+
 
 
                 if (msg != SCN.RESPONSE)
                 {
                     MessageBox.Show($"The device at port {this.cmbPort.SelectedItem} may be unresponsive or not valid.", "Timeout");
                     ManageConnection();
-                }                
+                }
 
 
                 else
                 {
-                
+
 
                     this.OpenPort!.WriteLine(SCN.SCAN);
 
@@ -438,7 +447,7 @@ namespace Frontend.Forms
 
                     else
                     {
-                        MessageBox.Show($"The device at port {cmbPort.SelectedItem} was unable to scan a card.","Timeout");
+                        MessageBox.Show($"The device at port {cmbPort.SelectedItem} was unable to scan a card.", "Timeout");
                     }
 
                 }
@@ -587,6 +596,31 @@ namespace Frontend.Forms
                     this.pbConnection.Visible=true;
                 }
             }
+        }
+
+        private void cbPermEdit_CheckedChanged(object sender, EventArgs e)
+        {
+            this.btnSavePerms.Enabled=this.cbPermEdit.Checked;
+            this.grpPermissions.Enabled=this.cbPermEdit.Checked;
+        }
+
+        private void btnSavePerms_Click(object sender, EventArgs e)
+        {
+            this.cbPermEdit.Checked=false;
+        }
+
+        private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex>=0 && e.RowIndex<dgvData.RowCount && e.ColumnIndex>=0 && e.ColumnIndex<=1)
+            {
+
+            }
+
+        }
+
+        private void txtValue_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
