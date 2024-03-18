@@ -16,7 +16,7 @@ namespace Backend.Endpoints.Customer.GetDataById
         }
 
         [HttpGet]
-        public ActionResult<CustomerGetDataByIdRes> GetCustomers([FromQuery] int id)
+        public ActionResult<CustomerGetDataByIdRes> GetCustomers([FromQuery] string id)
         {
             var customer = _context.Customers.OrderByDescending(x => x.Id)
                 .Where(x => x.Id == id)

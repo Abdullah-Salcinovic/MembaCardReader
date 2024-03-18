@@ -12,6 +12,8 @@ using System.Resources;
 using System.Security.Cryptography.X509Certificates;
 using System.Drawing.Text;
 using Frontend.CardReader;
+using Newtonsoft.Json;
+using Frontend.Models;
 
 namespace Frontend.Forms
 {
@@ -20,6 +22,11 @@ namespace Frontend.Forms
 
     public partial class frmStart : Form
     {
+        private static HttpClient sharedClient = new()
+        {
+            BaseAddress = new Uri("http://10.100.30.39:5174")
+        };
+
         private List<Int32> BaudRates;
 
         private List<string> PortNames;
@@ -392,12 +399,71 @@ namespace Frontend.Forms
             }
         }
 
-        private void btnScan_Click(object sender, EventArgs e)
+        private async void btnScan_Click(object sender, EventArgs e)
         {
             ScanCard();
+            if (txtId.Text != String.Empty && txtId.Text != null)
+            {
+
+                await GetAsync($"/customer?id={txtId.Text}", sharedClient);
+            }
 
 
 
+        }
+
+        private async Task GetAsync(string endpoint, HttpClient httpClient)
+        {
+            using HttpResponseMessage response = await httpClient.GetAsync($"/api{endpoint}");
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            var data = JsonConvert.DeserializeObject<CustomerGetRes>(jsonResponse);
+
+            if (response.IsSuccessStatusCode)
+            {
+                this.txtName.Text = data.Name;
+                this.cmbSex.Text = data.Sex;
+                this.dtpDoB.Value = data.DateOfBirth;
+                this.txtNumber.Text = data.Phone;
+                this.txtEmail.Text = data.Email;
+                this.cmbSubscription.Text = data.Subscription;
+                this.dtpValid.Value = data.ExpirationDate;
+            }
+            else
+            {
+                MessageBox.Show($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+            }
+        }
+
+        private async Task Get2Async(string endpoint, HttpClient httpClient)
+        {
+            using HttpResponseMessage response = await httpClient.GetAsync($"/api{endpoint}");
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            var data = JsonConvert.DeserializeObject<CustomerGetForm2Res>(jsonResponse);
+
+            if (response.IsSuccessStatusCode)
+            {
+                this.txtSelect.Text = $"{data.Name} ({data.Id})";
+                this.numStdFil.Value = decimal.Parse(data.Filament);
+                this.numResin.Value = decimal.Parse(data.Resin);
+                this.numCNCMill.Value = decimal.Parse(data.Cncmill);
+                this.numLsrCut.Value = decimal.Parse(data.LaserCutter);
+                this.numPremFil.Value = decimal.Parse(data.PremiumFilament);
+
+                this.cbCrealityPrinters.Checked = data.CrealityPrinters;
+                this.cbRaise3D.Checked = data.Raise3D;
+                this.cbLCDPrinters.Checked = data.Lcdprinters;
+                this.cbTools.Checked = data.Tools;
+                this.cbComputers.Checked = data.Computers;
+                this.cbElectronics.Checked = data.Electronics;
+            }
+            else
+            {
+                MessageBox.Show($"Error: {response.StatusCode}  {response.ReasonPhrase}");
+            }
 
         }
 

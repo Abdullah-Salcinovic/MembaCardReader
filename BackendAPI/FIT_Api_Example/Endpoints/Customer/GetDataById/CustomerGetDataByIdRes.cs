@@ -19,7 +19,7 @@ namespace Backend.Endpoints.Customer.GetDataById
     */
     public class CustomerGetDataByIdRes
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string? Name { get; set; }
         public string? Sex { get; set; }
         public DateTime? DateOfBirth { get; set; }
@@ -28,12 +28,12 @@ namespace Backend.Endpoints.Customer.GetDataById
 
         [JsonIgnore]
         public virtual ICollection<Membership> Memberships { get; set; }
-        public string? Subscription => Memberships.First().Subscription;
-        public DateTime? ExpirationDate => Memberships.First().ExpirationDate;
+        public string? Subscription => Memberships.Last().Subscription;
+        public DateTime? ExpirationDate => Memberships.Last().ExpirationDate;
 
         [JsonIgnore]
         public virtual ICollection<Material> Materials { get; set; }
-        public string? Filament => Materials.First().Filament;
-        public string? Resin => Materials.First().Resin;
+        public string? Filament => Materials.Last().Filament;
+        public string? Resin => Materials.Last().Resin;
     }
 }

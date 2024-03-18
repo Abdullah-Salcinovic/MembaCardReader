@@ -36,7 +36,8 @@ namespace Backend.Data.Models
                 entity.ToTable("CUSTOMER");
 
                 entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
                     .HasColumnName("ID");
 
                 entity.Property(e => e.DateOfBirth)
@@ -67,11 +68,11 @@ namespace Backend.Data.Models
                         r => r.HasOne<Customer>().WithMany().HasForeignKey("CustomerId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__CUSTOMER___Custo__2B3F6F97"),
                         j =>
                         {
-                            j.HasKey("CustomerId", "MaterialId").HasName("PK__CUSTOMER__4F121DB664E11995");
+                            j.HasKey("CustomerId", "MaterialId").HasName("PK__CUSTOMER__4F121DB65D928B2E");
 
                             j.ToTable("CUSTOMER_MATERIAL");
 
-                            j.IndexerProperty<int>("CustomerId").HasColumnName("Customer_ID");
+                            j.IndexerProperty<string>("CustomerId").HasMaxLength(20).IsUnicode(false).HasColumnName("Customer_ID");
 
                             j.IndexerProperty<int>("MaterialId").HasColumnName("Material_ID");
                         });
@@ -85,7 +86,20 @@ namespace Backend.Data.Models
                     .ValueGeneratedNever()
                     .HasColumnName("Material_ID");
 
+                entity.Property(e => e.Cncmill)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("CNCMill");
+
                 entity.Property(e => e.Filament)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LaserCutter)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PremiumFilament)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -102,11 +116,16 @@ namespace Backend.Data.Models
                     .ValueGeneratedNever()
                     .HasColumnName("ID");
 
-                entity.Property(e => e.CustomerId).HasColumnName("Customer_ID");
+                entity.Property(e => e.CustomerId)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("Customer_ID");
 
                 entity.Property(e => e.ExpirationDate)
                     .HasColumnType("date")
                     .HasColumnName("Expiration_Date");
+
+                entity.Property(e => e.Lcdprinters).HasColumnName("LCDPrinters");
 
                 entity.Property(e => e.Subscription)
                     .HasMaxLength(100)

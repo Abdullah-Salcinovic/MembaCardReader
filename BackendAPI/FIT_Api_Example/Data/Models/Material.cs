@@ -13,6 +13,9 @@ namespace Backend.Data.Models
         public int MaterialId { get; set; }
         public string? Filament { get; set; }
         public string? Resin { get; set; }
+        public string? Cncmill { get; set; }
+        public string? LaserCutter { get; set; }
+        public string? PremiumFilament { get; set; }
 
         public virtual ICollection<Customer> Customers { get; set; }
     }

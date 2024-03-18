@@ -29,9 +29,9 @@ namespace Backend.Endpoints.Customer.Register
             };
 
 
-            if(model.Id == 0)
+            if(model.Id == string.Empty)
             {
-                int maxID = _context.Customers.Any() ? _context.Customers.Max(x => x.Id) + 1 : 1;
+                string maxID = _context.Customers.Any() ? _context.Customers.Max(x => x.Id) + 1 : "1";
                 newCustomer.Id = maxID;
             }
             else

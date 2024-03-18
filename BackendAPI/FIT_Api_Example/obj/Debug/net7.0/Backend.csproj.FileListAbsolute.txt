@@ -67,9 +67,10 @@ C:\rs1v10\MembaCardReader\BackendAPI\FIT_Api_Example\obj\Debug\net7.0\staticweba
 C:\rs1v10\MembaCardReader\BackendAPI\FIT_Api_Example\obj\Debug\net7.0\staticwebassets.build.json
 C:\rs1v10\MembaCardReader\BackendAPI\FIT_Api_Example\obj\Debug\net7.0\staticwebassets.development.json
 C:\rs1v10\MembaCardReader\BackendAPI\FIT_Api_Example\obj\Debug\net7.0\scopedcss\bundle\Backend.styles.css
-C:\rs1v10\MembaCardReader\BackendAPI\FIT_Api_Example\obj\Debug\net7.0\Backend.csproj.CopyComplete
 C:\rs1v10\MembaCardReader\BackendAPI\FIT_Api_Example\obj\Debug\net7.0\Backend.dll
 C:\rs1v10\MembaCardReader\BackendAPI\FIT_Api_Example\obj\Debug\net7.0\refint\Backend.dll
 C:\rs1v10\MembaCardReader\BackendAPI\FIT_Api_Example\obj\Debug\net7.0\Backend.pdb
 C:\rs1v10\MembaCardReader\BackendAPI\FIT_Api_Example\obj\Debug\net7.0\Backend.genruntimeconfig.cache
 C:\rs1v10\MembaCardReader\BackendAPI\FIT_Api_Example\obj\Debug\net7.0\ref\Backend.dll
+C:\rs1v10\MembaCardReader\BackendAPI\FIT_Api_Example\obj\Debug\net7.0\Backend.sourcelink.json
+C:\rs1v10\MembaCardReader\BackendAPI\FIT_Api_Example\obj\Debug\net7.0\Backend.csproj.Up2Date
