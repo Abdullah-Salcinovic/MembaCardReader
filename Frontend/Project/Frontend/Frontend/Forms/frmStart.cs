@@ -20,7 +20,7 @@ namespace Frontend.Forms
 
     public partial class frmStart : Form
     {
-        private List<Int32> BaudRates;
+
 
         private List<string> PortNames;
 
@@ -47,21 +47,9 @@ namespace Frontend.Forms
 
             this.BaudIdeal=new List<int>();
 
-            
 
-            this.BaudRates  = new List<int>() {
 
-                9600,
-                1200,
-                2400,
-                4800,
-                14400,
-                19200,
-                38400,
-                57600,
-                115200
 
-            };
 
             this.Sexes= new List<string>()
             {
@@ -124,7 +112,7 @@ namespace Frontend.Forms
                 try
                 {
 
-                    foreach (int baud in BaudRates)
+                    foreach (int baud in SCN.BaudRates)
                     {
                         if (tempSerialPort.IsOpen)
                         {
@@ -143,12 +131,13 @@ namespace Frontend.Forms
                         tempSerialPort.WriteLine(SCN.ID);
 
 
-                        Thread.Sleep(SCN.ID_DELAY);
-
-
+                        Wait(SCN.ID_DELAY);
 
 
                         string msg = tempSerialPort.ReadExisting();
+
+                        tempSerialPort.DiscardOutBuffer();
+                        tempSerialPort.DiscardInBuffer();
 
                         if (msg == SCN.RESPONSE)
                         {
@@ -235,7 +224,7 @@ namespace Frontend.Forms
                     this.OpenPort.WriteLine(SCN.ID);
 
 
-                    Thread.Sleep(SCN.ID_DELAY);
+                    Wait(SCN.ID_DELAY);
 
 
                     string msg = this.OpenPort!.ReadExisting();
@@ -335,18 +324,21 @@ namespace Frontend.Forms
 
         private void Panel_Switch(Panel Selection)
         {
-            foreach (Panel pnl in this.Controls)
+            foreach (Control pnl in this.Controls)
             {
-                if (pnl == Selection || pnl == this.pnlButtons)
+                if (pnl.GetType()==typeof(Panel))
                 {
-                    pnl.Visible =true;
-                }
 
-                else
-                {
-                    pnl.Visible=false;
-                }
+                    if (pnl == Selection || pnl == this.pnlButtons)
+                    {
+                        pnl.Visible =true;
+                    }
 
+                    else
+                    {
+                        pnl.Visible=false;
+                    }
+                }
             }
 
 
@@ -412,7 +404,7 @@ namespace Frontend.Forms
                 this.OpenPort!.WriteLine(SCN.ID);
 
 
-                Thread.Sleep(SCN.ID_DELAY);
+                Wait(SCN.ID_DELAY);
 
 
                 string msg = this.OpenPort!.ReadExisting();
@@ -433,7 +425,7 @@ namespace Frontend.Forms
 
                     this.OpenPort!.WriteLine(SCN.SCAN);
 
-                    Thread.Sleep(SCN.SCAN_DELAY);
+                    Wait(SCN.SCAN_DELAY); 
 
                     string rez = this.OpenPort!.ReadExisting();
 
@@ -622,5 +614,41 @@ namespace Frontend.Forms
         {
 
         }
+
+        private void cmbSubscription_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbSubscription.Text=="Basic")
+            {
+                this.pbSubscription.Image=Resources.SharedResources.Basic;
+            }
+
+            else if (this.cmbSubscription.Text=="Student")
+            {
+
+                this.pbSubscription.Image= Resources.SharedResources.Student;
+            }
+            else if (this.cmbSubscription.Text=="Premium")
+            {
+                this.pbSubscription.Image = Resources.SharedResources.Premium;
+            }
+            else
+            {
+                this.pbSubscription.Image = Resources.SharedResources.Hand;
+            }
+        }    
+
+
+        private void Wait(int time)
+        {
+           
+
+
+
+            Thread.Sleep(time);
+
+
+        }
+
+
     }
 }

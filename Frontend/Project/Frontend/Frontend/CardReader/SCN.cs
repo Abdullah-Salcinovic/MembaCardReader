@@ -6,15 +6,28 @@ using System.Threading.Tasks;
 
 namespace Frontend.CardReader
 {
-    public class SCN
+    public static class SCN
     {       
+        public static List<int>BaudRates = new List<int>(){
 
-        public const int ID_DELAY = 100;
-        public const int SCAN_DELAY = 5000;
+                9600,
+                115200,
+                4800,
+                57600,
+                2400,
+                38400,
+                1200,
+                19200,
+                14400,        
+                           
+        };
 
-        public const string ID = "SCN_ID\0";
-        public const string SCAN = "SCN_CRD\0";
+        public static int ID_DELAY = 100;
+        public static int SCAN_DELAY = 5000;
 
-        public const string RESPONSE = "SCN_ACC";
+        public static string ID = "SCN_ID\0";
+        public static string SCAN = "SCN_CRD\0";
+
+        public static string RESPONSE = "SCN_ACC";
     }
 }

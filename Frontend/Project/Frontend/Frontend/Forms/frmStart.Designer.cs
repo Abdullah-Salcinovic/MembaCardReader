@@ -851,7 +851,7 @@ namespace Frontend.Forms
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 451);
             Controls.Add(pnlPerms);
             Controls.Add(pnlScan);
             Controls.Add(pnlConnection);

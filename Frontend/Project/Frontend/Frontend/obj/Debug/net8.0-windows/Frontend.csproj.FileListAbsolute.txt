@@ -3,7 +3,6 @@ C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Fronten
 C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\bin\Debug\net8.0-windows\Frontend.runtimeconfig.json
 C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\bin\Debug\net8.0-windows\Frontend.dll
 C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\bin\Debug\net8.0-windows\Frontend.pdb
-C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-windows\Frontend.Forms.frmStart.resources
 C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-windows\Frontend.csproj.GenerateResource.cache
 C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-windows\Frontend.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-windows\Frontend.AssemblyInfoInputs.cache
@@ -27,3 +26,4 @@ C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Fronten
 C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-windows\Frontend.csproj.AssemblyReference.cache
 C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-windows\Frontend.csproj.Up2Date
 C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-windows\Frontend.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-windows\Frontend.Forms.frmStart.resources
