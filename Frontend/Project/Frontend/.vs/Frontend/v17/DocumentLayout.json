@@ -11,16 +11,24 @@
       "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\forms\\frmstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|c:\\rs1v10\\membacardreader\\frontend\\project\\frontend\\frontend\\models\\customergetform2res.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\models\\customergetform2res.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\models\\customerputres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\models\\customerputres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|c:\\rs1v10\\membacardreader\\frontend\\project\\frontend\\frontend\\models\\customergetres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\codereader\\com_scanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\codereader\\com_scanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\models\\customergetres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\models\\customergetres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\cardreader\\scn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\cardreader\\scn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\models\\customergetall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\models\\customergetall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\forms\\frmstart.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\forms\\frmstart.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,46 +38,68 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "CustomerGetForm2Res.cs",
-              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetForm2Res.cs",
-              "RelativeDocumentMoniker": "Frontend\\Models\\CustomerGetForm2Res.cs",
-              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetForm2Res.cs",
-              "RelativeToolTip": "Frontend\\Models\\CustomerGetForm2Res.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAA1wBIAAAATAAAA",
+              "Title": "CustomerPutRes.cs",
+              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerPutRes.cs",
+              "RelativeDocumentMoniker": "Frontend\\Models\\CustomerPutRes.cs",
+              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerPutRes.cs",
+              "RelativeToolTip": "Frontend\\Models\\CustomerPutRes.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAtwAoAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T12:44:21.181Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-19T15:50:34.903Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CustomerGetRes.cs",
-              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetRes.cs",
-              "RelativeDocumentMoniker": "Frontend\\Models\\CustomerGetRes.cs",
-              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetRes.cs",
-              "RelativeToolTip": "Frontend\\Models\\CustomerGetRes.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAxwBIAAAAXAAAA",
+              "DocumentIndex": 6,
+              "Title": "frmStart.Designer.cs",
+              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.Designer.cs",
+              "RelativeDocumentMoniker": "Frontend\\Forms\\frmStart.Designer.cs",
+              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.Designer.cs",
+              "RelativeToolTip": "Frontend\\Forms\\frmStart.Designer.cs",
+              "ViewState": "AQIAAGQDAAAAAAAAAAAWwG8DAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T11:43:50.742Z",
+              "WhenOpened": "2024-03-19T12:54:57.826Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "SCN.cs",
-              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\CardReader\\SCN.cs",
-              "RelativeDocumentMoniker": "Frontend\\CardReader\\SCN.cs",
-              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\CardReader\\SCN.cs",
-              "RelativeToolTip": "Frontend\\CardReader\\SCN.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAMAAAA",
+              "Title": "CustomerGetRes.cs",
+              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetRes.cs",
+              "RelativeDocumentMoniker": "Frontend\\Models\\CustomerGetRes.cs",
+              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetRes.cs",
+              "RelativeToolTip": "Frontend\\Models\\CustomerGetRes.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAWwAoAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-15T09:29:36.999Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-18T11:43:50.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CustomerGetAll.cs",
+              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetAll.cs",
+              "RelativeDocumentMoniker": "Frontend\\Models\\CustomerGetAll.cs",
+              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetAll.cs",
+              "RelativeToolTip": "Frontend\\Models\\CustomerGetAll.cs",
+              "ViewState": "AQIAABcAAAAAAAAAAIA8wBwAAAC1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T14:40:18.934Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "COM_Scanner.cs",
+              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\CodeReader\\COM_Scanner.cs",
+              "RelativeDocumentMoniker": "Frontend\\CodeReader\\COM_Scanner.cs",
+              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\CodeReader\\COM_Scanner.cs",
+              "RelativeToolTip": "Frontend\\CodeReader\\COM_Scanner.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAmwBoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T13:41:43.816Z"
             },
             {
               "$type": "Document",
@@ -80,7 +110,7 @@
               "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.cs [Design]",
               "RelativeToolTip": "Frontend\\Forms\\frmStart.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-12T10:52:06.946Z",
+              "WhenOpened": "2024-03-19T12:58:47.699Z",
               "EditorCaption": " [Design]"
             },
             {
@@ -91,7 +121,7 @@
               "RelativeDocumentMoniker": "Frontend\\Forms\\frmStart.cs",
               "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.cs",
               "RelativeToolTip": "Frontend\\Forms\\frmStart.cs",
-              "ViewState": "AQIAAJABAAAAAAAAAAAgwJEBAAAIAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAACMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-12T10:20:20.615Z",
               "EditorCaption": ""

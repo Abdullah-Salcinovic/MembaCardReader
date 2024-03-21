@@ -39,7 +39,7 @@ namespace Frontend.Forms
             lblConnectionStatus = new Label();
             lblConnectionText = new Label();
             btnViewUsers = new Button();
-            btnScanCard = new Button();
+            btnRegistrations = new Button();
             btnConnection = new Button();
             pbLogo = new PictureBox();
             pnlConnection = new Panel();
@@ -77,19 +77,22 @@ namespace Frontend.Forms
             cmbValue = new ComboBox();
             txtValue = new TextBox();
             dgvData = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
+            Username = new DataGridViewTextBoxColumn();
             grpPermissions = new GroupBox();
+            grpQual = new GroupBox();
+            cbCrealityPrinters = new CheckBox();
+            cbTools = new CheckBox();
+            cbRaise3D = new CheckBox();
+            cbComputers = new CheckBox();
+            cbLCDPrinters = new CheckBox();
+            cbElectronics = new CheckBox();
             lblPremFilCurrent = new Label();
             lblLaserCutterCurrent = new Label();
             lblCNCMillCurrent = new Label();
             lblResinCurrent = new Label();
             lblStdFilCurrent = new Label();
             lblSelection = new Label();
-            cbElectronics = new CheckBox();
-            cbLCDPrinters = new CheckBox();
-            cbComputers = new CheckBox();
-            cbRaise3D = new CheckBox();
-            cbTools = new CheckBox();
-            cbCrealityPrinters = new CheckBox();
             numResin = new NumericUpDown();
             numPremFil = new NumericUpDown();
             numLsrCut = new NumericUpDown();
@@ -116,6 +119,7 @@ namespace Frontend.Forms
             pnlPerms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             grpPermissions.SuspendLayout();
+            grpQual.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numResin).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numPremFil).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numLsrCut).BeginInit();
@@ -129,7 +133,7 @@ namespace Frontend.Forms
             pnlButtons.Controls.Add(lblConnectionStatus);
             pnlButtons.Controls.Add(lblConnectionText);
             pnlButtons.Controls.Add(btnViewUsers);
-            pnlButtons.Controls.Add(btnScanCard);
+            pnlButtons.Controls.Add(btnRegistrations);
             pnlButtons.Controls.Add(btnConnection);
             pnlButtons.Controls.Add(pbLogo);
             pnlButtons.Location = new Point(12, 12);
@@ -184,18 +188,18 @@ namespace Frontend.Forms
             btnViewUsers.UseVisualStyleBackColor = false;
             btnViewUsers.Click += btnViewUsers_Click;
             // 
-            // btnScanCard
+            // btnRegistrations
             // 
-            btnScanCard.BackColor = Color.Gold;
-            btnScanCard.FlatStyle = FlatStyle.Flat;
-            btnScanCard.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnScanCard.Location = new Point(25, 286);
-            btnScanCard.Name = "btnScanCard";
-            btnScanCard.Size = new Size(176, 28);
-            btnScanCard.TabIndex = 2;
-            btnScanCard.Text = "Registrations";
-            btnScanCard.UseVisualStyleBackColor = false;
-            btnScanCard.Click += btnScanCard_Click;
+            btnRegistrations.BackColor = Color.Gold;
+            btnRegistrations.FlatStyle = FlatStyle.Flat;
+            btnRegistrations.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnRegistrations.Location = new Point(25, 286);
+            btnRegistrations.Name = "btnRegistrations";
+            btnRegistrations.Size = new Size(176, 28);
+            btnRegistrations.TabIndex = 2;
+            btnRegistrations.Text = "Registrations";
+            btnRegistrations.UseVisualStyleBackColor = false;
+            btnRegistrations.Click += btnScanCard_Click;
             // 
             // btnConnection
             // 
@@ -572,27 +576,40 @@ namespace Frontend.Forms
             dgvData.AllowUserToAddRows = false;
             dgvData.AllowUserToDeleteRows = false;
             dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvData.Columns.AddRange(new DataGridViewColumn[] { Id, Username });
             dgvData.Location = new Point(3, 68);
             dgvData.Name = "dgvData";
             dgvData.ReadOnly = true;
+            dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvData.Size = new Size(182, 355);
             dgvData.TabIndex = 1;
             dgvData.CellContentClick += dgvData_CellContentClick;
             // 
+            // Id
+            // 
+            Id.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Id.DataPropertyName = "Id";
+            Id.HeaderText = "Id";
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            // 
+            // Username
+            // 
+            Username.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Username.DataPropertyName = "Name";
+            Username.HeaderText = "Name";
+            Username.Name = "Username";
+            Username.ReadOnly = true;
+            // 
             // grpPermissions
             // 
+            grpPermissions.Controls.Add(grpQual);
             grpPermissions.Controls.Add(lblPremFilCurrent);
             grpPermissions.Controls.Add(lblLaserCutterCurrent);
             grpPermissions.Controls.Add(lblCNCMillCurrent);
             grpPermissions.Controls.Add(lblResinCurrent);
             grpPermissions.Controls.Add(lblStdFilCurrent);
             grpPermissions.Controls.Add(lblSelection);
-            grpPermissions.Controls.Add(cbElectronics);
-            grpPermissions.Controls.Add(cbLCDPrinters);
-            grpPermissions.Controls.Add(cbComputers);
-            grpPermissions.Controls.Add(cbRaise3D);
-            grpPermissions.Controls.Add(cbTools);
-            grpPermissions.Controls.Add(cbCrealityPrinters);
             grpPermissions.Controls.Add(numResin);
             grpPermissions.Controls.Add(numPremFil);
             grpPermissions.Controls.Add(numLsrCut);
@@ -611,6 +628,81 @@ namespace Frontend.Forms
             grpPermissions.TabIndex = 0;
             grpPermissions.TabStop = false;
             grpPermissions.Text = "Info";
+            // 
+            // grpQual
+            // 
+            grpQual.Controls.Add(cbCrealityPrinters);
+            grpQual.Controls.Add(cbTools);
+            grpQual.Controls.Add(cbRaise3D);
+            grpQual.Controls.Add(cbComputers);
+            grpQual.Controls.Add(cbLCDPrinters);
+            grpQual.Controls.Add(cbElectronics);
+            grpQual.Location = new Point(9, 251);
+            grpQual.Name = "grpQual";
+            grpQual.Size = new Size(320, 99);
+            grpQual.TabIndex = 41;
+            grpQual.TabStop = false;
+            grpQual.Text = "Qualified for:";
+            // 
+            // cbCrealityPrinters
+            // 
+            cbCrealityPrinters.AutoSize = true;
+            cbCrealityPrinters.Location = new Point(38, 26);
+            cbCrealityPrinters.Name = "cbCrealityPrinters";
+            cbCrealityPrinters.Size = new Size(109, 19);
+            cbCrealityPrinters.TabIndex = 29;
+            cbCrealityPrinters.Text = "Creality Printers";
+            cbCrealityPrinters.UseVisualStyleBackColor = true;
+            // 
+            // cbTools
+            // 
+            cbTools.AutoSize = true;
+            cbTools.Location = new Point(215, 26);
+            cbTools.Name = "cbTools";
+            cbTools.Size = new Size(53, 19);
+            cbTools.TabIndex = 30;
+            cbTools.Text = "Tools";
+            cbTools.UseVisualStyleBackColor = true;
+            // 
+            // cbRaise3D
+            // 
+            cbRaise3D.AutoSize = true;
+            cbRaise3D.Location = new Point(38, 51);
+            cbRaise3D.Name = "cbRaise3D";
+            cbRaise3D.Size = new Size(70, 19);
+            cbRaise3D.TabIndex = 31;
+            cbRaise3D.Text = "Raise 3D";
+            cbRaise3D.UseVisualStyleBackColor = true;
+            // 
+            // cbComputers
+            // 
+            cbComputers.AutoSize = true;
+            cbComputers.Location = new Point(215, 51);
+            cbComputers.Name = "cbComputers";
+            cbComputers.Size = new Size(85, 19);
+            cbComputers.TabIndex = 32;
+            cbComputers.Text = "Computers";
+            cbComputers.UseVisualStyleBackColor = true;
+            // 
+            // cbLCDPrinters
+            // 
+            cbLCDPrinters.AutoSize = true;
+            cbLCDPrinters.Location = new Point(38, 76);
+            cbLCDPrinters.Name = "cbLCDPrinters";
+            cbLCDPrinters.Size = new Size(91, 19);
+            cbLCDPrinters.TabIndex = 33;
+            cbLCDPrinters.Text = "LCD Printers";
+            cbLCDPrinters.UseVisualStyleBackColor = true;
+            // 
+            // cbElectronics
+            // 
+            cbElectronics.AutoSize = true;
+            cbElectronics.Location = new Point(215, 76);
+            cbElectronics.Name = "cbElectronics";
+            cbElectronics.Size = new Size(83, 19);
+            cbElectronics.TabIndex = 34;
+            cbElectronics.Text = "Electronics";
+            cbElectronics.UseVisualStyleBackColor = true;
             // 
             // lblPremFilCurrent
             // 
@@ -665,66 +757,6 @@ namespace Frontend.Forms
             lblSelection.Size = new Size(58, 15);
             lblSelection.TabIndex = 35;
             lblSelection.Text = "Selection:";
-            // 
-            // cbElectronics
-            // 
-            cbElectronics.AutoSize = true;
-            cbElectronics.Location = new Point(211, 331);
-            cbElectronics.Name = "cbElectronics";
-            cbElectronics.Size = new Size(83, 19);
-            cbElectronics.TabIndex = 34;
-            cbElectronics.Text = "Electronics";
-            cbElectronics.UseVisualStyleBackColor = true;
-            // 
-            // cbLCDPrinters
-            // 
-            cbLCDPrinters.AutoSize = true;
-            cbLCDPrinters.Location = new Point(34, 331);
-            cbLCDPrinters.Name = "cbLCDPrinters";
-            cbLCDPrinters.Size = new Size(91, 19);
-            cbLCDPrinters.TabIndex = 33;
-            cbLCDPrinters.Text = "LCD Printers";
-            cbLCDPrinters.UseVisualStyleBackColor = true;
-            // 
-            // cbComputers
-            // 
-            cbComputers.AutoSize = true;
-            cbComputers.Location = new Point(211, 306);
-            cbComputers.Name = "cbComputers";
-            cbComputers.Size = new Size(85, 19);
-            cbComputers.TabIndex = 32;
-            cbComputers.Text = "Computers";
-            cbComputers.UseVisualStyleBackColor = true;
-            // 
-            // cbRaise3D
-            // 
-            cbRaise3D.AutoSize = true;
-            cbRaise3D.Location = new Point(34, 306);
-            cbRaise3D.Name = "cbRaise3D";
-            cbRaise3D.Size = new Size(70, 19);
-            cbRaise3D.TabIndex = 31;
-            cbRaise3D.Text = "Raise 3D";
-            cbRaise3D.UseVisualStyleBackColor = true;
-            // 
-            // cbTools
-            // 
-            cbTools.AutoSize = true;
-            cbTools.Location = new Point(211, 281);
-            cbTools.Name = "cbTools";
-            cbTools.Size = new Size(53, 19);
-            cbTools.TabIndex = 30;
-            cbTools.Text = "Tools";
-            cbTools.UseVisualStyleBackColor = true;
-            // 
-            // cbCrealityPrinters
-            // 
-            cbCrealityPrinters.AutoSize = true;
-            cbCrealityPrinters.Location = new Point(34, 281);
-            cbCrealityPrinters.Name = "cbCrealityPrinters";
-            cbCrealityPrinters.Size = new Size(109, 19);
-            cbCrealityPrinters.TabIndex = 29;
-            cbCrealityPrinters.Text = "Creality Printers";
-            cbCrealityPrinters.UseVisualStyleBackColor = true;
             // 
             // numResin
             // 
@@ -879,6 +911,8 @@ namespace Frontend.Forms
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
             grpPermissions.ResumeLayout(false);
             grpPermissions.PerformLayout();
+            grpQual.ResumeLayout(false);
+            grpQual.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numResin).EndInit();
             ((System.ComponentModel.ISupportInitialize)numPremFil).EndInit();
             ((System.ComponentModel.ISupportInitialize)numLsrCut).EndInit();
@@ -893,7 +927,7 @@ namespace Frontend.Forms
         private PictureBox pbLogo;
         private Button btnConnection;
         private Button btnViewUsers;
-        private Button btnScanCard;
+        private Button btnRegistrations;
         private Label lblConnectionText;
         private Label lblConnectionStatus;
         private PictureBox pbConnection;
@@ -958,5 +992,8 @@ namespace Frontend.Forms
         private Label lblCNCMillCurrent;
         private Label lblResinCurrent;
         private Label lblStdFilCurrent;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn Username;
+        private GroupBox grpQual;
     }
 }

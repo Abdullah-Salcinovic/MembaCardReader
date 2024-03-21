@@ -1,6 +1,8 @@
-﻿using Backend.Data.Models;
+﻿using Azure.Core;
+using Backend.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Endpoints.Customer.Put
 {
@@ -16,23 +18,58 @@ namespace Backend.Endpoints.Customer.Put
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateCustomer(int id, [FromBody] CustomerPutReq customerReq)
+        public async Task<IActionResult> UpdateCustomer(string id, [FromBody] CustomerPutReq request)
         {
-            var customer = _context.Customers.Find(id);
-            if (customer == null)
+            if (id != request.Id)
             {
-                return NotFound();
+                return BadRequest("The ID in the URL does not match the ID in the request body.");
             }
 
-            customer.Name = customerReq.Name;
-            customer.Email = customerReq.Email;
-            customer.Phone = customerReq.Phone;
-            customer.DateOfBirth = customerReq.DateOfBirth;
-            customer.Sex = customerReq.Sex;
+            var customer = await _context.Customers
+                .Include(c => c.Memberships)
+                .Include(c => c.Materials)
+                .FirstOrDefaultAsync(c => c.Id == id);
 
-            _context.SaveChanges();
+            if (customer == null)
+            {
+                return NotFound("Customer not found.");
+            }
 
-            return NoContent();
+            // Update customer properties
+            customer.Name = request.Name;
+
+            // Update related entities (Membership, Material) if needed
+            // For brevity, assuming only updating the last item in collections.
+            if (customer.Memberships.Any())
+            {
+                var lastMembership = customer.Memberships.Last();
+                lastMembership.CrealityPrinters = request.CrealityPrinters;
+                lastMembership.Raise3D = request.Raise3D;
+                lastMembership.Lcdprinters = request.Lcdprinters;
+                lastMembership.Tools = request.Tools;
+                lastMembership.Computers = request.Computers;
+                lastMembership.Electronics = request.Electronics;
+            }
+
+            if (customer.Materials.Any())
+            {
+                var lastMaterial = customer.Materials.Last();
+                lastMaterial.Filament = request.Filament;
+                lastMaterial.Resin = request.Resin;
+                lastMaterial.Cncmill = request.Cncmill;
+                lastMaterial.LaserCutter = request.LaserCutter;
+                lastMaterial.PremiumFilament = request.PremiumFilament;
+            }
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok("Customer updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error updating customer: {ex.Message}");
+            }
         }
     }
 }

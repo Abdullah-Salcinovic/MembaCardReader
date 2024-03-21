@@ -22,11 +22,9 @@ namespace Backend.Endpoints.Customer.GetAll
                 {
                     Id = x.Id,
                     Name = x.Name,
-                    Sex = x.Sex,
-                    DateOfBirth = x.DateOfBirth,
-                    Email = x.Email,
-                    Phone = x.Phone
-    }).ToList();
+                    Materials = x.Materials,
+                    Memberships = x.Memberships
+                }).ToList();
 
             return new CustomerGetAllList
             {

@@ -11,9 +11,12 @@ using System.IO.Ports;
 using System.Resources;
 using System.Security.Cryptography.X509Certificates;
 using System.Drawing.Text;
-using Frontend.CardReader;
-using Newtonsoft.Json;
+using Frontend.CodeReader;
 using Frontend.Models;
+using Newtonsoft.Json;
+using System.Net.Http.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Net.Http;
 
 namespace Frontend.Forms
 {
@@ -24,14 +27,16 @@ namespace Frontend.Forms
     {
         private static HttpClient sharedClient = new()
         {
-            BaseAddress = new Uri("http://10.100.30.39:5174")
+            BaseAddress = new Uri("http://10.100.30.41:5174")
         };
 
-        private List<Int32> BaudRates;
+        private string slctdID;
+        private string slctdName;
+        private string scndID;
 
         private List<string> PortNames;
 
-        private List<string> ValidPorts;
+        private List<COM_Scanner> ValidPorts;
 
         private SerialPort? OpenPort;
 
@@ -52,25 +57,15 @@ namespace Frontend.Forms
         {
             InitializeComponent();
 
-            this.BaudIdeal=new List<int>();
+            this.dgvData.AutoGenerateColumns = false;
 
-            
+            this.BaudIdeal = new List<int>();
 
-            this.BaudRates  = new List<int>() {
 
-                9600,
-                1200,
-                2400,
-                4800,
-                14400,
-                19200,
-                38400,
-                57600,
-                115200
 
-            };
 
-            this.Sexes= new List<string>()
+
+            this.Sexes = new List<string>()
             {
                 "Male",
                 "Female"
@@ -90,10 +85,13 @@ namespace Frontend.Forms
                 "Filter by Name"
             };
 
+            this.slctdID = "";
+            this.scndID = "";
+            this.slctdName = "";
             this.PortNames = new List<string>();
-            this.ValidPorts = new List<string>();
+            this.ValidPorts = new List<COM_Scanner>();
             this.Connected = false;
-            this.CurrentPanel=this.pnlConnection;
+            this.CurrentPanel = this.pnlConnection;
             Panel_Switch(this.CurrentPanel);
 
         }
@@ -103,11 +101,11 @@ namespace Frontend.Forms
 
 
             ConnectionStatusLock();
-            this.cmbSex.DataSource=this.Sexes;
-            this.cmbSubscription.DataSource=this.Subscriptions;
-            this.cmbValue.DataSource=this.SearchFilters;
+            this.cmbSex.DataSource = this.Sexes;
+            this.cmbSubscription.DataSource = this.Subscriptions;
+            this.cmbValue.DataSource = this.SearchFilters;
             HandleEdit();
-
+            this.grpQual.Enabled = false;
 
             ScanPorts();
         }
@@ -115,7 +113,7 @@ namespace Frontend.Forms
         private void ScanPorts()
         {
             this.btnScanPort.Enabled = false;
-            this.cmbPort.DataSource=null;
+            this.cmbPort.DataSource = null;
 
             this.PortNames.Clear();
             this.ValidPorts.Clear();
@@ -131,7 +129,7 @@ namespace Frontend.Forms
                 try
                 {
 
-                    foreach (int baud in BaudRates)
+                    foreach (int baud in SCN.BaudRates)
                     {
                         if (tempSerialPort.IsOpen)
                         {
@@ -139,9 +137,7 @@ namespace Frontend.Forms
                         }
 
 
-
-
-                        tempSerialPort.BaudRate=baud;
+                        tempSerialPort.BaudRate = baud;
 
 
                         tempSerialPort.Open();
@@ -150,18 +146,27 @@ namespace Frontend.Forms
                         tempSerialPort.WriteLine(SCN.ID);
 
 
-                        Thread.Sleep(SCN.ID_DELAY);
-
-
+                        Wait(SCN.ID_DELAY);
 
 
                         string msg = tempSerialPort.ReadExisting();
 
+                        tempSerialPort.DiscardInBuffer();
+                        tempSerialPort.DiscardOutBuffer();
+
                         if (msg == SCN.RESPONSE)
                         {
+                            tempSerialPort.WriteLine(SCN.TYPE);
+
+                            Wait(SCN.TYPE_DELAY);
+
+                            string typ = tempSerialPort.ReadExisting();
+
+                            COM_Scanner com = new COM_Scanner(typ, portName);
 
 
-                            this.ValidPorts.Add(portName);
+
+                            this.ValidPorts.Add(com);
                             this.BaudIdeal.Add(baud);
                             break;
 
@@ -190,18 +195,18 @@ namespace Frontend.Forms
             }
 
 
-            if (this.ValidPorts.Count>0)
+            if (this.ValidPorts.Count > 0)
             {
                 this.cmbPort.Enabled = true;
 
-                this.cmbPort.DataSource=this.ValidPorts;
+                this.cmbPort.DataSource = this.ValidPorts;
 
             }
 
             else
             {
-                this.cmbPort.Enabled=false;
-                MessageBox.Show("Please ensure your device can see a valid card reader.", "No card readers found.");
+                this.cmbPort.Enabled = false;
+                MessageBox.Show("Please ensure your device can see a valid scanner.", "No scanners found.");
             }
             this.btnScanPort.Enabled = true;
         }
@@ -227,13 +232,18 @@ namespace Frontend.Forms
         {
             if (!Connected)
             {
-                if (this.OpenPort!=null)
+                if (this.OpenPort != null)
                 {
                     this.OpenPort.Dispose();
-                }
-                this.OpenPort = new SerialPort(cmbPort.SelectedItem!.ToString());
 
-                this.OpenPort.BaudRate=BaudIdeal[cmbPort.SelectedIndex];
+                }
+
+                COM_Scanner? tmp = this.cmbPort.SelectedItem as COM_Scanner;
+
+
+                this.OpenPort = new SerialPort(tmp!.COM);
+
+                this.OpenPort.BaudRate = BaudIdeal[cmbPort.SelectedIndex];
 
                 try
                 {
@@ -242,11 +252,10 @@ namespace Frontend.Forms
                     this.OpenPort.WriteLine(SCN.ID);
 
 
-                    Thread.Sleep(SCN.ID_DELAY);
+                    Wait(SCN.ID_DELAY);
 
 
                     string msg = this.OpenPort!.ReadExisting();
-
 
 
                     if (msg != SCN.RESPONSE)
@@ -256,13 +265,13 @@ namespace Frontend.Forms
 
                     else
                     {
-                        this.btnConnect.Text="Disconnect";
-                        this.lblConnectionStatus.Text="Connected";
+                        this.btnConnect.Text = "Disconnect";
+                        this.lblConnectionStatus.Text = "Connected";
 
-                        this.cmbPort.Enabled=false;
-                        this.btnScanPort.Enabled=false;
-                        this.pbConnection.Image= Resources.SharedResources.Green;
-                        this.Connected=true;
+                        this.cmbPort.Enabled = false;
+                        this.btnScanPort.Enabled = false;
+                        this.pbConnection.Image = Resources.SharedResources.Green;
+                        this.Connected = true;
                         ConnectionStatusLock();
                     }
                 }
@@ -282,49 +291,51 @@ namespace Frontend.Forms
             {
                 this.OpenPort!.Close();
 
-                if (this.OpenPort!=null)
+                if (this.OpenPort != null)
                 {
                     this.OpenPort.Dispose();
                 }
 
-                this.btnConnect.Text="Connect";
-                this.lblConnectionStatus.Text="Disconnected";
-                this.Connected =false;
-                this.CurrentPanel=pnlConnection;
+                this.btnConnect.Text = "Connect";
+                this.lblConnectionStatus.Text = "Disconnected";
+                this.Connected = false;
+                this.CurrentPanel = pnlConnection;
                 Panel_Switch(this.CurrentPanel);
 
-                this.cmbPort.Enabled=true;
-                this.btnScanPort.Enabled =true;
+                this.cmbPort.Enabled = true;
+                this.btnScanPort.Enabled = true;
                 ConnectionStatusLock();
-                this.pbConnection.Image=Resources.SharedResources.Red;
+                this.pbConnection.Image = Resources.SharedResources.Red;
             }
 
         }
 
         private void ConnectionStatusLock()
         {
-            this.btnConnection.Enabled=this.Connected;
-            this.btnScanCard.Enabled=this.Connected;
-            this.btnViewUsers.Enabled=this.Connected;
+            this.btnConnection.Enabled = this.Connected;
+            this.btnRegistrations.Enabled = this.Connected;
+            this.btnViewUsers.Enabled = this.Connected;
 
         }
 
         private void btnConnection_Click(object sender, EventArgs e)
         {
-            this.CurrentPanel=pnlConnection;
+            this.CurrentPanel = pnlConnection;
             Panel_Switch(this.CurrentPanel);
         }
 
         private void btnScanCard_Click(object sender, EventArgs e)
         {
-            this.CurrentPanel=this.pnlScan;
+            this.CurrentPanel = this.pnlScan;
             Panel_Switch(this.CurrentPanel);
         }
 
-        private void btnViewUsers_Click(object sender, EventArgs e)
+        private async void btnViewUsers_Click(object sender, EventArgs e)
         {
-            this.CurrentPanel=this.pnlPerms;
+            this.CurrentPanel = this.pnlPerms;
             Panel_Switch(this.CurrentPanel);
+
+            await GetAllAsync("/customers", sharedClient);
         }
 
 
@@ -346,12 +357,12 @@ namespace Frontend.Forms
             {
                 if (pnl == Selection || pnl == this.pnlButtons)
                 {
-                    pnl.Visible =true;
+                    pnl.Visible = true;
                 }
 
                 else
                 {
-                    pnl.Visible=false;
+                    pnl.Visible = false;
                 }
 
             }
@@ -367,14 +378,14 @@ namespace Frontend.Forms
 
         private void Verify_Selection()
         {
-            if (this.cmbPort.SelectedItem!=null)
+            if (this.cmbPort.SelectedItem != null)
             {
                 this.btnConnect.Enabled = true;
             }
 
             else
             {
-                this.btnConnect.Enabled=false;
+                this.btnConnect.Enabled = false;
             }
         }
 
@@ -394,17 +405,23 @@ namespace Frontend.Forms
             }
             else
             {
-                this.grpScan.Enabled=true;
-                this.grpInfo.Enabled=false;
+                this.grpScan.Enabled = true;
+                this.grpInfo.Enabled = false;
             }
+
+            this.cmbSex.SelectedItem = null;
+            this.cmbSubscription.SelectedItem = null;
+            this.pbSubscription.Image = null;
+            this.pbValid.Image = null;
+
+
         }
 
         private async void btnScan_Click(object sender, EventArgs e)
         {
-            ScanCard();
-            if (txtId.Text != String.Empty && txtId.Text != null)
+            ScanCode();
+            if (txtId.Text != System.String.Empty && txtId.Text != null)
             {
-
                 await GetAsync($"/customer?id={txtId.Text}", sharedClient);
             }
 
@@ -412,23 +429,78 @@ namespace Frontend.Forms
 
         }
 
+
         private async Task GetAsync(string endpoint, HttpClient httpClient)
         {
-            using HttpResponseMessage response = await httpClient.GetAsync($"/api{endpoint}");
+            try
+            {
+                using HttpResponseMessage response = await httpClient.GetAsync($"/api{endpoint}");
 
-            var jsonResponse = await response.Content.ReadAsStringAsync();
+                var jsonResponse = await response.Content.ReadAsStringAsync();
 
-            var data = JsonConvert.DeserializeObject<CustomerGetRes>(jsonResponse);
+                var data = JsonConvert.DeserializeObject<CustomerGetRes>(jsonResponse);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    this.scndID = data?.Id!;
+                    this.txtName.Text = data?.Name;
+                    this.cmbSex.SelectedItem = data?.Sex;
+                    this.dtpDoB.Value = data!.DateOfBirth;
+                    this.txtNumber.Text = data?.Phone;
+                    this.txtEmail.Text = data?.Email;
+                    this.cmbSubscription.SelectedItem = data?.Subscription;
+                    this.dtpValid.Value = data!.ExpirationDate;
+                    ChangeBanner();
+                }
+                else
+                {
+                    MessageBox.Show($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Connection to database cannot be formed. Check if the server is up!","Error");
+            }
+            
+        }
+
+        private async Task GetAllAsync(string endpoint, HttpClient httpClient)
+        {
+            try
+            {
+                using HttpResponseMessage response = await httpClient.GetAsync($"/api{endpoint}");
+
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+
+                var data = JsonConvert.DeserializeObject<CustomerGetAllResponse>(jsonResponse);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    dgvData.DataSource = data?.Customers;
+                }
+                else
+                {
+                    MessageBox.Show($"Error: {response.StatusCode} - {response.ReasonPhrase}", "Database error");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The server appears to be unresponsive.","Error");
+            }
+           
+        }
+
+        private async Task PutAsync(string endpoint, HttpClient httpClient, CustomerPutRes requestData)
+        {
+            var jsonContent = JsonConvert.SerializeObject(requestData);
+
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+            using HttpResponseMessage response = await httpClient.PutAsync($"/api{endpoint}", content);
 
             if (response.IsSuccessStatusCode)
             {
-                this.txtName.Text = data.Name;
-                this.cmbSex.Text = data.Sex;
-                this.dtpDoB.Value = data.DateOfBirth;
-                this.txtNumber.Text = data.Phone;
-                this.txtEmail.Text = data.Email;
-                this.cmbSubscription.Text = data.Subscription;
-                this.dtpValid.Value = data.ExpirationDate;
+                MessageBox.Show("User updated successfully");
             }
             else
             {
@@ -436,38 +508,26 @@ namespace Frontend.Forms
             }
         }
 
-        private async Task Get2Async(string endpoint, HttpClient httpClient)
+        private async Task Put2Async(string endpoint, HttpClient httpClient, CustomerGetAll requestData)
         {
-            using HttpResponseMessage response = await httpClient.GetAsync($"/api{endpoint}");
+            var jsonContent = JsonConvert.SerializeObject(requestData);
 
-            var jsonResponse = await response.Content.ReadAsStringAsync();
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            var data = JsonConvert.DeserializeObject<CustomerGetForm2Res>(jsonResponse);
+            using HttpResponseMessage response = await httpClient.PutAsync($"/api{endpoint}", content);
 
             if (response.IsSuccessStatusCode)
             {
-                this.txtSelect.Text = $"{data.Name} ({data.Id})";
-                this.numStdFil.Value = decimal.Parse(data.Filament);
-                this.numResin.Value = decimal.Parse(data.Resin);
-                this.numCNCMill.Value = decimal.Parse(data.Cncmill);
-                this.numLsrCut.Value = decimal.Parse(data.LaserCutter);
-                this.numPremFil.Value = decimal.Parse(data.PremiumFilament);
-
-                this.cbCrealityPrinters.Checked = data.CrealityPrinters;
-                this.cbRaise3D.Checked = data.Raise3D;
-                this.cbLCDPrinters.Checked = data.Lcdprinters;
-                this.cbTools.Checked = data.Tools;
-                this.cbComputers.Checked = data.Computers;
-                this.cbElectronics.Checked = data.Electronics;
+                MessageBox.Show("User updated successfully");
             }
             else
             {
-                MessageBox.Show($"Error: {response.StatusCode}  {response.ReasonPhrase}");
+                MessageBox.Show($"Error: {response.StatusCode} - {response.ReasonPhrase}");
             }
+        }   
 
-        }
 
-        private void ScanCard()
+        private void ScanCode()
         {
             this.btnScan.Enabled = false;
 
@@ -478,8 +538,7 @@ namespace Frontend.Forms
                 this.OpenPort!.WriteLine(SCN.ID);
 
 
-                Thread.Sleep(SCN.ID_DELAY);
-
+                Wait(SCN.ID_DELAY);
 
                 string msg = this.OpenPort!.ReadExisting();
 
@@ -499,12 +558,12 @@ namespace Frontend.Forms
 
                     this.OpenPort!.WriteLine(SCN.SCAN);
 
-                    Thread.Sleep(SCN.SCAN_DELAY);
+                    Wait(SCN.SCAN_DELAY);
 
                     string rez = this.OpenPort!.ReadExisting();
 
 
-                    if (rez!=String.Empty)
+                    if (rez != System.String.Empty)
                     {
 
                         this.txtId.Text = rez;
@@ -513,7 +572,7 @@ namespace Frontend.Forms
 
                     else
                     {
-                        MessageBox.Show($"The device at port {cmbPort.SelectedItem} was unable to scan a card.", "Timeout");
+                        MessageBox.Show($"The device at port {cmbPort.SelectedItem} was unable to scan a code.", "Timeout");
                     }
 
                 }
@@ -529,18 +588,18 @@ namespace Frontend.Forms
             }
 
 
-            this.btnScan.Enabled=true;
+            this.btnScan.Enabled = true;
         }
 
         private void dtpValid_ValueChanged(object sender, EventArgs e)
         {
-            if (this.dtpValid.Value<=DateTime.Now)
+            if (this.dtpValid.Value <= DateTime.Now)
             {
-                this.pbValid.Image=(Image)Resources.SharedResources.Invalid;
+                this.pbValid.Image = (Image)Resources.SharedResources.Invalid;
             }
             else
             {
-                this.pbValid.Image=(Image)Resources.SharedResources.Valid;
+                this.pbValid.Image = (Image)Resources.SharedResources.Valid;
             }
         }
 
@@ -551,10 +610,23 @@ namespace Frontend.Forms
 
         }
 
-        private void btnSaveChanges_Click(object sender, EventArgs e)
+        private async void btnSaveChanges_Click(object sender, EventArgs e)
         {
             if (ValidateInput())
             {
+                var customer = new CustomerPutRes()
+                {
+                    Id = this.scndID,
+                    Name = this.txtName.Text,
+                    DateOfBirth = this.dtpDoB.Value,
+                    Email = this.txtEmail.Text,
+                    ExpirationDate = this.dtpValid.Value,
+                    Phone = this.txtNumber.Text,
+                    Sex = this.cmbSex.Text,
+                    Subscription = this.cmbSubscription.Text
+                };
+
+                await PutAsync($"/customera/{customer.Id}", sharedClient, customer);
 
                 SaveChanges();
             }
@@ -563,27 +635,29 @@ namespace Frontend.Forms
 
         private void Clear()
         {
-            this.cbEdit.Checked=false;
+            this.cbEdit.Checked = false;
 
 
-            this.pbSubscription.Image=null;
+            this.pbSubscription.Image = null;
 
-            this.txtId.Text=string.Empty;
-            this.txtName.Text=string.Empty;
-            this.cmbSex.SelectedItem=null;
-            this.dtpDoB.Value=DateTime.Now;
-            this.txtNumber.Text=string.Empty;
-            this.txtEmail.Text=string.Empty;
-            this.cmbSubscription.SelectedItem=null;
-            this.dtpValid.Value=DateTime.Now;
+            this.txtId.Text = string.Empty;
+            this.txtName.Text = string.Empty;
+            this.cmbSex.SelectedItem = null;
+            this.dtpDoB.Value = DateTime.Now;
+            this.txtNumber.Text = string.Empty;
+            this.txtEmail.Text = string.Empty;
+            this.cmbSubscription.SelectedItem = null;
+            this.dtpValid.Value = DateTime.Now;
 
-            this.pbValid.Image=null;
+            this.pbValid.Image = null;
+
+
+
 
             HandleEdit();
         }
         private void SaveChanges()
         {
-
             Clear();
         }
 
@@ -592,43 +666,48 @@ namespace Frontend.Forms
             this.err.Clear();
 
 
-            if (this.txtId.Text==null||this.txtId.Text==String.Empty)
+            if (this.txtId.Text == null || this.txtId.Text == System.String.Empty)
             {
-                this.err.SetError(this.txtId, "A card needs to be scanned to continue.");
+                this.err.SetError(this.txtId, "A code needs to be scanned to continue.");
                 return false;
             }
-            else if (this.txtName.Text==null||this.txtName.Text==String.Empty)
+            else if (this.txtName.Text == null || this.txtName.Text == System.String.Empty)
             {
                 this.err.SetError(this.txtName, "The user entry requires a name.");
                 return false;
             }
-            else if (this.cmbSex.SelectedItem==null)
+            else if (this.cmbSex.SelectedItem == null)
             {
                 this.err.SetError(this.cmbSex, "The user entry requires a sex.");
                 return false;
             }
 
-            else if (this.dtpDoB.Value.AddYears(DateTime.Now.Year-this.dtpDoB.Value.Year)<DateTime.Now && DateTime.Now.Year -this.dtpDoB.Value.Year<=18)
+            else if (DateTime.Now.Year - this.dtpDoB.Value.Year < 18 ||
+                (DateTime.Now.Year - this.dtpDoB.Value.Year == 18 && DateTime.Now.Month < this.dtpDoB.Value.Month) ||
+                (DateTime.Now.Year - this.dtpDoB.Value.Year == 18 && DateTime.Now.Month == this.dtpDoB.Value.Month && DateTime.Now.Day < this.dtpDoB.Value.Day)
+
+
+                )
             {
-                this.err.SetError(this.dtpDoB, "The user needs to be a person born prior to this moment.");
+                this.err.SetError(this.dtpDoB, "The user needs to be a person of age.");
                 return false;
             }
-            else if (this.txtNumber.Text==null||this.txtNumber.Text==String.Empty)
+            else if (this.txtNumber.Text == null || this.txtNumber.Text == System.String.Empty)
             {
                 this.err.SetError(this.txtNumber, "The user needs to have a phone number.");
                 return false;
             }
-            else if (this.txtEmail.Text==null||this.txtEmail.Text==String.Empty)
+            else if (this.txtEmail.Text == null || this.txtEmail.Text == System.String.Empty)
             {
                 this.err.SetError(this.txtEmail, "The user needs to have an E-Mail address.");
                 return false;
             }
-            else if (this.cmbSubscription.SelectedItem==null)
+            else if (this.cmbSubscription.SelectedItem == null)
             {
                 this.err.SetError(this.cmbSubscription, "Invalid subscription type.");
                 return false;
             }
-            else if (this.dtpValid.Value<=DateTime.Now)
+            else if (this.dtpValid.Value <= DateTime.Now)
             {
                 this.err.SetError(this.dtpValid, "User cannot have an expired membership.");
                 return false;
@@ -643,50 +722,122 @@ namespace Frontend.Forms
 
         private void tmr_Tick(object sender, EventArgs e)
         {
-            if (this.Connected==false)
+            if (this.Connected == false)
             {
-                if (this.pbConnection.Visible==true)
+                if (this.pbConnection.Visible == true)
                 {
                     this.pbConnection.Visible = false;
                 }
                 else
                 {
-                    this.pbConnection.Visible=true;
+                    this.pbConnection.Visible = true;
                 }
             }
 
             else
             {
-                if (this.pbConnection.Visible==false)
+                if (this.pbConnection.Visible == false)
                 {
-                    this.pbConnection.Visible=true;
+                    this.pbConnection.Visible = true;
                 }
             }
         }
 
         private void cbPermEdit_CheckedChanged(object sender, EventArgs e)
         {
-            this.btnSavePerms.Enabled=this.cbPermEdit.Checked;
-            this.grpPermissions.Enabled=this.cbPermEdit.Checked;
+            this.btnSavePerms.Enabled = this.cbPermEdit.Checked;
+            this.grpPermissions.Enabled = this.cbPermEdit.Checked;
+
+            this.grpQual.Enabled = false;
         }
 
-        private void btnSavePerms_Click(object sender, EventArgs e)
+        private async void btnSavePerms_Click(object sender, EventArgs e)
         {
-            this.cbPermEdit.Checked=false;
+            if (cbPermEdit.Checked == true)
+            {
+                var data = new CustomerGetAll()
+                {
+                    Id = this.slctdID,
+                    Name = this.slctdName,
+                    Filament = this.numStdFil.Value.ToString(),
+                    Resin = this.numResin.Value.ToString(),
+                    Cncmill = this.numCNCMill.Value.ToString(),
+                    LaserCutter = this.numLsrCut.Value.ToString(),
+                    PremiumFilament = this.numPremFil.Value.ToString(),
+                    CrealityPrinters = this.cbCrealityPrinters.Checked,
+                    Raise3D = this.cbRaise3D.Checked,
+                    Lcdprinters = this.cbLCDPrinters.Checked,
+                    Tools = this.cbTools.Checked,
+                    Computers = this.cbComputers.Checked,
+                    Electronics = this.cbElectronics.Checked
+                };
+
+                await Put2Async($"/customer/{data.Id}", sharedClient, data);
+            }
+
+            this.cbPermEdit.Checked = false;
         }
 
         private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex>=0 && e.RowIndex<dgvData.RowCount && e.ColumnIndex>=0 && e.ColumnIndex<=1)
+            if (e.RowIndex >= 0 && e.RowIndex < dgvData.RowCount && e.ColumnIndex >= 0 && e.ColumnIndex <= 1)
             {
+                var data = dgvData.SelectedRows[0].DataBoundItem as CustomerGetAll;
+                this.slctdID = data!.Id!;
+                this.slctdName = data!.Name!;
+                this.txtSelect.Text = $"{data?.Name} ({data!.Id!})";
+                this.numStdFil.Value = decimal.Parse(data!.Filament!);
+                this.numResin.Value = decimal.Parse(data!.Resin!);
+                this.numCNCMill.Value = decimal.Parse(data!.Cncmill!);
+                this.numLsrCut.Value = decimal.Parse(data!.LaserCutter!);
+                this.numPremFil.Value = decimal.Parse(data!.PremiumFilament!);
+
+                this.cbCrealityPrinters.Checked = data.CrealityPrinters;
+                this.cbRaise3D.Checked = data.Raise3D;
+                this.cbLCDPrinters.Checked = data.Lcdprinters;
+                this.cbTools.Checked = data.Tools;
+                this.cbComputers.Checked = data.Computers;
+                this.cbElectronics.Checked = data.Electronics;
 
             }
-
+            
         }
 
         private void txtValue_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+
+
+        private void ChangeBanner()
+        {
+            if (this.cmbSubscription.SelectedItem as System.String == "Basic")
+            {
+                this.pbSubscription.Image = Resources.SharedResources.Basic;
+            }
+            else if (this.cmbSubscription.SelectedItem as System.String == "Student")
+            {
+                this.pbSubscription.Image = Resources.SharedResources.Student;
+            }
+            else if (this.cmbSubscription.SelectedItem as System.String == "Premium")
+            {
+                this.pbSubscription.Image = Resources.SharedResources.Premium;
+            }
+            else
+            {
+                this.pbSubscription.Image = Resources.SharedResources.Invalid;
+            }
+        }
+
+        private void cmbSubscription_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChangeBanner();
+        }
+
+        private void Wait(int time)
+        {
+            Thread.Sleep(time);
         }
     }
 }
