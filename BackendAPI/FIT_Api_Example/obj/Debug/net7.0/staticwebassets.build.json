@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bcykTH2UtLHFnaAUMWZqa6X+z48SyHBiGHbU8zHeu9A=",
+  "Hash": "456nCZfwRtdSTGS5DzGusHbu7MLp2UlCdPYA6fW6rY4=",
   "Source": "Backend",
   "BasePath": "_content/Backend",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "Backend\\wwwroot",
       "Source": "Backend",
-      "ContentRoot": "C:\\rs1v10\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\",
       "BasePath": "_content/Backend",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\rs1v10\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\profile_images\\0e3d05f1-a543-4e81-b3b3-3b13c6fded19.png",
+      "Identity": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\profile_images\\0e3d05f1-a543-4e81-b3b3-3b13c6fded19.png",
       "SourceId": "Backend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\rs1v10\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\",
       "BasePath": "_content/Backend",
       "RelativePath": "profile_images/0e3d05f1-a543-4e81-b3b3-3b13c6fded19.png",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot\\profile_images\\0e3d05f1-a543-4e81-b3b3-3b13c6fded19.png"
     },
     {
-      "Identity": "C:\\rs1v10\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\profile_images\\empty.png",
+      "Identity": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\profile_images\\empty.png",
       "SourceId": "Backend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\rs1v10\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\wwwroot\\",
       "BasePath": "_content/Backend",
       "RelativePath": "profile_images/empty.png",
       "AssetKind": "All",

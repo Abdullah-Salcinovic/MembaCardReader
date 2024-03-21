@@ -27,7 +27,7 @@ namespace Frontend.Forms
     {
         private static HttpClient sharedClient = new()
         {
-            BaseAddress = new Uri("http://10.100.30.41:5174")
+            BaseAddress = new Uri("http://192.168.1.138:5174")
         };
 
         private string slctdID;
@@ -46,12 +46,16 @@ namespace Frontend.Forms
 
         private Panel CurrentPanel;
 
+
+
         private List<string> SearchFilters;
 
 
         private List<string> Sexes;
 
         private List<string> Subscriptions;
+
+       
 
         public frmStart()
         {
@@ -61,9 +65,11 @@ namespace Frontend.Forms
 
             this.BaudIdeal = new List<int>();
 
+           
 
+            this.CurrentPanel = this.pnlConnection;
 
-
+            
 
             this.Sexes = new List<string>()
             {
@@ -91,21 +97,25 @@ namespace Frontend.Forms
             this.PortNames = new List<string>();
             this.ValidPorts = new List<COM_Scanner>();
             this.Connected = false;
-            this.CurrentPanel = this.pnlConnection;
-            Panel_Switch(this.CurrentPanel);
+            
 
         }
 
         private void frmStart_Load(object sender, EventArgs e)
         {
 
-
+            
             ConnectionStatusLock();
             this.cmbSex.DataSource = this.Sexes;
             this.cmbSubscription.DataSource = this.Subscriptions;
             this.cmbValue.DataSource = this.SearchFilters;
+
             HandleEdit();
+            HandlePerms();
             this.grpQual.Enabled = false;
+
+            this.CurrentPanel = this.pnlConnection;
+            Panel_Switch(this.CurrentPanel);
 
             ScanPorts();
         }
@@ -128,6 +138,7 @@ namespace Frontend.Forms
 
                 try
                 {
+                   
 
                     foreach (int baud in SCN.BaudRates)
                     {
@@ -188,7 +199,7 @@ namespace Frontend.Forms
                 catch (Exception)
                 {
                     MessageBox.Show($"Device port not opening. Please check your connection at {portName}", "Error");
-
+                   
                 }
 
 
@@ -245,6 +256,8 @@ namespace Frontend.Forms
 
                 this.OpenPort.BaudRate = BaudIdeal[cmbPort.SelectedIndex];
 
+                
+
                 try
                 {
                     this.OpenPort.Open();
@@ -278,9 +291,10 @@ namespace Frontend.Forms
                 catch (Exception)
                 {
                     MessageBox.Show($"Device port not opening. Please check your connection at {this.cmbPort.SelectedItem}", "Error");
-
+                   
                 }
 
+               
 
             }
 
@@ -353,21 +367,27 @@ namespace Frontend.Forms
 
         private void Panel_Switch(Panel Selection)
         {
-            foreach (Panel pnl in this.Controls)
+
+
+
+            foreach (Control pnl in this.Controls)
             {
-                if (pnl == Selection || pnl == this.pnlButtons)
-                {
-                    pnl.Visible = true;
-                }
 
-                else
+                if (pnl.GetType() == typeof(Panel))
                 {
-                    pnl.Visible = false;
-                }
 
+                    if (pnl == Selection || pnl == this.pnlButtons)
+                    {
+                        pnl.Visible = true;
+                    }
+
+                    else
+                    {
+                        pnl.Visible = false;
+                    }
+
+                }
             }
-
-
 
 
         }
@@ -401,12 +421,18 @@ namespace Frontend.Forms
             if (this.cbEdit.Checked)
             {
                 this.grpScan.Enabled = false;
+                this.grpScan.BackColor = Color.FromArgb(255, 188, 188, 208);
                 this.grpInfo.Enabled = true;
+                this.grpInfo.BackColor = Color.FromArgb(255, 66, 66, 86);
             }
             else
             {
                 this.grpScan.Enabled = true;
                 this.grpInfo.Enabled = false;
+
+                this.grpInfo.BackColor = Color.FromArgb(255, 188, 188, 208);
+
+                this.grpScan.BackColor = Color.FromArgb(255, 66, 66, 86);
             }
 
             this.cmbSex.SelectedItem = null;
@@ -459,9 +485,9 @@ namespace Frontend.Forms
             }
             catch (Exception)
             {
-                MessageBox.Show("Connection to database cannot be formed. Check if the server is up!","Error");
+                MessageBox.Show("Connection to database cannot be formed. Check if the server is up!", "Error");
             }
-            
+
         }
 
         private async Task GetAllAsync(string endpoint, HttpClient httpClient)
@@ -485,9 +511,9 @@ namespace Frontend.Forms
             }
             catch (Exception)
             {
-                MessageBox.Show("The server appears to be unresponsive.","Error");
+                MessageBox.Show("The server appears to be unresponsive.", "Error");
             }
-           
+
         }
 
         private async Task PutAsync(string endpoint, HttpClient httpClient, CustomerPutRes requestData)
@@ -524,13 +550,14 @@ namespace Frontend.Forms
             {
                 MessageBox.Show($"Error: {response.StatusCode} - {response.ReasonPhrase}");
             }
-        }   
+        }
 
 
         private void ScanCode()
         {
             this.btnScan.Enabled = false;
 
+          
             try
             {
 
@@ -583,11 +610,12 @@ namespace Frontend.Forms
 
             catch (Exception)
             {
+               
                 MessageBox.Show($"Device communication error. Please check your connection at {this.cmbPort.SelectedItem}", "Error");
                 ManageConnection();
             }
 
-
+           
             this.btnScan.Enabled = true;
         }
 
@@ -745,8 +773,31 @@ namespace Frontend.Forms
 
         private void cbPermEdit_CheckedChanged(object sender, EventArgs e)
         {
-            this.btnSavePerms.Enabled = this.cbPermEdit.Checked;
-            this.grpPermissions.Enabled = this.cbPermEdit.Checked;
+            HandlePerms();
+        }
+
+        private void HandlePerms()
+        {
+            if (this.cbPermEdit.Checked == true)
+            {
+                this.btnSavePerms.Enabled = true;
+                this.grpPermissions.Enabled = true;
+
+                this.grpPermissions.BackColor = Color.FromArgb(255, 66, 66, 86);
+
+            }
+
+            else
+            {
+
+                this.btnSavePerms.Enabled = false;
+                this.grpPermissions.Enabled = false;
+
+                this.grpPermissions.BackColor = Color.FromArgb(255, 188, 188, 208);
+
+            }
+
+
 
             this.grpQual.Enabled = false;
         }
@@ -764,12 +815,12 @@ namespace Frontend.Forms
                     Cncmill = this.numCNCMill.Value.ToString(),
                     LaserCutter = this.numLsrCut.Value.ToString(),
                     PremiumFilament = this.numPremFil.Value.ToString(),
-                    CrealityPrinters = this.cbCrealityPrinters.Checked,
-                    Raise3D = this.cbRaise3D.Checked,
-                    Lcdprinters = this.cbLCDPrinters.Checked,
-                    Tools = this.cbTools.Checked,
-                    Computers = this.cbComputers.Checked,
-                    Electronics = this.cbElectronics.Checked
+                    CrealityPrinters = this.pbCreality.Image == Resources.SharedResources.Green,
+                    Raise3D = this.pbRaise3D.Image == Resources.SharedResources.Green,
+                    Lcdprinters = this.pbLCD.Image == Resources.SharedResources.Green,
+                    Tools = this.pbTools.Image == Resources.SharedResources.Green,
+                    Computers = this.pbComputers.Image == Resources.SharedResources.Green,
+                    Electronics = this.pbElectronics.Image == Resources.SharedResources.Green
                 };
 
                 await Put2Async($"/customer/{data.Id}", sharedClient, data);
@@ -792,15 +843,15 @@ namespace Frontend.Forms
                 this.numLsrCut.Value = decimal.Parse(data!.LaserCutter!);
                 this.numPremFil.Value = decimal.Parse(data!.PremiumFilament!);
 
-                this.cbCrealityPrinters.Checked = data.CrealityPrinters;
-                this.cbRaise3D.Checked = data.Raise3D;
-                this.cbLCDPrinters.Checked = data.Lcdprinters;
-                this.cbTools.Checked = data.Tools;
-                this.cbComputers.Checked = data.Computers;
-                this.cbElectronics.Checked = data.Electronics;
+                this.pbCreality.Image = (data.CrealityPrinters) ? Resources.SharedResources.Green : Resources.SharedResources.Red;
+                this.pbRaise3D.Image = (data.Raise3D) ? Resources.SharedResources.Green : Resources.SharedResources.Red;
+                this.pbLCD.Image = (data.Lcdprinters) ? Resources.SharedResources.Green : Resources.SharedResources.Red;
+                this.pbTools.Image = (data.Tools) ? Resources.SharedResources.Green : Resources.SharedResources.Red;
+                this.pbComputers.Image = (data.Computers) ? Resources.SharedResources.Green : Resources.SharedResources.Red;
+                this.pbElectronics.Image = (data.Electronics) ? Resources.SharedResources.Green : Resources.SharedResources.Red;
 
             }
-            
+
         }
 
         private void txtValue_TextChanged(object sender, EventArgs e)
@@ -837,7 +888,23 @@ namespace Frontend.Forms
 
         private void Wait(int time)
         {
-            Thread.Sleep(time);
+            string former = this.Text;
+
+            this.Text = "Please wait...";
+
+
+                Thread.Sleep(time);
+
+            this.Text = former;
+           
+
         }
+       
+
+
     }
+
+
+
+
 }

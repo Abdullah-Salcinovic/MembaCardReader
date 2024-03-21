@@ -1,34 +1,50 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\",
+  "WorkspaceRootPath": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|c:\\rs1v10\\membacardreader\\frontend\\project\\frontend\\frontend\\forms\\frmstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\forms\\frmstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\forms\\frmstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\forms\\frmstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\forms\\frmstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\forms\\frmstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\models\\customerputres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\models\\customerputres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\forms\\frmstart.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\forms\\frmstart.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\codereader\\com_scanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\codereader\\com_scanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|c:\\users\\user\\documents\\github\\membacardreader\\frontend\\project\\frontend\\frontend\\forms\\frmstart.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\forms\\frmstart.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\models\\customergetres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\forms\\frmload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\forms\\frmload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\resources\\sharedresources.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\resources\\sharedresources.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\models\\customergetres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\models\\customergetres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\models\\customergetall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\models\\customergetall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\resources\\sharedresources.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\resources\\sharedresources.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\forms\\frmstart.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\forms\\frmstart.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\codereader\\com_scanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\codereader\\com_scanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\models\\customerputres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\models\\customerputres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\frontend\\models\\customergetall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C787145-6675-43B7-BE32-42123F1CB084}|Frontend\\Frontend.csproj|solutionrelative:frontend\\models\\customergetall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,52 +54,27 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CustomerPutRes.cs",
-              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerPutRes.cs",
-              "RelativeDocumentMoniker": "Frontend\\Models\\CustomerPutRes.cs",
-              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerPutRes.cs",
-              "RelativeToolTip": "Frontend\\Models\\CustomerPutRes.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAtwAoAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T15:50:34.903Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "frmStart.Designer.cs",
-              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.Designer.cs",
-              "RelativeDocumentMoniker": "Frontend\\Forms\\frmStart.Designer.cs",
-              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.Designer.cs",
-              "RelativeToolTip": "Frontend\\Forms\\frmStart.Designer.cs",
-              "ViewState": "AQIAAGQDAAAAAAAAAAAWwG8DAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T12:54:57.826Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "CustomerGetRes.cs",
-              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetRes.cs",
-              "RelativeDocumentMoniker": "Frontend\\Models\\CustomerGetRes.cs",
-              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetRes.cs",
-              "RelativeToolTip": "Frontend\\Models\\CustomerGetRes.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAWwAoAAAAWAAAA",
+              "Title": "frmLoad.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmLoad.cs",
+              "RelativeDocumentMoniker": "Frontend\\Forms\\frmLoad.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmLoad.cs",
+              "RelativeToolTip": "Frontend\\Forms\\frmLoad.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAAnwCQAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T11:43:50.742Z"
+              "WhenOpened": "2024-03-21T14:29:33.039Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "CustomerGetAll.cs",
-              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetAll.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetAll.cs",
               "RelativeDocumentMoniker": "Frontend\\Models\\CustomerGetAll.cs",
-              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetAll.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetAll.cs",
               "RelativeToolTip": "Frontend\\Models\\CustomerGetAll.cs",
               "ViewState": "AQIAABcAAAAAAAAAAIA8wBwAAAC1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -91,40 +82,113 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "COM_Scanner.cs",
-              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\CodeReader\\COM_Scanner.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\CodeReader\\COM_Scanner.cs",
               "RelativeDocumentMoniker": "Frontend\\CodeReader\\COM_Scanner.cs",
-              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\CodeReader\\COM_Scanner.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\CodeReader\\COM_Scanner.cs",
               "RelativeToolTip": "Frontend\\CodeReader\\COM_Scanner.cs",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAmwBoAAAAAAAAA",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAmwBoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-18T13:41:43.816Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmStart.cs [Design]",
-              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.cs",
-              "RelativeDocumentMoniker": "Frontend\\Forms\\frmStart.cs",
-              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.cs [Design]",
-              "RelativeToolTip": "Frontend\\Forms\\frmStart.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T12:58:47.699Z",
-              "EditorCaption": " [Design]"
+              "DocumentIndex": 7,
+              "Title": "SharedResources.resx",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Resources\\SharedResources.resx",
+              "RelativeDocumentMoniker": "Frontend\\Resources\\SharedResources.resx",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Resources\\SharedResources.resx",
+              "RelativeToolTip": "Frontend\\Resources\\SharedResources.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2024-03-21T11:00:53.695Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "frmStart.cs",
-              "DocumentMoniker": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.cs",
               "RelativeDocumentMoniker": "Frontend\\Forms\\frmStart.cs",
-              "ToolTip": "C:\\rs1v10\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.cs",
               "RelativeToolTip": "Frontend\\Forms\\frmStart.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAAACMAAAAAAAAA",
+              "ViewState": "AQIAAM8AAAAAAAAAAAAEwNMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-12T10:20:20.615Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SharedResources.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Resources\\SharedResources.Designer.cs",
+              "RelativeDocumentMoniker": "Frontend\\Resources\\SharedResources.Designer.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Resources\\SharedResources.Designer.cs",
+              "RelativeToolTip": "Frontend\\Resources\\SharedResources.Designer.cs",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAIwFEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-21T11:10:29.94Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frmStart.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.cs",
+              "RelativeDocumentMoniker": "Frontend\\Forms\\frmStart.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.cs [Design]",
+              "RelativeToolTip": "Frontend\\Forms\\frmStart.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-21T13:00:08.027Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "frmStart.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.Designer.cs",
+              "RelativeDocumentMoniker": "Frontend\\Forms\\frmStart.Designer.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.Designer.cs",
+              "RelativeToolTip": "Frontend\\Forms\\frmStart.Designer.cs",
+              "ViewState": "AQIAAN8AAAAAAAAAAAAEwOwAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-19T12:54:57.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "frmStart.resx",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.resx",
+              "RelativeDocumentMoniker": "Frontend\\Forms\\frmStart.resx",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.resx",
+              "RelativeToolTip": "Frontend\\Forms\\frmStart.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2024-03-21T14:42:09.116Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CustomerGetRes.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetRes.cs",
+              "RelativeDocumentMoniker": "Frontend\\Models\\CustomerGetRes.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerGetRes.cs",
+              "RelativeToolTip": "Frontend\\Models\\CustomerGetRes.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAIAywAoAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T11:43:50.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CustomerPutRes.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerPutRes.cs",
+              "RelativeDocumentMoniker": "Frontend\\Models\\CustomerPutRes.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Models\\CustomerPutRes.cs",
+              "RelativeToolTip": "Frontend\\Models\\CustomerPutRes.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAgAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-19T15:50:34.903Z"
             }
           ]
         }

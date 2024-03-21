@@ -57,3 +57,4 @@ C:\rs1v10\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-wi
 C:\rs1v10\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-windows\Frontend.pdb
 C:\rs1v10\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-windows\Frontend.genruntimeconfig.cache
 C:\rs1v10\MembaCardReader\Frontend\Project\Frontend\Frontend\obj\Debug\net8.0-windows\ref\Frontend.dll
+C:\Users\User\Documents\GitHub\MembaCardReader\Frontend\Project\Frontend\Frontend\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
