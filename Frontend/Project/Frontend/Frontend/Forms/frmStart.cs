@@ -334,7 +334,7 @@ namespace Frontend.Forms
 
                     ChangeFormText("Please wait...");
 
-                    this.txtConsole.Text += $"Cpnnecting to device {this.cmbPort.SelectedItem}." + Environment.NewLine;
+                    this.txtConsole.Text += $"Connecting to device {this.cmbPort.SelectedItem}." + Environment.NewLine;
 
                     await Task.Run(() =>
                     {
@@ -388,6 +388,8 @@ namespace Frontend.Forms
                 {
                     this.OpenPort.Dispose();
                 }
+
+                this.txtConsole.Text += $"Disconnected from device {this.cmbPort.SelectedItem}." + Environment.NewLine;
 
                 this.btnConnect.Text = "Connect";
                 this.lblConnectionStatus.Text = "Disconnected";
@@ -683,7 +685,7 @@ namespace Frontend.Forms
 
                     this.OpenPort!.WriteLine(SCN.SCAN);
 
-                    ChangeFormText("Scanning");
+                    ChangeFormText("Scanning...");
 
                     await Task.Run(() =>
                     {
