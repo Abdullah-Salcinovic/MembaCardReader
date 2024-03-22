@@ -17,11 +17,13 @@ using Newtonsoft.Json;
 using System.Net.Http.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Net.Http;
+using System.Drawing.Drawing2D;
+using System.Reflection.Metadata;
 
 namespace Frontend.Forms
 {
 
-    //Panel Location : 248;12;
+
 
     public partial class frmStart : Form
     {
@@ -33,6 +35,13 @@ namespace Frontend.Forms
         private string slctdID;
         private string slctdName;
         private string scndID;
+
+        private bool Loading;
+
+        private const float Rotating_Angle = 10.0f;
+
+        private readonly Point PanelLoc = new Point(248, 12);
+
 
         private List<string> PortNames;
 
@@ -55,7 +64,7 @@ namespace Frontend.Forms
 
         private List<string> Subscriptions;
 
-       
+
 
         public frmStart()
         {
@@ -65,11 +74,11 @@ namespace Frontend.Forms
 
             this.BaudIdeal = new List<int>();
 
-           
+
 
             this.CurrentPanel = this.pnlConnection;
 
-            
+
 
             this.Sexes = new List<string>()
             {
@@ -97,14 +106,23 @@ namespace Frontend.Forms
             this.PortNames = new List<string>();
             this.ValidPorts = new List<COM_Scanner>();
             this.Connected = false;
-            
+
 
         }
 
         private void frmStart_Load(object sender, EventArgs e)
         {
+            this.txtConsole.Text = string.Empty;
 
-            
+
+            foreach (Control item in this.Controls)
+            {
+                if (item.GetType() == typeof(Panel) && item != this.pnlButtons)
+                {
+                    item.Location = this.PanelLoc;
+                }
+            }
+
             ConnectionStatusLock();
             this.cmbSex.DataSource = this.Sexes;
             this.cmbSubscription.DataSource = this.Subscriptions;
@@ -120,7 +138,7 @@ namespace Frontend.Forms
             ScanPorts();
         }
 
-        private void ScanPorts()
+        private async void ScanPorts()
         {
             this.btnScanPort.Enabled = false;
             this.cmbPort.DataSource = null;
@@ -138,7 +156,7 @@ namespace Frontend.Forms
 
                 try
                 {
-                   
+
 
                     foreach (int baud in SCN.BaudRates)
                     {
@@ -156,33 +174,78 @@ namespace Frontend.Forms
 
                         tempSerialPort.WriteLine(SCN.ID);
 
+                        ChangeFormText("Please wait...");
 
-                        Wait(SCN.ID_DELAY);
+
+                        this.txtConsole.Text += $"Pinging port {portName} with baud rate {baud}..." + Environment.NewLine;
+
+
+
+                        await Task.Run(() =>
+                        {
+
+                            Delay(SCN.ID_DELAY);
+
+                        });
+
+                        ChangeFormText();
 
 
                         string msg = tempSerialPort.ReadExisting();
+
+
 
                         tempSerialPort.DiscardInBuffer();
                         tempSerialPort.DiscardOutBuffer();
 
                         if (msg == SCN.RESPONSE)
                         {
-                            tempSerialPort.WriteLine(SCN.TYPE);
 
-                            Wait(SCN.TYPE_DELAY);
+                            try
+                            {
+                                tempSerialPort.WriteLine(SCN.TYPE);
 
-                            string typ = tempSerialPort.ReadExisting();
+                                ChangeFormText("Please wait...");
 
-                            COM_Scanner com = new COM_Scanner(typ, portName);
+                                await Task.Run(() =>
+                                {
+
+                                    Delay(SCN.TYPE_DELAY);
+
+                                });
 
 
 
-                            this.ValidPorts.Add(com);
-                            this.BaudIdeal.Add(baud);
-                            break;
+                                ChangeFormText();
+
+                                string typ = tempSerialPort.ReadExisting();
+
+                                COM_Scanner com = new COM_Scanner(typ, portName);
+
+
+
+                                this.ValidPorts.Add(com);
+                                this.BaudIdeal.Add(baud);
+
+                                this.txtConsole.Text += $"Added device {typ}, at port {portName}." + Environment.NewLine;
+
+
+                                break;
+
+                            }
+                            catch (Exception)
+                            {
+
+                                MessageBox.Show($"Unexpected disconnection. Please make sure your connection with the device at port {portName} is secure.", "Error");
+                            }
+
 
                         }
 
+                        else
+                        {
+                            this.txtConsole.Text += $"Device at port {portName} replied with : {msg}. Expected response: {SCN.RESPONSE}." + Environment.NewLine;
+                        }
 
 
                         tempSerialPort.Close();
@@ -198,8 +261,8 @@ namespace Frontend.Forms
 
                 catch (Exception)
                 {
-                    MessageBox.Show($"Device port not opening. Please check your connection at {portName}", "Error");
-                   
+                    MessageBox.Show($"Device port not opening. Please check your connection with {portName}", "Error");
+
                 }
 
 
@@ -239,7 +302,7 @@ namespace Frontend.Forms
 
         }
 
-        private void ManageConnection()
+        private async void ManageConnection()
         {
             if (!Connected)
             {
@@ -256,30 +319,46 @@ namespace Frontend.Forms
 
                 this.OpenPort.BaudRate = BaudIdeal[cmbPort.SelectedIndex];
 
-                
+
 
                 try
                 {
+                    if (this.OpenPort.IsOpen)
+                    {
+                        this.OpenPort.Close();
+                    }
+
                     this.OpenPort.Open();
 
                     this.OpenPort.WriteLine(SCN.ID);
 
+                    ChangeFormText("Please wait...");
 
-                    Wait(SCN.ID_DELAY);
+                    this.txtConsole.Text += $"Cpnnecting to device {this.cmbPort.SelectedItem}." + Environment.NewLine;
 
+                    await Task.Run(() =>
+                    {
+
+                        Delay(SCN.ID_DELAY);
+
+                    });
+
+                    ChangeFormText();
 
                     string msg = this.OpenPort!.ReadExisting();
 
 
                     if (msg != SCN.RESPONSE)
                     {
-                        MessageBox.Show($"The device at port {this.cmbPort.SelectedItem} may be unresponsive or not valid.", "Timeout");
+                        MessageBox.Show($"The device {this.cmbPort.SelectedItem} may be unresponsive or not valid.", "Timeout");
                     }
 
                     else
                     {
                         this.btnConnect.Text = "Disconnect";
                         this.lblConnectionStatus.Text = "Connected";
+
+                        this.txtConsole.Text += $"Succesfully connected to device {this.cmbPort.SelectedItem}." + Environment.NewLine;
 
                         this.cmbPort.Enabled = false;
                         this.btnScanPort.Enabled = false;
@@ -290,11 +369,11 @@ namespace Frontend.Forms
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show($"Device port not opening. Please check your connection at {this.cmbPort.SelectedItem}", "Error");
-                   
+                    MessageBox.Show($"Device port not opening. Please check your connection with {this.cmbPort.SelectedItem}", "Error");
+
                 }
 
-               
+
 
             }
 
@@ -320,6 +399,9 @@ namespace Frontend.Forms
                 this.btnScanPort.Enabled = true;
                 ConnectionStatusLock();
                 this.pbConnection.Image = Resources.SharedResources.Red;
+
+
+                ScanPorts();
             }
 
         }
@@ -553,28 +635,44 @@ namespace Frontend.Forms
         }
 
 
-        private void ScanCode()
+        private async void ScanCode()
         {
             this.btnScan.Enabled = false;
 
-          
+            Clear();
+
+
             try
             {
+
 
 
                 this.OpenPort!.WriteLine(SCN.ID);
 
 
-                Wait(SCN.ID_DELAY);
+                ChangeFormText("Please wait...");
+
+                await Task.Run(() =>
+                {
+
+                    Delay(SCN.ID_DELAY);
+
+                });
+
+                ChangeFormText();
 
                 string msg = this.OpenPort!.ReadExisting();
 
+                this.OpenPort!.DiscardInBuffer();
+                this.OpenPort!.DiscardOutBuffer();
 
 
 
                 if (msg != SCN.RESPONSE)
                 {
-                    MessageBox.Show($"The device at port {this.cmbPort.SelectedItem} may be unresponsive or not valid.", "Timeout");
+
+
+                    MessageBox.Show($"The device {this.cmbPort.SelectedItem} may be unresponsive or not valid.", "Timeout");
                     ManageConnection();
                 }
 
@@ -585,7 +683,16 @@ namespace Frontend.Forms
 
                     this.OpenPort!.WriteLine(SCN.SCAN);
 
-                    Wait(SCN.SCAN_DELAY);
+                    ChangeFormText("Scanning");
+
+                    await Task.Run(() =>
+                    {
+
+                        Delay(SCN.SCAN_DELAY);
+
+                    });
+
+                    ChangeFormText();
 
                     string rez = this.OpenPort!.ReadExisting();
 
@@ -599,7 +706,7 @@ namespace Frontend.Forms
 
                     else
                     {
-                        MessageBox.Show($"The device at port {cmbPort.SelectedItem} was unable to scan a code.", "Timeout");
+                        MessageBox.Show($"The device {cmbPort.SelectedItem} was unable to scan a code.", "Timeout");
                     }
 
                 }
@@ -610,12 +717,12 @@ namespace Frontend.Forms
 
             catch (Exception)
             {
-               
-                MessageBox.Show($"Device communication error. Please check your connection at {this.cmbPort.SelectedItem}", "Error");
+
+                MessageBox.Show($"Device communication error. Please check your connection with {this.cmbPort.SelectedItem}", "Error");
                 ManageConnection();
             }
 
-           
+
             this.btnScan.Enabled = true;
         }
 
@@ -886,22 +993,68 @@ namespace Frontend.Forms
             ChangeBanner();
         }
 
-        private void Wait(int time)
+        private void Delay(int time)
         {
-            string former = this.Text;
-
-            this.Text = "Please wait...";
 
 
-                Thread.Sleep(time);
+            this.pbLogo.Image = Resources.SharedResources.Loading;
 
-            this.Text = former;
-           
+            this.Loading = true;
+
+            Thread.Sleep(time);
+
+            this.Loading = false;
+
+            this.pbLogo.Image = Resources.SharedResources.Logo;
+
+
 
         }
-       
+
+        private void ChangeFormText(string text = "Garaža Makerspace")
+        {
+            this.Text = text;
+        }
+
+        private void anim_Tick(object sender, EventArgs e)
+        {
+
+            if (this.Loading)
+            {
+                Bitmap newimg = new Bitmap(this.pbLogo.Width, this.pbLogo.Height);
 
 
+                using (Graphics gfx = Graphics.FromImage(newimg))
+                {
+
+                    gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+                    gfx.TranslateTransform((float)this.pbLogo.Width / 2, (float)this.pbLogo.Height / 2);
+
+                    gfx.RotateTransform(Rotating_Angle);
+
+                    gfx.TranslateTransform(-(float)this.pbLogo.Width / 2, -(float)this.pbLogo.Height / 2);
+
+
+                    gfx.DrawImage(this.pbLogo.Image, 0, 0, this.pbLogo.Width, this.pbLogo.Height);
+
+                    gfx.Dispose();
+
+                }
+
+                this.pbLogo.Image = newimg;
+
+            }
+
+
+        }
+
+        private void txtConsole_TextChanged(object sender, EventArgs e)
+        {
+            this.txtConsole.SelectionStart=this.txtConsole.Text.Length;
+            this.txtConsole.SelectionLength = 0;
+            this.txtConsole.ScrollToCaret();
+        }
     }
 
 

@@ -43,6 +43,7 @@ namespace Frontend.Forms
             btnConnection = new Button();
             pbLogo = new PictureBox();
             pnlConnection = new Panel();
+            txtConsole = new TextBox();
             cmbPort = new ComboBox();
             btnConnect = new Button();
             btnScanPort = new Button();
@@ -112,6 +113,7 @@ namespace Frontend.Forms
             lblStdFil = new Label();
             cbPermEdit = new CheckBox();
             btnSavePerms = new Button();
+            anim = new System.Windows.Forms.Timer(components);
             pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbConnection).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbLogo).BeginInit();
@@ -235,7 +237,7 @@ namespace Frontend.Forms
             // pbLogo
             // 
             pbLogo.BackColor = Color.Transparent;
-            pbLogo.Image = Resources.SharedResources.Logo;
+            pbLogo.Image = (Image)resources.GetObject("pbLogo.Image");
             pbLogo.Location = new Point(25, 15);
             pbLogo.Name = "pbLogo";
             pbLogo.Size = new Size(176, 174);
@@ -246,6 +248,7 @@ namespace Frontend.Forms
             // pnlConnection
             // 
             pnlConnection.BackColor = Color.FromArgb(66, 66, 86);
+            pnlConnection.Controls.Add(txtConsole);
             pnlConnection.Controls.Add(cmbPort);
             pnlConnection.Controls.Add(btnConnect);
             pnlConnection.Controls.Add(btnScanPort);
@@ -254,6 +257,18 @@ namespace Frontend.Forms
             pnlConnection.Size = new Size(540, 426);
             pnlConnection.TabIndex = 1;
             pnlConnection.Tag = "";
+            // 
+            // txtConsole
+            // 
+            txtConsole.BackColor = Color.Black;
+            txtConsole.ForeColor = Color.WhiteSmoke;
+            txtConsole.Location = new Point(20, 177);
+            txtConsole.Multiline = true;
+            txtConsole.Name = "txtConsole";
+            txtConsole.ReadOnly = true;
+            txtConsole.Size = new Size(500, 231);
+            txtConsole.TabIndex = 6;
+            txtConsole.TextChanged += txtConsole_TextChanged;
             // 
             // cmbPort
             // 
@@ -264,7 +279,7 @@ namespace Frontend.Forms
             cmbPort.FormattingEnabled = true;
             cmbPort.Location = new Point(269, 18);
             cmbPort.Name = "cmbPort";
-            cmbPort.Size = new Size(156, 25);
+            cmbPort.Size = new Size(251, 25);
             cmbPort.TabIndex = 5;
             cmbPort.SelectedIndexChanged += cmbPort_SelectedIndexChanged;
             // 
@@ -374,7 +389,7 @@ namespace Frontend.Forms
             btnScan.Name = "btnScan";
             btnScan.Size = new Size(111, 23);
             btnScan.TabIndex = 15;
-            btnScan.Text = "Scan Card";
+            btnScan.Text = "Scan Code";
             btnScan.UseVisualStyleBackColor = false;
             btnScan.Click += btnScan_Click;
             // 
@@ -1024,6 +1039,12 @@ namespace Frontend.Forms
             btnSavePerms.UseVisualStyleBackColor = false;
             btnSavePerms.Click += btnSavePerms_Click;
             // 
+            // anim
+            // 
+            anim.Enabled = true;
+            anim.Interval = 35;
+            anim.Tick += anim_Tick;
+            // 
             // frmStart
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1036,6 +1057,7 @@ namespace Frontend.Forms
             Controls.Add(pnlConnection);
             Controls.Add(pnlButtons);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "frmStart";
             StartPosition = FormStartPosition.CenterScreen;
@@ -1046,6 +1068,7 @@ namespace Frontend.Forms
             ((System.ComponentModel.ISupportInitialize)pbConnection).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbLogo).EndInit();
             pnlConnection.ResumeLayout(false);
+            pnlConnection.PerformLayout();
             pnlScan.ResumeLayout(false);
             grpScan.ResumeLayout(false);
             grpScan.PerformLayout();
@@ -1155,5 +1178,7 @@ namespace Frontend.Forms
         private PictureBox pbLCD;
         private PictureBox pbRaise3D;
         private PictureBox pbCreality;
+        private System.Windows.Forms.Timer anim;
+        private TextBox txtConsole;
     }
 }
