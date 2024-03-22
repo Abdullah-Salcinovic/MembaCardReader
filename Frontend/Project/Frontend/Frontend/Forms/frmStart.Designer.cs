@@ -361,7 +361,7 @@ namespace Frontend.Forms
             // 
             // txtId
             // 
-            txtId.BackColor = Color.Silver;
+            txtId.BackColor = Color.WhiteSmoke;
             txtId.ForeColor = Color.Black;
             txtId.Location = new Point(6, 140);
             txtId.Name = "txtId";
@@ -528,7 +528,7 @@ namespace Frontend.Forms
             // 
             // cmbSubscription
             // 
-            cmbSubscription.BackColor = Color.Silver;
+            cmbSubscription.BackColor = Color.WhiteSmoke;
             cmbSubscription.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbSubscription.ForeColor = Color.Black;
             cmbSubscription.FormattingEnabled = true;
@@ -539,7 +539,7 @@ namespace Frontend.Forms
             // 
             // txtEmail
             // 
-            txtEmail.BackColor = Color.Silver;
+            txtEmail.BackColor = Color.WhiteSmoke;
             txtEmail.ForeColor = Color.Black;
             txtEmail.Location = new Point(144, 136);
             txtEmail.Name = "txtEmail";
@@ -548,7 +548,7 @@ namespace Frontend.Forms
             // 
             // txtNumber
             // 
-            txtNumber.BackColor = Color.Silver;
+            txtNumber.BackColor = Color.WhiteSmoke;
             txtNumber.ForeColor = Color.Black;
             txtNumber.Location = new Point(144, 107);
             txtNumber.Name = "txtNumber";
@@ -564,7 +564,7 @@ namespace Frontend.Forms
             // 
             // cmbSex
             // 
-            cmbSex.BackColor = Color.Silver;
+            cmbSex.BackColor = Color.WhiteSmoke;
             cmbSex.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbSex.ForeColor = Color.Black;
             cmbSex.FormattingEnabled = true;
@@ -575,7 +575,7 @@ namespace Frontend.Forms
             // 
             // txtName
             // 
-            txtName.BackColor = Color.Silver;
+            txtName.BackColor = Color.WhiteSmoke;
             txtName.ForeColor = Color.Black;
             txtName.Location = new Point(144, 20);
             txtName.Name = "txtName";
@@ -618,7 +618,7 @@ namespace Frontend.Forms
             // 
             // cmbValue
             // 
-            cmbValue.BackColor = Color.Silver;
+            cmbValue.BackColor = Color.WhiteSmoke;
             cmbValue.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbValue.ForeColor = Color.Black;
             cmbValue.FormattingEnabled = true;
@@ -629,7 +629,7 @@ namespace Frontend.Forms
             // 
             // txtValue
             // 
-            txtValue.BackColor = Color.Silver;
+            txtValue.BackColor = Color.WhiteSmoke;
             txtValue.ForeColor = Color.Black;
             txtValue.Location = new Point(3, 3);
             txtValue.Name = "txtValue";
@@ -902,7 +902,7 @@ namespace Frontend.Forms
             // 
             // numResin
             // 
-            numResin.BackColor = Color.Silver;
+            numResin.BackColor = Color.WhiteSmoke;
             numResin.ForeColor = Color.Black;
             numResin.Location = new Point(138, 101);
             numResin.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
@@ -912,7 +912,7 @@ namespace Frontend.Forms
             // 
             // numPremFil
             // 
-            numPremFil.BackColor = Color.Silver;
+            numPremFil.BackColor = Color.WhiteSmoke;
             numPremFil.ForeColor = Color.Black;
             numPremFil.Location = new Point(138, 212);
             numPremFil.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
@@ -922,7 +922,7 @@ namespace Frontend.Forms
             // 
             // numLsrCut
             // 
-            numLsrCut.BackColor = Color.Silver;
+            numLsrCut.BackColor = Color.WhiteSmoke;
             numLsrCut.DecimalPlaces = 2;
             numLsrCut.ForeColor = Color.Black;
             numLsrCut.Location = new Point(138, 174);
@@ -933,7 +933,7 @@ namespace Frontend.Forms
             // 
             // numCNCMill
             // 
-            numCNCMill.BackColor = Color.Silver;
+            numCNCMill.BackColor = Color.WhiteSmoke;
             numCNCMill.DecimalPlaces = 2;
             numCNCMill.ForeColor = Color.Black;
             numCNCMill.Location = new Point(138, 138);
@@ -944,7 +944,7 @@ namespace Frontend.Forms
             // 
             // numStdFil
             // 
-            numStdFil.BackColor = Color.Silver;
+            numStdFil.BackColor = Color.WhiteSmoke;
             numStdFil.ForeColor = Color.Black;
             numStdFil.Location = new Point(138, 67);
             numStdFil.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
@@ -954,12 +954,12 @@ namespace Frontend.Forms
             // 
             // txtSelect
             // 
-            txtSelect.BackColor = Color.Silver;
+            txtSelect.BackColor = Color.WhiteSmoke;
             txtSelect.ForeColor = Color.Black;
             txtSelect.Location = new Point(73, 22);
             txtSelect.Name = "txtSelect";
             txtSelect.ReadOnly = true;
-            txtSelect.Size = new Size(267, 23);
+            txtSelect.Size = new Size(256, 23);
             txtSelect.TabIndex = 23;
             // 
             // lblPremFil
