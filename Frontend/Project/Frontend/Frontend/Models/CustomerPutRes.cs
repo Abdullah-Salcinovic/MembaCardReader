@@ -8,7 +8,7 @@ namespace Frontend.Models
 {
     public class CustomerPutRes
     {
-        public string Id { get; set; }
+        public string? Id { get; set; }
         public string? Name { get; set; }
         public string? Sex { get; set; }
         public DateTime? DateOfBirth { get; set; }
