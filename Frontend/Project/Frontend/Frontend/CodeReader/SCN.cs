@@ -24,9 +24,9 @@ namespace Frontend.CodeReader
         };
 
 
-        public static int ID_DELAY = 100;
-        public static int SCAN_DELAY = 1500;
-        public static int TYPE_DELAY = 500;
+        public static int ID_DELAY = 125;
+        public static int SCAN_DELAY = 2500;
+        public static int TYPE_DELAY = 250;
 
         public static string ID = "SCN_ID\0";
         public static string SCAN = "SCN_GET\0";
