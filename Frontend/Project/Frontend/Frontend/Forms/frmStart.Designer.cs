@@ -1094,6 +1094,7 @@ namespace Frontend.Forms
             Controls.Add(pnlConnection);
             Controls.Add(pnlButtons);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MinimumSize = new Size(816, 490);
             Name = "frmStart";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Garaža Makerspace";
