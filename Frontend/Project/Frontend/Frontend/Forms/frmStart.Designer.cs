@@ -75,11 +75,12 @@ namespace Frontend.Forms
             err = new ErrorProvider(components);
             tmr = new System.Windows.Forms.Timer(components);
             pnlPerms = new Panel();
-            cmbValue = new ComboBox();
+            grpdgv = new GroupBox();
             txtValue = new TextBox();
             dgvData = new DataGridView();
             Id = new DataGridViewTextBoxColumn();
             Username = new DataGridViewTextBoxColumn();
+            cmbValue = new ComboBox();
             grpPermissions = new GroupBox();
             grpQual = new GroupBox();
             pbElectronics = new PictureBox();
@@ -97,7 +98,9 @@ namespace Frontend.Forms
             lblPremFilCurrent = new Label();
             lblLaserCutterCurrent = new Label();
             lblCNCMillCurrent = new Label();
+            cbPermEdit = new CheckBox();
             lblResinCurrent = new Label();
+            btnSavePerms = new Button();
             lblStdFilCurrent = new Label();
             lblSelection = new Label();
             numResin = new NumericUpDown();
@@ -111,8 +114,6 @@ namespace Frontend.Forms
             lblCNCMill = new Label();
             lblRes = new Label();
             lblStdFil = new Label();
-            cbPermEdit = new CheckBox();
-            btnSavePerms = new Button();
             anim = new System.Windows.Forms.Timer(components);
             pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbConnection).BeginInit();
@@ -125,6 +126,7 @@ namespace Frontend.Forms
             ((System.ComponentModel.ISupportInitialize)pbValid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)err).BeginInit();
             pnlPerms.SuspendLayout();
+            grpdgv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             grpPermissions.SuspendLayout();
             grpQual.SuspendLayout();
@@ -143,9 +145,9 @@ namespace Frontend.Forms
             // 
             // pnlButtons
             // 
-            pnlButtons.BackColor = Color.FromArgb(66, 66, 86);
+            pnlButtons.BackColor = Color.FromArgb(84, 84, 108);
             pnlButtons.BackgroundImage = (Image)resources.GetObject("pnlButtons.BackgroundImage");
-            pnlButtons.BackgroundImageLayout = ImageLayout.Stretch;
+            pnlButtons.BackgroundImageLayout = ImageLayout.Zoom;
             pnlButtons.Controls.Add(pbConnection);
             pnlButtons.Controls.Add(lblConnectionStatus);
             pnlButtons.Controls.Add(lblConnectionText);
@@ -153,9 +155,10 @@ namespace Frontend.Forms
             pnlButtons.Controls.Add(btnRegistrations);
             pnlButtons.Controls.Add(btnConnection);
             pnlButtons.Controls.Add(pbLogo);
-            pnlButtons.Location = new Point(12, 12);
+            pnlButtons.Dock = DockStyle.Left;
+            pnlButtons.Location = new Point(0, 0);
             pnlButtons.Name = "pnlButtons";
-            pnlButtons.Size = new Size(230, 426);
+            pnlButtons.Size = new Size(230, 451);
             pnlButtons.TabIndex = 0;
             pnlButtons.Tag = "";
             // 
@@ -247,6 +250,7 @@ namespace Frontend.Forms
             // 
             // pnlConnection
             // 
+            pnlConnection.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlConnection.BackColor = Color.FromArgb(66, 66, 86);
             pnlConnection.Controls.Add(txtConsole);
             pnlConnection.Controls.Add(cmbPort);
@@ -260,6 +264,7 @@ namespace Frontend.Forms
             // 
             // txtConsole
             // 
+            txtConsole.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtConsole.BackColor = Color.Black;
             txtConsole.ForeColor = Color.WhiteSmoke;
             txtConsole.Location = new Point(20, 177);
@@ -314,6 +319,7 @@ namespace Frontend.Forms
             // 
             // pnlScan
             // 
+            pnlScan.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlScan.BackColor = Color.FromArgb(66, 66, 86);
             pnlScan.Controls.Add(grpScan);
             pnlScan.Controls.Add(grpInfo);
@@ -324,15 +330,16 @@ namespace Frontend.Forms
             // 
             // grpScan
             // 
+            grpScan.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             grpScan.Controls.Add(cbEdit);
             grpScan.Controls.Add(lblId);
             grpScan.Controls.Add(txtId);
             grpScan.Controls.Add(pbSubscription);
             grpScan.Controls.Add(btnScan);
             grpScan.ForeColor = Color.WhiteSmoke;
-            grpScan.Location = new Point(3, 9);
+            grpScan.Location = new Point(0, 0);
             grpScan.Name = "grpScan";
-            grpScan.Size = new Size(534, 180);
+            grpScan.Size = new Size(537, 180);
             grpScan.TabIndex = 1;
             grpScan.TabStop = false;
             grpScan.Text = "Scan";
@@ -371,10 +378,11 @@ namespace Frontend.Forms
             // 
             // pbSubscription
             // 
+            pbSubscription.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             pbSubscription.BackColor = Color.FromArgb(100, 100, 120);
             pbSubscription.Location = new Point(125, 22);
             pbSubscription.Name = "pbSubscription";
-            pbSubscription.Size = new Size(403, 152);
+            pbSubscription.Size = new Size(402, 152);
             pbSubscription.SizeMode = PictureBoxSizeMode.StretchImage;
             pbSubscription.TabIndex = 16;
             pbSubscription.TabStop = false;
@@ -395,6 +403,8 @@ namespace Frontend.Forms
             // 
             // grpInfo
             // 
+            grpInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpInfo.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             grpInfo.Controls.Add(pbValid);
             grpInfo.Controls.Add(btnClear);
             grpInfo.Controls.Add(btnSaveChanges);
@@ -413,25 +423,27 @@ namespace Frontend.Forms
             grpInfo.Controls.Add(txtName);
             grpInfo.Controls.Add(lblName);
             grpInfo.ForeColor = Color.WhiteSmoke;
-            grpInfo.Location = new Point(3, 194);
+            grpInfo.Location = new Point(0, 180);
             grpInfo.Name = "grpInfo";
-            grpInfo.Size = new Size(534, 229);
+            grpInfo.Size = new Size(537, 243);
             grpInfo.TabIndex = 0;
             grpInfo.TabStop = false;
             grpInfo.Text = "Info";
             // 
             // pbValid
             // 
+            pbValid.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbValid.BackColor = Color.FromArgb(100, 100, 120);
-            pbValid.Location = new Point(406, 126);
+            pbValid.Location = new Point(406, 110);
             pbValid.Name = "pbValid";
-            pbValid.Size = new Size(111, 89);
+            pbValid.Size = new Size(111, 105);
             pbValid.SizeMode = PictureBoxSizeMode.StretchImage;
             pbValid.TabIndex = 16;
             pbValid.TabStop = false;
             // 
             // btnClear
             // 
+            btnClear.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnClear.BackColor = Color.Gold;
             btnClear.FlatStyle = FlatStyle.Flat;
             btnClear.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -446,6 +458,7 @@ namespace Frontend.Forms
             // 
             // btnSaveChanges
             // 
+            btnSaveChanges.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnSaveChanges.BackColor = Color.Gold;
             btnSaveChanges.FlatStyle = FlatStyle.Flat;
             btnSaveChanges.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -520,6 +533,7 @@ namespace Frontend.Forms
             // 
             // dtpValid
             // 
+            dtpValid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dtpValid.Location = new Point(144, 194);
             dtpValid.Name = "dtpValid";
             dtpValid.Size = new Size(200, 23);
@@ -528,6 +542,7 @@ namespace Frontend.Forms
             // 
             // cmbSubscription
             // 
+            cmbSubscription.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             cmbSubscription.BackColor = Color.WhiteSmoke;
             cmbSubscription.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbSubscription.ForeColor = Color.Black;
@@ -539,6 +554,7 @@ namespace Frontend.Forms
             // 
             // txtEmail
             // 
+            txtEmail.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtEmail.BackColor = Color.WhiteSmoke;
             txtEmail.ForeColor = Color.Black;
             txtEmail.Location = new Point(144, 136);
@@ -548,6 +564,7 @@ namespace Frontend.Forms
             // 
             // txtNumber
             // 
+            txtNumber.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtNumber.BackColor = Color.WhiteSmoke;
             txtNumber.ForeColor = Color.Black;
             txtNumber.Location = new Point(144, 107);
@@ -557,6 +574,7 @@ namespace Frontend.Forms
             // 
             // dtpDoB
             // 
+            dtpDoB.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dtpDoB.Location = new Point(144, 78);
             dtpDoB.Name = "dtpDoB";
             dtpDoB.Size = new Size(200, 23);
@@ -564,6 +582,7 @@ namespace Frontend.Forms
             // 
             // cmbSex
             // 
+            cmbSex.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             cmbSex.BackColor = Color.WhiteSmoke;
             cmbSex.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbSex.ForeColor = Color.Black;
@@ -575,6 +594,7 @@ namespace Frontend.Forms
             // 
             // txtName
             // 
+            txtName.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtName.BackColor = Color.WhiteSmoke;
             txtName.ForeColor = Color.Black;
             txtName.Location = new Point(144, 20);
@@ -604,36 +624,37 @@ namespace Frontend.Forms
             // 
             // pnlPerms
             // 
+            pnlPerms.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlPerms.BackColor = Color.FromArgb(66, 66, 86);
-            pnlPerms.Controls.Add(cmbValue);
-            pnlPerms.Controls.Add(txtValue);
-            pnlPerms.Controls.Add(dgvData);
+            pnlPerms.Controls.Add(grpdgv);
             pnlPerms.Controls.Add(grpPermissions);
-            pnlPerms.Controls.Add(cbPermEdit);
-            pnlPerms.Controls.Add(btnSavePerms);
             pnlPerms.Location = new Point(248, 12);
             pnlPerms.Name = "pnlPerms";
             pnlPerms.Size = new Size(540, 426);
             pnlPerms.TabIndex = 20;
             // 
-            // cmbValue
+            // grpdgv
             // 
-            cmbValue.BackColor = Color.WhiteSmoke;
-            cmbValue.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbValue.ForeColor = Color.Black;
-            cmbValue.FormattingEnabled = true;
-            cmbValue.Location = new Point(3, 31);
-            cmbValue.Name = "cmbValue";
-            cmbValue.Size = new Size(182, 23);
-            cmbValue.TabIndex = 3;
+            grpdgv.Controls.Add(txtValue);
+            grpdgv.Controls.Add(dgvData);
+            grpdgv.Controls.Add(cmbValue);
+            grpdgv.Dock = DockStyle.Fill;
+            grpdgv.ForeColor = Color.WhiteSmoke;
+            grpdgv.Location = new Point(0, 0);
+            grpdgv.Name = "grpdgv";
+            grpdgv.Size = new Size(144, 426);
+            grpdgv.TabIndex = 4;
+            grpdgv.TabStop = false;
+            grpdgv.Text = "Users";
             // 
             // txtValue
             // 
             txtValue.BackColor = Color.WhiteSmoke;
+            txtValue.Dock = DockStyle.Top;
             txtValue.ForeColor = Color.Black;
-            txtValue.Location = new Point(3, 3);
+            txtValue.Location = new Point(3, 42);
             txtValue.Name = "txtValue";
-            txtValue.Size = new Size(182, 23);
+            txtValue.Size = new Size(138, 23);
             txtValue.TabIndex = 2;
             txtValue.TextChanged += txtValue_TextChanged;
             // 
@@ -641,14 +662,15 @@ namespace Frontend.Forms
             // 
             dgvData.AllowUserToAddRows = false;
             dgvData.AllowUserToDeleteRows = false;
+            dgvData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvData.BackgroundColor = Color.FromArgb(100, 100, 120);
             dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvData.Columns.AddRange(new DataGridViewColumn[] { Id, Username });
-            dgvData.Location = new Point(3, 68);
+            dgvData.Location = new Point(6, 75);
             dgvData.Name = "dgvData";
             dgvData.ReadOnly = true;
             dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvData.Size = new Size(182, 355);
+            dgvData.Size = new Size(132, 336);
             dgvData.TabIndex = 1;
             dgvData.CellContentClick += dgvData_CellContentClick;
             // 
@@ -668,13 +690,27 @@ namespace Frontend.Forms
             Username.Name = "Username";
             Username.ReadOnly = true;
             // 
+            // cmbValue
+            // 
+            cmbValue.BackColor = Color.WhiteSmoke;
+            cmbValue.Dock = DockStyle.Top;
+            cmbValue.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbValue.ForeColor = Color.Black;
+            cmbValue.FormattingEnabled = true;
+            cmbValue.Location = new Point(3, 19);
+            cmbValue.Name = "cmbValue";
+            cmbValue.Size = new Size(138, 23);
+            cmbValue.TabIndex = 3;
+            // 
             // grpPermissions
             // 
             grpPermissions.Controls.Add(grpQual);
             grpPermissions.Controls.Add(lblPremFilCurrent);
             grpPermissions.Controls.Add(lblLaserCutterCurrent);
             grpPermissions.Controls.Add(lblCNCMillCurrent);
+            grpPermissions.Controls.Add(cbPermEdit);
             grpPermissions.Controls.Add(lblResinCurrent);
+            grpPermissions.Controls.Add(btnSavePerms);
             grpPermissions.Controls.Add(lblStdFilCurrent);
             grpPermissions.Controls.Add(lblSelection);
             grpPermissions.Controls.Add(numResin);
@@ -688,11 +724,12 @@ namespace Frontend.Forms
             grpPermissions.Controls.Add(lblCNCMill);
             grpPermissions.Controls.Add(lblRes);
             grpPermissions.Controls.Add(lblStdFil);
+            grpPermissions.Dock = DockStyle.Right;
             grpPermissions.Enabled = false;
             grpPermissions.ForeColor = Color.WhiteSmoke;
-            grpPermissions.Location = new Point(191, 3);
+            grpPermissions.Location = new Point(144, 0);
             grpPermissions.Name = "grpPermissions";
-            grpPermissions.Size = new Size(346, 374);
+            grpPermissions.Size = new Size(396, 426);
             grpPermissions.TabIndex = 0;
             grpPermissions.TabStop = false;
             grpPermissions.Text = "Info";
@@ -715,7 +752,7 @@ namespace Frontend.Forms
             grpQual.ForeColor = SystemColors.GrayText;
             grpQual.Location = new Point(9, 251);
             grpQual.Name = "grpQual";
-            grpQual.Size = new Size(320, 99);
+            grpQual.Size = new Size(375, 105);
             grpQual.TabIndex = 41;
             grpQual.TabStop = false;
             grpQual.Text = "Qualified for:";
@@ -724,7 +761,7 @@ namespace Frontend.Forms
             // 
             pbElectronics.BackColor = Color.Transparent;
             pbElectronics.Image = (Image)resources.GetObject("pbElectronics.Image");
-            pbElectronics.Location = new Point(200, 68);
+            pbElectronics.Location = new Point(264, 68);
             pbElectronics.Name = "pbElectronics";
             pbElectronics.Size = new Size(15, 15);
             pbElectronics.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -735,7 +772,7 @@ namespace Frontend.Forms
             // 
             pbComputers.BackColor = Color.Transparent;
             pbComputers.Image = (Image)resources.GetObject("pbComputers.Image");
-            pbComputers.Location = new Point(200, 49);
+            pbComputers.Location = new Point(264, 49);
             pbComputers.Name = "pbComputers";
             pbComputers.Size = new Size(15, 15);
             pbComputers.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -746,7 +783,7 @@ namespace Frontend.Forms
             // 
             pbTools.BackColor = Color.Transparent;
             pbTools.Image = (Image)resources.GetObject("pbTools.Image");
-            pbTools.Location = new Point(200, 31);
+            pbTools.Location = new Point(264, 31);
             pbTools.Name = "pbTools";
             pbTools.Size = new Size(15, 15);
             pbTools.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -789,7 +826,7 @@ namespace Frontend.Forms
             // lblElectronics
             // 
             lblElectronics.AutoSize = true;
-            lblElectronics.Location = new Point(221, 68);
+            lblElectronics.Location = new Point(285, 68);
             lblElectronics.Name = "lblElectronics";
             lblElectronics.Size = new Size(64, 15);
             lblElectronics.TabIndex = 5;
@@ -798,7 +835,7 @@ namespace Frontend.Forms
             // lblComputers
             // 
             lblComputers.AutoSize = true;
-            lblComputers.Location = new Point(221, 49);
+            lblComputers.Location = new Point(285, 49);
             lblComputers.Name = "lblComputers";
             lblComputers.Size = new Size(66, 15);
             lblComputers.TabIndex = 4;
@@ -807,7 +844,7 @@ namespace Frontend.Forms
             // lblTools
             // 
             lblTools.AutoSize = true;
-            lblTools.Location = new Point(221, 31);
+            lblTools.Location = new Point(285, 31);
             lblTools.Name = "lblTools";
             lblTools.Size = new Size(34, 15);
             lblTools.TabIndex = 3;
@@ -844,7 +881,7 @@ namespace Frontend.Forms
             // 
             lblPremFilCurrent.AutoSize = true;
             lblPremFilCurrent.ForeColor = Color.WhiteSmoke;
-            lblPremFilCurrent.Location = new Point(235, 214);
+            lblPremFilCurrent.Location = new Point(273, 214);
             lblPremFilCurrent.Name = "lblPremFilCurrent";
             lblPremFilCurrent.Size = new Size(59, 15);
             lblPremFilCurrent.TabIndex = 40;
@@ -854,7 +891,7 @@ namespace Frontend.Forms
             // 
             lblLaserCutterCurrent.AutoSize = true;
             lblLaserCutterCurrent.ForeColor = Color.WhiteSmoke;
-            lblLaserCutterCurrent.Location = new Point(235, 176);
+            lblLaserCutterCurrent.Location = new Point(273, 176);
             lblLaserCutterCurrent.Name = "lblLaserCutterCurrent";
             lblLaserCutterCurrent.Size = new Size(59, 15);
             lblLaserCutterCurrent.TabIndex = 39;
@@ -864,27 +901,54 @@ namespace Frontend.Forms
             // 
             lblCNCMillCurrent.AutoSize = true;
             lblCNCMillCurrent.ForeColor = Color.WhiteSmoke;
-            lblCNCMillCurrent.Location = new Point(235, 142);
+            lblCNCMillCurrent.Location = new Point(273, 142);
             lblCNCMillCurrent.Name = "lblCNCMillCurrent";
             lblCNCMillCurrent.Size = new Size(59, 15);
             lblCNCMillCurrent.TabIndex = 38;
             lblCNCMillCurrent.Text = "Currently:";
             // 
+            // cbPermEdit
+            // 
+            cbPermEdit.AutoSize = true;
+            cbPermEdit.ForeColor = Color.WhiteSmoke;
+            cbPermEdit.Location = new Point(9, 387);
+            cbPermEdit.Name = "cbPermEdit";
+            cbPermEdit.Size = new Size(83, 19);
+            cbPermEdit.TabIndex = 17;
+            cbPermEdit.Text = "Edit Mode:";
+            cbPermEdit.UseVisualStyleBackColor = true;
+            cbPermEdit.CheckedChanged += cbPermEdit_CheckedChanged;
+            // 
             // lblResinCurrent
             // 
             lblResinCurrent.AutoSize = true;
             lblResinCurrent.ForeColor = Color.WhiteSmoke;
-            lblResinCurrent.Location = new Point(235, 103);
+            lblResinCurrent.Location = new Point(273, 103);
             lblResinCurrent.Name = "lblResinCurrent";
             lblResinCurrent.Size = new Size(59, 15);
             lblResinCurrent.TabIndex = 37;
             lblResinCurrent.Text = "Currently:";
             // 
+            // btnSavePerms
+            // 
+            btnSavePerms.BackColor = Color.Gold;
+            btnSavePerms.Enabled = false;
+            btnSavePerms.FlatStyle = FlatStyle.Flat;
+            btnSavePerms.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnSavePerms.ForeColor = Color.Black;
+            btnSavePerms.Location = new Point(273, 383);
+            btnSavePerms.Name = "btnSavePerms";
+            btnSavePerms.Size = new Size(111, 23);
+            btnSavePerms.TabIndex = 16;
+            btnSavePerms.Text = "Save Changes";
+            btnSavePerms.UseVisualStyleBackColor = false;
+            btnSavePerms.Click += btnSavePerms_Click;
+            // 
             // lblStdFilCurrent
             // 
             lblStdFilCurrent.AutoSize = true;
             lblStdFilCurrent.ForeColor = Color.WhiteSmoke;
-            lblStdFilCurrent.Location = new Point(235, 69);
+            lblStdFilCurrent.Location = new Point(273, 69);
             lblStdFilCurrent.Name = "lblStdFilCurrent";
             lblStdFilCurrent.Size = new Size(59, 15);
             lblStdFilCurrent.TabIndex = 36;
@@ -907,7 +971,7 @@ namespace Frontend.Forms
             numResin.Location = new Point(138, 101);
             numResin.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numResin.Name = "numResin";
-            numResin.Size = new Size(96, 23);
+            numResin.Size = new Size(129, 23);
             numResin.TabIndex = 28;
             // 
             // numPremFil
@@ -917,7 +981,7 @@ namespace Frontend.Forms
             numPremFil.Location = new Point(138, 212);
             numPremFil.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numPremFil.Name = "numPremFil";
-            numPremFil.Size = new Size(96, 23);
+            numPremFil.Size = new Size(129, 23);
             numPremFil.TabIndex = 27;
             // 
             // numLsrCut
@@ -928,7 +992,7 @@ namespace Frontend.Forms
             numLsrCut.Location = new Point(138, 174);
             numLsrCut.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numLsrCut.Name = "numLsrCut";
-            numLsrCut.Size = new Size(96, 23);
+            numLsrCut.Size = new Size(129, 23);
             numLsrCut.TabIndex = 26;
             // 
             // numCNCMill
@@ -939,7 +1003,7 @@ namespace Frontend.Forms
             numCNCMill.Location = new Point(138, 138);
             numCNCMill.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numCNCMill.Name = "numCNCMill";
-            numCNCMill.Size = new Size(96, 23);
+            numCNCMill.Size = new Size(129, 23);
             numCNCMill.TabIndex = 25;
             // 
             // numStdFil
@@ -949,7 +1013,7 @@ namespace Frontend.Forms
             numStdFil.Location = new Point(138, 67);
             numStdFil.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numStdFil.Name = "numStdFil";
-            numStdFil.Size = new Size(96, 23);
+            numStdFil.Size = new Size(129, 23);
             numStdFil.TabIndex = 24;
             // 
             // txtSelect
@@ -959,7 +1023,7 @@ namespace Frontend.Forms
             txtSelect.Location = new Point(73, 22);
             txtSelect.Name = "txtSelect";
             txtSelect.ReadOnly = true;
-            txtSelect.Size = new Size(256, 23);
+            txtSelect.Size = new Size(311, 23);
             txtSelect.TabIndex = 23;
             // 
             // lblPremFil
@@ -1012,33 +1076,6 @@ namespace Frontend.Forms
             lblStdFil.TabIndex = 18;
             lblStdFil.Text = "Standard Filament (g):";
             // 
-            // cbPermEdit
-            // 
-            cbPermEdit.AutoSize = true;
-            cbPermEdit.ForeColor = Color.WhiteSmoke;
-            cbPermEdit.Location = new Point(191, 387);
-            cbPermEdit.Name = "cbPermEdit";
-            cbPermEdit.Size = new Size(83, 19);
-            cbPermEdit.TabIndex = 17;
-            cbPermEdit.Text = "Edit Mode:";
-            cbPermEdit.UseVisualStyleBackColor = true;
-            cbPermEdit.CheckedChanged += cbPermEdit_CheckedChanged;
-            // 
-            // btnSavePerms
-            // 
-            btnSavePerms.BackColor = Color.Gold;
-            btnSavePerms.Enabled = false;
-            btnSavePerms.FlatStyle = FlatStyle.Flat;
-            btnSavePerms.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnSavePerms.ForeColor = Color.Black;
-            btnSavePerms.Location = new Point(420, 384);
-            btnSavePerms.Name = "btnSavePerms";
-            btnSavePerms.Size = new Size(111, 23);
-            btnSavePerms.TabIndex = 16;
-            btnSavePerms.Text = "Save Changes";
-            btnSavePerms.UseVisualStyleBackColor = false;
-            btnSavePerms.Click += btnSavePerms_Click;
-            // 
             // anim
             // 
             anim.Enabled = true;
@@ -1056,9 +1093,7 @@ namespace Frontend.Forms
             Controls.Add(pnlScan);
             Controls.Add(pnlConnection);
             Controls.Add(pnlButtons);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MaximizeBox = false;
             Name = "frmStart";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Garaža Makerspace";
@@ -1078,7 +1113,8 @@ namespace Frontend.Forms
             ((System.ComponentModel.ISupportInitialize)pbValid).EndInit();
             ((System.ComponentModel.ISupportInitialize)err).EndInit();
             pnlPerms.ResumeLayout(false);
-            pnlPerms.PerformLayout();
+            grpdgv.ResumeLayout(false);
+            grpdgv.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
             grpPermissions.ResumeLayout(false);
             grpPermissions.PerformLayout();
@@ -1180,5 +1216,6 @@ namespace Frontend.Forms
         private PictureBox pbCreality;
         private System.Windows.Forms.Timer anim;
         private TextBox txtConsole;
+        private GroupBox grpdgv;
     }
 }

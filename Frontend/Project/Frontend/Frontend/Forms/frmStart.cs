@@ -36,7 +36,7 @@ namespace Frontend.Forms
         private string slctdName;
         private string scndID;
 
-        private bool Loading;
+        private int Loading;
 
         private const float Rotating_Angle = 10.0f;
 
@@ -999,13 +999,13 @@ namespace Frontend.Forms
         {
 
 
-            this.pbLogo.Image = Resources.SharedResources.Loading;
+            
 
-            this.Loading = true;
+            this.Loading = time;
 
             Thread.Sleep(time);
 
-            this.Loading = false;
+            this.Loading = 0;
 
             this.pbLogo.Image = Resources.SharedResources.Logo;
 
@@ -1021,7 +1021,7 @@ namespace Frontend.Forms
         private void anim_Tick(object sender, EventArgs e)
         {
 
-            if (this.Loading)
+            if (this.Loading>=1000)
             {
                 Bitmap newimg = new Bitmap(this.pbLogo.Width, this.pbLogo.Height);
 
