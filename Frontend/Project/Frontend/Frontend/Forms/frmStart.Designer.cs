@@ -55,23 +55,24 @@ namespace Frontend.Forms
             pbSubscription = new PictureBox();
             btnScan = new Button();
             grpInfo = new GroupBox();
+            tblInfo = new TableLayoutPanel();
+            lblName = new Label();
+            lblSex = new Label();
+            lblDoB = new Label();
+            lblPhone = new Label();
+            dtpValid = new DateTimePicker();
+            lblValid = new Label();
+            cmbSubscription = new ComboBox();
+            lblEMail = new Label();
+            txtEmail = new TextBox();
+            lblSubscription = new Label();
+            txtNumber = new TextBox();
+            txtName = new TextBox();
+            dtpDoB = new DateTimePicker();
+            cmbSex = new ComboBox();
             pbValid = new PictureBox();
             btnClear = new Button();
             btnSaveChanges = new Button();
-            lblValid = new Label();
-            lblSubscription = new Label();
-            lblEMail = new Label();
-            lblPhone = new Label();
-            lblDoB = new Label();
-            lblSex = new Label();
-            dtpValid = new DateTimePicker();
-            cmbSubscription = new ComboBox();
-            txtEmail = new TextBox();
-            txtNumber = new TextBox();
-            dtpDoB = new DateTimePicker();
-            cmbSex = new ComboBox();
-            txtName = new TextBox();
-            lblName = new Label();
             err = new ErrorProvider(components);
             tmr = new System.Windows.Forms.Timer(components);
             pnlPerms = new Panel();
@@ -123,6 +124,7 @@ namespace Frontend.Forms
             grpScan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbSubscription).BeginInit();
             grpInfo.SuspendLayout();
+            tblInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbValid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)err).BeginInit();
             pnlPerms.SuspendLayout();
@@ -378,7 +380,6 @@ namespace Frontend.Forms
             // 
             // pbSubscription
             // 
-            pbSubscription.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             pbSubscription.BackColor = Color.FromArgb(100, 100, 120);
             pbSubscription.Location = new Point(125, 22);
             pbSubscription.Name = "pbSubscription";
@@ -405,23 +406,10 @@ namespace Frontend.Forms
             // 
             grpInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             grpInfo.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            grpInfo.Controls.Add(tblInfo);
             grpInfo.Controls.Add(pbValid);
             grpInfo.Controls.Add(btnClear);
             grpInfo.Controls.Add(btnSaveChanges);
-            grpInfo.Controls.Add(lblValid);
-            grpInfo.Controls.Add(lblSubscription);
-            grpInfo.Controls.Add(lblEMail);
-            grpInfo.Controls.Add(lblPhone);
-            grpInfo.Controls.Add(lblDoB);
-            grpInfo.Controls.Add(lblSex);
-            grpInfo.Controls.Add(dtpValid);
-            grpInfo.Controls.Add(cmbSubscription);
-            grpInfo.Controls.Add(txtEmail);
-            grpInfo.Controls.Add(txtNumber);
-            grpInfo.Controls.Add(dtpDoB);
-            grpInfo.Controls.Add(cmbSex);
-            grpInfo.Controls.Add(txtName);
-            grpInfo.Controls.Add(lblName);
             grpInfo.ForeColor = Color.WhiteSmoke;
             grpInfo.Location = new Point(0, 180);
             grpInfo.Name = "grpInfo";
@@ -430,11 +418,185 @@ namespace Frontend.Forms
             grpInfo.TabStop = false;
             grpInfo.Text = "Info";
             // 
+            // tblInfo
+            // 
+            tblInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tblInfo.ColumnCount = 2;
+            tblInfo.ColumnStyles.Add(new ColumnStyle());
+            tblInfo.ColumnStyles.Add(new ColumnStyle());
+            tblInfo.Controls.Add(lblName, 0, 0);
+            tblInfo.Controls.Add(lblSex, 0, 1);
+            tblInfo.Controls.Add(lblDoB, 0, 2);
+            tblInfo.Controls.Add(lblPhone, 0, 3);
+            tblInfo.Controls.Add(dtpValid, 1, 6);
+            tblInfo.Controls.Add(lblValid, 0, 6);
+            tblInfo.Controls.Add(cmbSubscription, 1, 5);
+            tblInfo.Controls.Add(lblEMail, 0, 4);
+            tblInfo.Controls.Add(txtEmail, 1, 4);
+            tblInfo.Controls.Add(lblSubscription, 0, 5);
+            tblInfo.Controls.Add(txtNumber, 1, 3);
+            tblInfo.Controls.Add(txtName, 1, 0);
+            tblInfo.Controls.Add(dtpDoB, 1, 2);
+            tblInfo.Controls.Add(cmbSex, 1, 1);
+            tblInfo.Location = new Point(8, 31);
+            tblInfo.Name = "tblInfo";
+            tblInfo.RowCount = 7;
+            tblInfo.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857113F));
+            tblInfo.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857151F));
+            tblInfo.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857151F));
+            tblInfo.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857151F));
+            tblInfo.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857151F));
+            tblInfo.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857151F));
+            tblInfo.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857151F));
+            tblInfo.Size = new Size(392, 197);
+            tblInfo.TabIndex = 17;
+            // 
+            // lblName
+            // 
+            lblName.AutoSize = true;
+            lblName.ForeColor = Color.WhiteSmoke;
+            lblName.Location = new Point(3, 0);
+            lblName.Name = "lblName";
+            lblName.Size = new Size(42, 15);
+            lblName.TabIndex = 0;
+            lblName.Text = "Name:";
+            // 
+            // lblSex
+            // 
+            lblSex.AutoSize = true;
+            lblSex.ForeColor = Color.WhiteSmoke;
+            lblSex.Location = new Point(3, 28);
+            lblSex.Name = "lblSex";
+            lblSex.Size = new Size(28, 15);
+            lblSex.TabIndex = 8;
+            lblSex.Text = "Sex:";
+            // 
+            // lblDoB
+            // 
+            lblDoB.AutoSize = true;
+            lblDoB.ForeColor = Color.WhiteSmoke;
+            lblDoB.Location = new Point(3, 56);
+            lblDoB.Name = "lblDoB";
+            lblDoB.Size = new Size(76, 15);
+            lblDoB.TabIndex = 9;
+            lblDoB.Text = "Date of birth:";
+            // 
+            // lblPhone
+            // 
+            lblPhone.AutoSize = true;
+            lblPhone.ForeColor = Color.WhiteSmoke;
+            lblPhone.Location = new Point(3, 84);
+            lblPhone.Name = "lblPhone";
+            lblPhone.Size = new Size(89, 15);
+            lblPhone.TabIndex = 10;
+            lblPhone.Text = "Phone number:";
+            // 
+            // dtpValid
+            // 
+            dtpValid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dtpValid.Location = new Point(111, 171);
+            dtpValid.Name = "dtpValid";
+            dtpValid.Size = new Size(308, 23);
+            dtpValid.TabIndex = 7;
+            dtpValid.ValueChanged += dtpValid_ValueChanged;
+            // 
+            // lblValid
+            // 
+            lblValid.AutoSize = true;
+            lblValid.ForeColor = Color.WhiteSmoke;
+            lblValid.Location = new Point(3, 168);
+            lblValid.Name = "lblValid";
+            lblValid.Size = new Size(62, 15);
+            lblValid.TabIndex = 13;
+            lblValid.Text = "Valid until:";
+            // 
+            // cmbSubscription
+            // 
+            cmbSubscription.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            cmbSubscription.BackColor = Color.WhiteSmoke;
+            cmbSubscription.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSubscription.ForeColor = Color.Black;
+            cmbSubscription.FormattingEnabled = true;
+            cmbSubscription.Location = new Point(111, 143);
+            cmbSubscription.Name = "cmbSubscription";
+            cmbSubscription.Size = new Size(308, 23);
+            cmbSubscription.TabIndex = 6;
+            // 
+            // lblEMail
+            // 
+            lblEMail.AutoSize = true;
+            lblEMail.ForeColor = Color.WhiteSmoke;
+            lblEMail.Location = new Point(3, 112);
+            lblEMail.Name = "lblEMail";
+            lblEMail.Size = new Size(41, 15);
+            lblEMail.TabIndex = 11;
+            lblEMail.Text = "E-Mail";
+            // 
+            // txtEmail
+            // 
+            txtEmail.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtEmail.BackColor = Color.WhiteSmoke;
+            txtEmail.ForeColor = Color.Black;
+            txtEmail.Location = new Point(111, 115);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(308, 23);
+            txtEmail.TabIndex = 5;
+            // 
+            // lblSubscription
+            // 
+            lblSubscription.AutoSize = true;
+            lblSubscription.ForeColor = Color.WhiteSmoke;
+            lblSubscription.Location = new Point(3, 140);
+            lblSubscription.Name = "lblSubscription";
+            lblSubscription.Size = new Size(102, 15);
+            lblSubscription.TabIndex = 12;
+            lblSubscription.Text = "Subscription type:";
+            // 
+            // txtNumber
+            // 
+            txtNumber.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtNumber.BackColor = Color.WhiteSmoke;
+            txtNumber.ForeColor = Color.Black;
+            txtNumber.Location = new Point(111, 87);
+            txtNumber.Name = "txtNumber";
+            txtNumber.Size = new Size(308, 23);
+            txtNumber.TabIndex = 4;
+            // 
+            // txtName
+            // 
+            txtName.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtName.BackColor = Color.WhiteSmoke;
+            txtName.ForeColor = Color.Black;
+            txtName.Location = new Point(111, 3);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(308, 23);
+            txtName.TabIndex = 1;
+            // 
+            // dtpDoB
+            // 
+            dtpDoB.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dtpDoB.Location = new Point(111, 59);
+            dtpDoB.Name = "dtpDoB";
+            dtpDoB.Size = new Size(308, 23);
+            dtpDoB.TabIndex = 3;
+            // 
+            // cmbSex
+            // 
+            cmbSex.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            cmbSex.BackColor = Color.WhiteSmoke;
+            cmbSex.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSex.ForeColor = Color.Black;
+            cmbSex.FormattingEnabled = true;
+            cmbSex.Location = new Point(111, 31);
+            cmbSex.Name = "cmbSex";
+            cmbSex.Size = new Size(308, 23);
+            cmbSex.TabIndex = 2;
+            // 
             // pbValid
             // 
-            pbValid.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pbValid.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             pbValid.BackColor = Color.FromArgb(100, 100, 120);
-            pbValid.Location = new Point(406, 110);
+            pbValid.Location = new Point(406, 123);
             pbValid.Name = "pbValid";
             pbValid.Size = new Size(111, 105);
             pbValid.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -448,7 +610,7 @@ namespace Frontend.Forms
             btnClear.FlatStyle = FlatStyle.Flat;
             btnClear.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnClear.ForeColor = Color.Black;
-            btnClear.Location = new Point(406, 52);
+            btnClear.Location = new Point(406, 65);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(111, 23);
             btnClear.TabIndex = 15;
@@ -463,154 +625,13 @@ namespace Frontend.Forms
             btnSaveChanges.FlatStyle = FlatStyle.Flat;
             btnSaveChanges.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnSaveChanges.ForeColor = Color.Black;
-            btnSaveChanges.Location = new Point(406, 18);
+            btnSaveChanges.Location = new Point(406, 31);
             btnSaveChanges.Name = "btnSaveChanges";
             btnSaveChanges.Size = new Size(111, 23);
             btnSaveChanges.TabIndex = 14;
             btnSaveChanges.Text = "Save Changes";
             btnSaveChanges.UseVisualStyleBackColor = false;
             btnSaveChanges.Click += btnSaveChanges_Click;
-            // 
-            // lblValid
-            // 
-            lblValid.AutoSize = true;
-            lblValid.ForeColor = Color.WhiteSmoke;
-            lblValid.Location = new Point(17, 200);
-            lblValid.Name = "lblValid";
-            lblValid.Size = new Size(62, 15);
-            lblValid.TabIndex = 13;
-            lblValid.Text = "Valid until:";
-            // 
-            // lblSubscription
-            // 
-            lblSubscription.AutoSize = true;
-            lblSubscription.ForeColor = Color.WhiteSmoke;
-            lblSubscription.Location = new Point(17, 168);
-            lblSubscription.Name = "lblSubscription";
-            lblSubscription.Size = new Size(102, 15);
-            lblSubscription.TabIndex = 12;
-            lblSubscription.Text = "Subscription type:";
-            // 
-            // lblEMail
-            // 
-            lblEMail.AutoSize = true;
-            lblEMail.ForeColor = Color.WhiteSmoke;
-            lblEMail.Location = new Point(17, 139);
-            lblEMail.Name = "lblEMail";
-            lblEMail.Size = new Size(41, 15);
-            lblEMail.TabIndex = 11;
-            lblEMail.Text = "E-Mail";
-            // 
-            // lblPhone
-            // 
-            lblPhone.AutoSize = true;
-            lblPhone.ForeColor = Color.WhiteSmoke;
-            lblPhone.Location = new Point(17, 110);
-            lblPhone.Name = "lblPhone";
-            lblPhone.Size = new Size(89, 15);
-            lblPhone.TabIndex = 10;
-            lblPhone.Text = "Phone number:";
-            // 
-            // lblDoB
-            // 
-            lblDoB.AutoSize = true;
-            lblDoB.ForeColor = Color.WhiteSmoke;
-            lblDoB.Location = new Point(17, 84);
-            lblDoB.Name = "lblDoB";
-            lblDoB.Size = new Size(76, 15);
-            lblDoB.TabIndex = 9;
-            lblDoB.Text = "Date of birth:";
-            // 
-            // lblSex
-            // 
-            lblSex.AutoSize = true;
-            lblSex.ForeColor = Color.WhiteSmoke;
-            lblSex.Location = new Point(17, 52);
-            lblSex.Name = "lblSex";
-            lblSex.Size = new Size(28, 15);
-            lblSex.TabIndex = 8;
-            lblSex.Text = "Sex:";
-            // 
-            // dtpValid
-            // 
-            dtpValid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dtpValid.Location = new Point(144, 194);
-            dtpValid.Name = "dtpValid";
-            dtpValid.Size = new Size(200, 23);
-            dtpValid.TabIndex = 7;
-            dtpValid.ValueChanged += dtpValid_ValueChanged;
-            // 
-            // cmbSubscription
-            // 
-            cmbSubscription.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            cmbSubscription.BackColor = Color.WhiteSmoke;
-            cmbSubscription.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbSubscription.ForeColor = Color.Black;
-            cmbSubscription.FormattingEnabled = true;
-            cmbSubscription.Location = new Point(144, 165);
-            cmbSubscription.Name = "cmbSubscription";
-            cmbSubscription.Size = new Size(200, 23);
-            cmbSubscription.TabIndex = 6;
-            // 
-            // txtEmail
-            // 
-            txtEmail.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtEmail.BackColor = Color.WhiteSmoke;
-            txtEmail.ForeColor = Color.Black;
-            txtEmail.Location = new Point(144, 136);
-            txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(200, 23);
-            txtEmail.TabIndex = 5;
-            // 
-            // txtNumber
-            // 
-            txtNumber.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtNumber.BackColor = Color.WhiteSmoke;
-            txtNumber.ForeColor = Color.Black;
-            txtNumber.Location = new Point(144, 107);
-            txtNumber.Name = "txtNumber";
-            txtNumber.Size = new Size(200, 23);
-            txtNumber.TabIndex = 4;
-            // 
-            // dtpDoB
-            // 
-            dtpDoB.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dtpDoB.Location = new Point(144, 78);
-            dtpDoB.Name = "dtpDoB";
-            dtpDoB.Size = new Size(200, 23);
-            dtpDoB.TabIndex = 3;
-            // 
-            // cmbSex
-            // 
-            cmbSex.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            cmbSex.BackColor = Color.WhiteSmoke;
-            cmbSex.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbSex.ForeColor = Color.Black;
-            cmbSex.FormattingEnabled = true;
-            cmbSex.Location = new Point(144, 49);
-            cmbSex.Name = "cmbSex";
-            cmbSex.Size = new Size(200, 23);
-            cmbSex.TabIndex = 2;
-            // 
-            // txtName
-            // 
-            txtName.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtName.BackColor = Color.WhiteSmoke;
-            txtName.ForeColor = Color.Black;
-            txtName.Location = new Point(144, 20);
-            txtName.Name = "txtName";
-            txtName.Size = new Size(200, 23);
-            txtName.TabIndex = 1;
-            // 
-            // lblName
-            // 
-            lblName.AutoSize = true;
-            lblName.ForeColor = Color.WhiteSmoke;
-            lblName.Location = new Point(17, 23);
-            lblName.Name = "lblName";
-            lblName.Size = new Size(42, 15);
-            lblName.TabIndex = 0;
-            lblName.Text = "Name:";
             // 
             // err
             // 
@@ -1110,7 +1131,8 @@ namespace Frontend.Forms
             grpScan.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbSubscription).EndInit();
             grpInfo.ResumeLayout(false);
-            grpInfo.PerformLayout();
+            tblInfo.ResumeLayout(false);
+            tblInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbValid).EndInit();
             ((System.ComponentModel.ISupportInitialize)err).EndInit();
             pnlPerms.ResumeLayout(false);
@@ -1218,5 +1240,6 @@ namespace Frontend.Forms
         private System.Windows.Forms.Timer anim;
         private TextBox txtConsole;
         private GroupBox grpdgv;
+        private TableLayoutPanel tblInfo;
     }
 }

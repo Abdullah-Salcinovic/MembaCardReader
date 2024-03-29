@@ -40,7 +40,7 @@
               "RelativeDocumentMoniker": "FIT_Api_Example\\Properties\\launchSettings.json",
               "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\BackendAPI\\FIT_Api_Example\\Properties\\launchSettings.json",
               "RelativeToolTip": "FIT_Api_Example\\Properties\\launchSettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAIAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-03-20T14:19:04.966Z",
               "EditorCaption": ""
@@ -55,8 +55,7 @@
               "RelativeToolTip": "FIT_Api_Example\\Endpoints\\Customer\\Put1\\CustomerPut1Req.cs",
               "ViewState": "AQIAAAUAAAAAAAAAAAAxwA8AAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T15:41:20.577Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-19T15:41:20.577Z"
             },
             {
               "$type": "Document",
@@ -68,8 +67,7 @@
               "RelativeToolTip": "FIT_Api_Example\\Endpoints\\Customer\\Put1\\CustomerPut1Endpoint.cs",
               "ViewState": "AQIAACgAAAAAAAAAAAAmwDEAAABHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T15:41:04.108Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-19T15:41:04.108Z"
             },
             {
               "$type": "Document",
@@ -81,8 +79,7 @@
               "RelativeToolTip": "FIT_Api_Example\\Endpoints\\Customer\\Put\\CustomerPutEndpoint.cs",
               "ViewState": "AQIAACQAAAAAAAAAAAAowEAAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T15:37:54.572Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-19T15:37:54.572Z"
             },
             {
               "$type": "Document",
@@ -94,8 +91,7 @@
               "RelativeToolTip": "FIT_Api_Example\\Endpoints\\Customer\\GetDataById\\CustomerGetDataByIdEndpoint.cs",
               "ViewState": "AQIAABAAAAAAAAAAAAAgwBgAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T11:20:26.451Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-18T11:20:26.451Z"
             }
           ]
         }

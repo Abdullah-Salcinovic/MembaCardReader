@@ -29,7 +29,7 @@ namespace Frontend.Forms
     {
         private static HttpClient sharedClient = new()
         {
-            BaseAddress = new Uri("http://192.168.1.138:5174")
+            BaseAddress = new Uri("http://192.168.1.138:5974")
         };
 
         private string slctdID;
@@ -1028,6 +1028,8 @@ namespace Frontend.Forms
 
                 using (Graphics gfx = Graphics.FromImage(newimg))
                 {
+
+                    gfx.Clear(Color.Transparent);
 
                     gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
