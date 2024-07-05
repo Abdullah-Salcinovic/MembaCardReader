@@ -129,8 +129,8 @@ namespace Frontend.Forms
             this.cmbValue.DataSource = this.SearchFilters;
 
             HandleEdit();
-            HandlePerms();
-            this.grpQual.Enabled = false;
+            
+          
 
             this.CurrentPanel = this.pnlConnection;
 
@@ -431,27 +431,7 @@ namespace Frontend.Forms
         private void HandleEdit()
         {
 
-            if (this.cbEdit.Checked)
-            {
-                this.grpScan.Enabled = false;
-                this.grpScan.BackColor = Color.FromArgb(255, 188, 188, 208);
-                this.grpInfo.Enabled = true;
-                this.grpInfo.BackColor = Color.FromArgb(255, 66, 66, 86);
-            }
-            else
-            {
-                this.grpScan.Enabled = true;
-                this.grpInfo.Enabled = false;
-
-                this.grpInfo.BackColor = Color.FromArgb(255, 188, 188, 208);
-
-                this.grpScan.BackColor = Color.FromArgb(255, 66, 66, 86);
-            }
-
-            this.cmbSex.SelectedItem = null;
-            this.cmbSubscription.SelectedItem = null;
-
-
+          
 
 
         }
@@ -797,40 +777,10 @@ namespace Frontend.Forms
             }
         }
 
-        private void cbPermEdit_CheckedChanged(object sender, EventArgs e)
-        {
-            HandlePerms();
-        }
-
-        private void HandlePerms()
-        {
-            if (this.cbPermEdit.Checked == true)
-            {
-                this.btnSavePerms.Enabled = true;
-                this.grpPermissions.Enabled = true;
-
-                this.grpPermissions.BackColor = Color.FromArgb(255, 66, 66, 86);
-
-            }
-
-            else
-            {
-
-                this.btnSavePerms.Enabled = false;
-                this.grpPermissions.Enabled = false;
-
-                this.grpPermissions.BackColor = Color.FromArgb(255, 188, 188, 208);
-
-            }
-
-
-
-            this.grpQual.Enabled = false;
-        }
-
+       
         private async void btnSavePerms_Click(object sender, EventArgs e)
         {
-            if (cbPermEdit.Checked == true)
+            if (cbEdit.Checked == true)
             {
                 var data = new CustomerGetAll()
                 {
@@ -852,7 +802,7 @@ namespace Frontend.Forms
                 await Put2Async($"/customer/{data.Id}", sharedClient, data);
             }
 
-            this.cbPermEdit.Checked = false;
+            this.cbEdit.Checked = false;
         }
 
         private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
