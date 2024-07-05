@@ -1,0 +1,25 @@
+body{
+    width: 100%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
+    border: 0%;
+    position: fixed;   
+}
+
+.sidebar{
+    width: 25%;
+    height: 100%;
+    padding: 0%;
+    border: 0%;
+    margin: 0%;
+    float:right;
+}
+.main{
+    width: 75%;
+    height: 100%;
+    padding: 0%;
+    border: 0%;
+    margin: 0%;
+    float: left;
+}

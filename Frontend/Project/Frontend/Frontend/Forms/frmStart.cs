@@ -112,7 +112,7 @@ namespace Frontend.Forms
 
         private void frmStart_Load(object sender, EventArgs e)
         {
-            this.txtConsole.Text = string.Empty;
+
 
 
             foreach (Control item in this.Controls)
@@ -123,7 +123,7 @@ namespace Frontend.Forms
                 }
             }
 
-            ConnectionStatusLock();
+
             this.cmbSex.DataSource = this.Sexes;
             this.cmbSubscription.DataSource = this.Subscriptions;
             this.cmbValue.DataSource = this.SearchFilters;
@@ -133,7 +133,7 @@ namespace Frontend.Forms
             this.grpQual.Enabled = false;
 
             this.CurrentPanel = this.pnlConnection;
-            Panel_Switch(this.CurrentPanel);
+
 
             ScanPorts();
         }
@@ -177,7 +177,7 @@ namespace Frontend.Forms
                         ChangeFormText("Please wait...");
 
 
-                        this.txtConsole.Text += $"Pinging port {portName} with baud rate {baud}..." + Environment.NewLine;
+                       
 
 
 
@@ -227,9 +227,6 @@ namespace Frontend.Forms
                                 this.ValidPorts.Add(com);
                                 this.BaudIdeal.Add(baud);
 
-                                this.txtConsole.Text += $"Added device {typ}, at port {portName}." + Environment.NewLine;
-
-
                                 break;
 
                             }
@@ -242,10 +239,6 @@ namespace Frontend.Forms
 
                         }
 
-                        else
-                        {
-                            this.txtConsole.Text += $"Device at port {portName} replied with : {msg}. Expected response: {SCN.RESPONSE}." + Environment.NewLine;
-                        }
 
 
                         tempSerialPort.Close();
@@ -334,8 +327,7 @@ namespace Frontend.Forms
 
                     ChangeFormText("Please wait...");
 
-                    this.txtConsole.Text += $"Connecting to device {this.cmbPort.SelectedItem}." + Environment.NewLine;
-
+                   
                     await Task.Run(() =>
                     {
 
@@ -358,13 +350,12 @@ namespace Frontend.Forms
                         this.btnConnect.Text = "Disconnect";
                         this.lblConnectionStatus.Text = "Connected";
 
-                        this.txtConsole.Text += $"Succesfully connected to device {this.cmbPort.SelectedItem}." + Environment.NewLine;
-
+                    
                         this.cmbPort.Enabled = false;
                         this.btnScanPort.Enabled = false;
                         this.pbConnection.Image = Resources.SharedResources.Green;
                         this.Connected = true;
-                        ConnectionStatusLock();
+
                     }
                 }
                 catch (Exception)
@@ -389,51 +380,21 @@ namespace Frontend.Forms
                     this.OpenPort.Dispose();
                 }
 
-                this.txtConsole.Text += $"Disconnected from device {this.cmbPort.SelectedItem}." + Environment.NewLine;
-
+               
                 this.btnConnect.Text = "Connect";
                 this.lblConnectionStatus.Text = "Disconnected";
                 this.Connected = false;
                 this.CurrentPanel = pnlConnection;
-                Panel_Switch(this.CurrentPanel);
 
                 this.cmbPort.Enabled = true;
                 this.btnScanPort.Enabled = true;
-                ConnectionStatusLock();
+
                 this.pbConnection.Image = Resources.SharedResources.Red;
 
 
                 ScanPorts();
             }
 
-        }
-
-        private void ConnectionStatusLock()
-        {
-            this.btnConnection.Enabled = this.Connected;
-            this.btnRegistrations.Enabled = this.Connected;
-            this.btnViewUsers.Enabled = this.Connected;
-
-        }
-
-        private void btnConnection_Click(object sender, EventArgs e)
-        {
-            this.CurrentPanel = pnlConnection;
-            Panel_Switch(this.CurrentPanel);
-        }
-
-        private void btnScanCard_Click(object sender, EventArgs e)
-        {
-            this.CurrentPanel = this.pnlScan;
-            Panel_Switch(this.CurrentPanel);
-        }
-
-        private async void btnViewUsers_Click(object sender, EventArgs e)
-        {
-            this.CurrentPanel = this.pnlPerms;
-            Panel_Switch(this.CurrentPanel);
-
-            await GetAllAsync("/customers", sharedClient);
         }
 
 
@@ -447,38 +408,6 @@ namespace Frontend.Forms
         {
             Verify_Selection();
         }
-
-
-        private void Panel_Switch(Panel Selection)
-        {
-
-
-
-            foreach (Control pnl in this.Controls)
-            {
-
-                if (pnl.GetType() == typeof(Panel))
-                {
-
-                    if (pnl == Selection || pnl == this.pnlButtons)
-                    {
-                        pnl.Visible = true;
-                    }
-
-                    else
-                    {
-                        pnl.Visible = false;
-                    }
-
-                }
-            }
-
-
-        }
-
-
-
-
 
         private void Verify_Selection()
         {
@@ -521,8 +450,8 @@ namespace Frontend.Forms
 
             this.cmbSex.SelectedItem = null;
             this.cmbSubscription.SelectedItem = null;
-            this.pbSubscription.Image = null;
-            this.pbValid.Image = null;
+
+
 
 
         }
@@ -560,7 +489,7 @@ namespace Frontend.Forms
                     this.txtEmail.Text = data?.Email;
                     this.cmbSubscription.SelectedItem = data?.Subscription;
                     this.dtpValid.Value = data!.ExpirationDate;
-                    ChangeBanner();
+
                 }
                 else
                 {
@@ -728,17 +657,6 @@ namespace Frontend.Forms
             this.btnScan.Enabled = true;
         }
 
-        private void dtpValid_ValueChanged(object sender, EventArgs e)
-        {
-            if (this.dtpValid.Value <= DateTime.Now)
-            {
-                this.pbValid.Image = (Image)Resources.SharedResources.Invalid;
-            }
-            else
-            {
-                this.pbValid.Image = (Image)Resources.SharedResources.Valid;
-            }
-        }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -775,7 +693,7 @@ namespace Frontend.Forms
             this.cbEdit.Checked = false;
 
 
-            this.pbSubscription.Image = null;
+
 
             this.txtId.Text = string.Empty;
             this.txtName.Text = string.Empty;
@@ -786,9 +704,8 @@ namespace Frontend.Forms
             this.cmbSubscription.SelectedItem = null;
             this.dtpValid.Value = DateTime.Now;
 
-            this.pbValid.Image = null;
 
-
+            this.err.Clear();
 
 
             HandleEdit();
@@ -969,37 +886,11 @@ namespace Frontend.Forms
         }
 
 
-
-        private void ChangeBanner()
-        {
-            if (this.cmbSubscription.SelectedItem as System.String == "Basic")
-            {
-                this.pbSubscription.Image = Resources.SharedResources.Basic;
-            }
-            else if (this.cmbSubscription.SelectedItem as System.String == "Student")
-            {
-                this.pbSubscription.Image = Resources.SharedResources.Student;
-            }
-            else if (this.cmbSubscription.SelectedItem as System.String == "Premium")
-            {
-                this.pbSubscription.Image = Resources.SharedResources.Premium;
-            }
-            else
-            {
-                this.pbSubscription.Image = Resources.SharedResources.Invalid;
-            }
-        }
-
-        private void cmbSubscription_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ChangeBanner();
-        }
-
         private void Delay(int time)
         {
 
 
-            
+
 
             this.Loading = time;
 
@@ -1021,7 +912,7 @@ namespace Frontend.Forms
         private void anim_Tick(object sender, EventArgs e)
         {
 
-            if (this.Loading>=1000)
+            if (this.Loading >= 1000)
             {
                 Bitmap newimg = new Bitmap(this.pbLogo.Width, this.pbLogo.Height);
 
@@ -1053,12 +944,7 @@ namespace Frontend.Forms
 
         }
 
-        private void txtConsole_TextChanged(object sender, EventArgs e)
-        {
-            this.txtConsole.SelectionStart=this.txtConsole.Text.Length;
-            this.txtConsole.SelectionLength = 0;
-            this.txtConsole.ScrollToCaret();
-        }
+       
     }
 
 
