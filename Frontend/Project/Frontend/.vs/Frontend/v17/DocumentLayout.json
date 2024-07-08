@@ -70,7 +70,8 @@
               "RelativeToolTip": "Frontend\\CodeReader\\SCN.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-22T14:04:52.437Z"
+              "WhenOpened": "2024-03-22T14:04:52.437Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -115,7 +116,7 @@
               "RelativeDocumentMoniker": "Frontend\\Forms\\frmStart.cs",
               "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\MembaCardReader\\Frontend\\Project\\Frontend\\Frontend\\Forms\\frmStart.cs",
               "RelativeToolTip": "Frontend\\Forms\\frmStart.cs",
-              "ViewState": "AQIAAG8CAAAAAAAAAAAAAHsCAAAAAAAA",
+              "ViewState": "AQIAAFUCAAAAAAAAAAAuwF4CAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-12T10:20:20.615Z",
               "EditorCaption": ""

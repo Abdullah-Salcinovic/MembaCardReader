@@ -431,19 +431,23 @@ namespace Frontend.Forms
         private void HandleEdit()
         {
 
-          
-
+            this.btnSavePerms.Enabled = this.cbEdit.Checked;
+           
 
         }
 
         private async void btnScan_Click(object sender, EventArgs e)
         {
-            ScanCode();
-            if (txtId.Text != System.String.Empty && txtId.Text != null)
+            if (Connected)
             {
-                await GetAsync($"/customer?id={txtId.Text}", sharedClient);
-            }
 
+                ScanCode();
+                if (txtId.Text != System.String.Empty && txtId.Text != null)
+                {
+                    await GetAsync($"/customer?id={txtId.Text}", sharedClient);
+                }
+
+            }
 
 
         }
@@ -556,8 +560,6 @@ namespace Frontend.Forms
             try
             {
 
-
-
                 this.OpenPort!.WriteLine(SCN.ID);
 
 
@@ -645,28 +647,7 @@ namespace Frontend.Forms
 
         }
 
-        private async void btnSaveChanges_Click(object sender, EventArgs e)
-        {
-            if (ValidateInput())
-            {
-                var customer = new CustomerPutRes()
-                {
-                    Id = this.scndID,
-                    Name = this.txtName.Text,
-                    DateOfBirth = this.dtpDoB.Value,
-                    Email = this.txtEmail.Text,
-                    ExpirationDate = this.dtpValid.Value,
-                    Phone = this.txtNumber.Text,
-                    Sex = this.cmbSex.Text,
-                    Subscription = this.cmbSubscription.Text
-                };
 
-                await PutAsync($"/customera/{customer.Id}", sharedClient, customer);
-
-                SaveChanges();
-            }
-
-        }
 
         private void Clear()
         {
@@ -800,6 +781,27 @@ namespace Frontend.Forms
                 };
 
                 await Put2Async($"/customer/{data.Id}", sharedClient, data);
+
+
+                if (ValidateInput())
+                {
+                    var customer = new CustomerPutRes()
+                    {
+                        Id = this.scndID,
+                        Name = this.txtName.Text,
+                        DateOfBirth = this.dtpDoB.Value,
+                        Email = this.txtEmail.Text,
+                        ExpirationDate = this.dtpValid.Value,
+                        Phone = this.txtNumber.Text,
+                        Sex = this.cmbSex.Text,
+                        Subscription = this.cmbSubscription.Text
+                    };
+
+                    await PutAsync($"/customera/{customer.Id}", sharedClient, customer);
+
+                    SaveChanges();
+                }
+
             }
 
             this.cbEdit.Checked = false;
