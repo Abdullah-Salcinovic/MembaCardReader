@@ -2,6 +2,7 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
+
 #define DEVICE "RFID Scanner\0"
 
 #define ID "SCN_ID"
