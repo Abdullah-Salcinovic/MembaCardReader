@@ -253,6 +253,7 @@ namespace Frontend.Forms
             // grpPermissions
             // 
             grpPermissions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpPermissions.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             grpPermissions.Controls.Add(grpScan);
             grpPermissions.Controls.Add(grpQual);
             grpPermissions.Controls.Add(lblPremFilCurrent);
@@ -288,9 +289,9 @@ namespace Frontend.Forms
             grpScan.Controls.Add(txtId);
             grpScan.Controls.Add(btnScan);
             grpScan.ForeColor = Color.WhiteSmoke;
-            grpScan.Location = new Point(9, 239);
+            grpScan.Location = new Point(6, 239);
             grpScan.Name = "grpScan";
-            grpScan.Size = new Size(597, 295);
+            grpScan.Size = new Size(600, 295);
             grpScan.TabIndex = 1;
             grpScan.TabStop = false;
             grpScan.Text = "Scan";
@@ -303,7 +304,7 @@ namespace Frontend.Forms
             grpInfo.ForeColor = Color.WhiteSmoke;
             grpInfo.Location = new Point(125, 10);
             grpInfo.Name = "grpInfo";
-            grpInfo.Size = new Size(466, 279);
+            grpInfo.Size = new Size(469, 279);
             grpInfo.TabIndex = 0;
             grpInfo.TabStop = false;
             grpInfo.Text = "Info";
@@ -338,7 +339,7 @@ namespace Frontend.Forms
             tblInfo.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857161F));
             tblInfo.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857161F));
             tblInfo.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857161F));
-            tblInfo.Size = new Size(452, 233);
+            tblInfo.Size = new Size(455, 233);
             tblInfo.TabIndex = 17;
             // 
             // lblName
@@ -828,6 +829,7 @@ namespace Frontend.Forms
             // grpdgv
             // 
             grpdgv.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpdgv.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             grpdgv.Controls.Add(cbEdit);
             grpdgv.Controls.Add(btnClear);
             grpdgv.Controls.Add(txtValue);
@@ -882,7 +884,7 @@ namespace Frontend.Forms
             // 
             dgvData.AllowUserToAddRows = false;
             dgvData.AllowUserToDeleteRows = false;
-            dgvData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dgvData.BackgroundColor = Color.FromArgb(100, 100, 120);
             dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvData.Columns.AddRange(new DataGridViewColumn[] { Id, Username });
@@ -956,6 +958,7 @@ namespace Frontend.Forms
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.Black;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1179, 569);
