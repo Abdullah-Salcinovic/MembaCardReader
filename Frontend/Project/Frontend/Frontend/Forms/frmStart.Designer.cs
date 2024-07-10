@@ -45,8 +45,6 @@ namespace Frontend.Forms
             pnlConnection = new Panel();
             grpPermissions = new GroupBox();
             grpScan = new GroupBox();
-            cbEdit = new CheckBox();
-            btnClear = new Button();
             grpInfo = new GroupBox();
             tblInfo = new TableLayoutPanel();
             lblName = new Label();
@@ -83,7 +81,6 @@ namespace Frontend.Forms
             lblLaserCutterCurrent = new Label();
             lblCNCMillCurrent = new Label();
             lblResinCurrent = new Label();
-            btnSavePerms = new Button();
             lblStdFilCurrent = new Label();
             lblSelection = new Label();
             numResin = new NumericUpDown();
@@ -98,10 +95,13 @@ namespace Frontend.Forms
             lblRes = new Label();
             lblStdFil = new Label();
             grpdgv = new GroupBox();
+            cbEdit = new CheckBox();
+            btnClear = new Button();
             txtValue = new TextBox();
             dgvData = new DataGridView();
             Id = new DataGridViewTextBoxColumn();
             Username = new DataGridViewTextBoxColumn();
+            btnSavePerms = new Button();
             cmbValue = new ComboBox();
             err = new ErrorProvider(components);
             tmr = new System.Windows.Forms.Timer(components);
@@ -239,23 +239,21 @@ namespace Frontend.Forms
             // 
             // pnlConnection
             // 
-            pnlConnection.Anchor = AnchorStyles.None;
+            pnlConnection.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlConnection.AutoSize = true;
             pnlConnection.BackColor = Color.FromArgb(66, 66, 86);
-            pnlConnection.Controls.Add(btnClear);
-            pnlConnection.Controls.Add(cbEdit);
             pnlConnection.Controls.Add(grpPermissions);
             pnlConnection.Controls.Add(grpdgv);
-            pnlConnection.Controls.Add(btnSavePerms);
-            pnlConnection.Location = new Point(236, 6);
+            pnlConnection.Location = new Point(236, 12);
             pnlConnection.Name = "pnlConnection";
-            pnlConnection.Size = new Size(939, 571);
+            pnlConnection.Size = new Size(931, 551);
             pnlConnection.TabIndex = 1;
             pnlConnection.Tag = "";
             // 
             // grpPermissions
             // 
-            grpPermissions.Anchor = AnchorStyles.None;
+            grpPermissions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpPermissions.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             grpPermissions.Controls.Add(grpScan);
             grpPermissions.Controls.Add(grpQual);
             grpPermissions.Controls.Add(lblPremFilCurrent);
@@ -275,55 +273,28 @@ namespace Frontend.Forms
             grpPermissions.Controls.Add(lblCNCMill);
             grpPermissions.Controls.Add(lblRes);
             grpPermissions.Controls.Add(lblStdFil);
-            grpPermissions.Enabled = false;
             grpPermissions.ForeColor = Color.WhiteSmoke;
-            grpPermissions.Location = new Point(312, 6);
+            grpPermissions.Location = new Point(308, 6);
             grpPermissions.Name = "grpPermissions";
-            grpPermissions.Size = new Size(619, 562);
+            grpPermissions.Size = new Size(612, 540);
             grpPermissions.TabIndex = 0;
             grpPermissions.TabStop = false;
             grpPermissions.Text = "Info";
             // 
             // grpScan
             // 
-            grpScan.Anchor = AnchorStyles.None;
+            grpScan.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             grpScan.Controls.Add(grpInfo);
             grpScan.Controls.Add(lblId);
             grpScan.Controls.Add(txtId);
             grpScan.Controls.Add(btnScan);
             grpScan.ForeColor = Color.WhiteSmoke;
-            grpScan.Location = new Point(9, 272);
+            grpScan.Location = new Point(6, 239);
             grpScan.Name = "grpScan";
-            grpScan.Size = new Size(598, 272);
+            grpScan.Size = new Size(600, 295);
             grpScan.TabIndex = 1;
             grpScan.TabStop = false;
             grpScan.Text = "Scan";
-            // 
-            // cbEdit
-            // 
-            cbEdit.AutoSize = true;
-            cbEdit.ForeColor = Color.WhiteSmoke;
-            cbEdit.Location = new Point(3, 6);
-            cbEdit.Name = "cbEdit";
-            cbEdit.Size = new Size(80, 19);
-            cbEdit.TabIndex = 19;
-            cbEdit.Text = "Edit Mode";
-            cbEdit.UseVisualStyleBackColor = true;
-            cbEdit.CheckedChanged += cbEdit_CheckedChanged;
-            // 
-            // btnClear
-            // 
-            btnClear.BackColor = Color.Gold;
-            btnClear.FlatStyle = FlatStyle.Flat;
-            btnClear.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnClear.ForeColor = Color.Black;
-            btnClear.Location = new Point(196, 39);
-            btnClear.Name = "btnClear";
-            btnClear.Size = new Size(104, 23);
-            btnClear.TabIndex = 15;
-            btnClear.Text = "Clear";
-            btnClear.UseVisualStyleBackColor = false;
-            btnClear.Click += btnClear_Click;
             // 
             // grpInfo
             // 
@@ -333,7 +304,7 @@ namespace Frontend.Forms
             grpInfo.ForeColor = Color.WhiteSmoke;
             grpInfo.Location = new Point(125, 10);
             grpInfo.Name = "grpInfo";
-            grpInfo.Size = new Size(467, 256);
+            grpInfo.Size = new Size(469, 279);
             grpInfo.TabIndex = 0;
             grpInfo.TabStop = false;
             grpInfo.Text = "Info";
@@ -368,7 +339,7 @@ namespace Frontend.Forms
             tblInfo.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857161F));
             tblInfo.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857161F));
             tblInfo.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857161F));
-            tblInfo.Size = new Size(453, 210);
+            tblInfo.Size = new Size(455, 233);
             tblInfo.TabIndex = 17;
             // 
             // lblName
@@ -385,7 +356,7 @@ namespace Frontend.Forms
             // 
             lblSex.AutoSize = true;
             lblSex.ForeColor = Color.WhiteSmoke;
-            lblSex.Location = new Point(3, 29);
+            lblSex.Location = new Point(3, 33);
             lblSex.Name = "lblSex";
             lblSex.Size = new Size(28, 15);
             lblSex.TabIndex = 8;
@@ -395,7 +366,7 @@ namespace Frontend.Forms
             // 
             lblDoB.AutoSize = true;
             lblDoB.ForeColor = Color.WhiteSmoke;
-            lblDoB.Location = new Point(3, 59);
+            lblDoB.Location = new Point(3, 66);
             lblDoB.Name = "lblDoB";
             lblDoB.Size = new Size(76, 15);
             lblDoB.TabIndex = 9;
@@ -405,7 +376,7 @@ namespace Frontend.Forms
             // 
             lblPhone.AutoSize = true;
             lblPhone.ForeColor = Color.WhiteSmoke;
-            lblPhone.Location = new Point(3, 89);
+            lblPhone.Location = new Point(3, 99);
             lblPhone.Name = "lblPhone";
             lblPhone.Size = new Size(89, 15);
             lblPhone.TabIndex = 10;
@@ -413,7 +384,7 @@ namespace Frontend.Forms
             // 
             // dtpValid
             // 
-            dtpValid.Location = new Point(111, 182);
+            dtpValid.Location = new Point(111, 201);
             dtpValid.Name = "dtpValid";
             dtpValid.Size = new Size(342, 23);
             dtpValid.TabIndex = 7;
@@ -422,7 +393,7 @@ namespace Frontend.Forms
             // 
             lblValid.AutoSize = true;
             lblValid.ForeColor = Color.WhiteSmoke;
-            lblValid.Location = new Point(3, 179);
+            lblValid.Location = new Point(3, 198);
             lblValid.Name = "lblValid";
             lblValid.Size = new Size(62, 15);
             lblValid.TabIndex = 13;
@@ -434,7 +405,7 @@ namespace Frontend.Forms
             cmbSubscription.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbSubscription.ForeColor = Color.Black;
             cmbSubscription.FormattingEnabled = true;
-            cmbSubscription.Location = new Point(111, 152);
+            cmbSubscription.Location = new Point(111, 168);
             cmbSubscription.Name = "cmbSubscription";
             cmbSubscription.Size = new Size(342, 23);
             cmbSubscription.TabIndex = 6;
@@ -443,7 +414,7 @@ namespace Frontend.Forms
             // 
             lblEMail.AutoSize = true;
             lblEMail.ForeColor = Color.WhiteSmoke;
-            lblEMail.Location = new Point(3, 119);
+            lblEMail.Location = new Point(3, 132);
             lblEMail.Name = "lblEMail";
             lblEMail.Size = new Size(41, 15);
             lblEMail.TabIndex = 11;
@@ -453,7 +424,7 @@ namespace Frontend.Forms
             // 
             txtEmail.BackColor = Color.WhiteSmoke;
             txtEmail.ForeColor = Color.Black;
-            txtEmail.Location = new Point(111, 122);
+            txtEmail.Location = new Point(111, 135);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(342, 23);
             txtEmail.TabIndex = 5;
@@ -462,7 +433,7 @@ namespace Frontend.Forms
             // 
             lblSubscription.AutoSize = true;
             lblSubscription.ForeColor = Color.WhiteSmoke;
-            lblSubscription.Location = new Point(3, 149);
+            lblSubscription.Location = new Point(3, 165);
             lblSubscription.Name = "lblSubscription";
             lblSubscription.Size = new Size(102, 15);
             lblSubscription.TabIndex = 12;
@@ -472,7 +443,7 @@ namespace Frontend.Forms
             // 
             txtNumber.BackColor = Color.WhiteSmoke;
             txtNumber.ForeColor = Color.Black;
-            txtNumber.Location = new Point(111, 92);
+            txtNumber.Location = new Point(111, 102);
             txtNumber.Name = "txtNumber";
             txtNumber.Size = new Size(342, 23);
             txtNumber.TabIndex = 4;
@@ -488,7 +459,7 @@ namespace Frontend.Forms
             // 
             // dtpDoB
             // 
-            dtpDoB.Location = new Point(111, 62);
+            dtpDoB.Location = new Point(111, 69);
             dtpDoB.Name = "dtpDoB";
             dtpDoB.Size = new Size(342, 23);
             dtpDoB.TabIndex = 3;
@@ -500,7 +471,7 @@ namespace Frontend.Forms
             cmbSex.DropDownWidth = 96;
             cmbSex.ForeColor = Color.Black;
             cmbSex.FormattingEnabled = true;
-            cmbSex.Location = new Point(111, 32);
+            cmbSex.Location = new Point(111, 36);
             cmbSex.Name = "cmbSex";
             cmbSex.Size = new Size(342, 23);
             cmbSex.TabIndex = 2;
@@ -528,6 +499,7 @@ namespace Frontend.Forms
             // btnScan
             // 
             btnScan.BackColor = Color.Gold;
+            btnScan.Enabled = false;
             btnScan.FlatStyle = FlatStyle.Flat;
             btnScan.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnScan.ForeColor = Color.Black;
@@ -555,9 +527,9 @@ namespace Frontend.Forms
             grpQual.Controls.Add(lblRaise3D);
             grpQual.Controls.Add(lblCreality);
             grpQual.ForeColor = SystemColors.GrayText;
-            grpQual.Location = new Point(329, 103);
+            grpQual.Location = new Point(329, 67);
             grpQual.Name = "grpQual";
-            grpQual.Size = new Size(278, 132);
+            grpQual.Size = new Size(278, 168);
             grpQual.TabIndex = 41;
             grpQual.TabStop = false;
             grpQual.Text = "Qualified for:";
@@ -722,21 +694,6 @@ namespace Frontend.Forms
             lblResinCurrent.TabIndex = 37;
             lblResinCurrent.Text = "Currently:";
             // 
-            // btnSavePerms
-            // 
-            btnSavePerms.BackColor = Color.Gold;
-            btnSavePerms.Enabled = false;
-            btnSavePerms.FlatStyle = FlatStyle.Flat;
-            btnSavePerms.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnSavePerms.ForeColor = Color.Black;
-            btnSavePerms.Location = new Point(196, 9);
-            btnSavePerms.Name = "btnSavePerms";
-            btnSavePerms.Size = new Size(104, 23);
-            btnSavePerms.TabIndex = 16;
-            btnSavePerms.Text = "Save Changes";
-            btnSavePerms.UseVisualStyleBackColor = false;
-            btnSavePerms.Click += btnSavePerms_Click;
-            // 
             // lblStdFilCurrent
             // 
             lblStdFilCurrent.AutoSize = true;
@@ -816,7 +773,7 @@ namespace Frontend.Forms
             txtSelect.Location = new Point(73, 22);
             txtSelect.Name = "txtSelect";
             txtSelect.ReadOnly = true;
-            txtSelect.Size = new Size(395, 23);
+            txtSelect.Size = new Size(534, 23);
             txtSelect.TabIndex = 23;
             // 
             // lblPremFil
@@ -871,26 +828,55 @@ namespace Frontend.Forms
             // 
             // grpdgv
             // 
-            grpdgv.Anchor = AnchorStyles.None;
+            grpdgv.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpdgv.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            grpdgv.Controls.Add(cbEdit);
+            grpdgv.Controls.Add(btnClear);
             grpdgv.Controls.Add(txtValue);
             grpdgv.Controls.Add(dgvData);
+            grpdgv.Controls.Add(btnSavePerms);
             grpdgv.Controls.Add(cmbValue);
             grpdgv.ForeColor = Color.WhiteSmoke;
-            grpdgv.Location = new Point(3, 67);
+            grpdgv.Location = new Point(3, 6);
             grpdgv.Name = "grpdgv";
-            grpdgv.Size = new Size(303, 489);
+            grpdgv.Size = new Size(299, 540);
             grpdgv.TabIndex = 4;
             grpdgv.TabStop = false;
             grpdgv.Text = "Users";
             // 
+            // cbEdit
+            // 
+            cbEdit.AutoSize = true;
+            cbEdit.ForeColor = Color.WhiteSmoke;
+            cbEdit.Location = new Point(6, 22);
+            cbEdit.Name = "cbEdit";
+            cbEdit.Size = new Size(80, 19);
+            cbEdit.TabIndex = 19;
+            cbEdit.Text = "Edit Mode";
+            cbEdit.UseVisualStyleBackColor = true;
+            cbEdit.CheckedChanged += cbEdit_CheckedChanged;
+            // 
+            // btnClear
+            // 
+            btnClear.BackColor = Color.Gold;
+            btnClear.FlatStyle = FlatStyle.Flat;
+            btnClear.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnClear.ForeColor = Color.Black;
+            btnClear.Location = new Point(189, 48);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(104, 23);
+            btnClear.TabIndex = 15;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = false;
+            btnClear.Click += btnClear_Click;
+            // 
             // txtValue
             // 
             txtValue.BackColor = Color.WhiteSmoke;
-            txtValue.Dock = DockStyle.Top;
             txtValue.ForeColor = Color.Black;
-            txtValue.Location = new Point(3, 42);
+            txtValue.Location = new Point(6, 106);
             txtValue.Name = "txtValue";
-            txtValue.Size = new Size(297, 23);
+            txtValue.Size = new Size(287, 23);
             txtValue.TabIndex = 2;
             txtValue.TextChanged += txtValue_TextChanged;
             // 
@@ -898,15 +884,15 @@ namespace Frontend.Forms
             // 
             dgvData.AllowUserToAddRows = false;
             dgvData.AllowUserToDeleteRows = false;
-            dgvData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dgvData.BackgroundColor = Color.FromArgb(100, 100, 120);
             dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvData.Columns.AddRange(new DataGridViewColumn[] { Id, Username });
-            dgvData.Location = new Point(6, 75);
+            dgvData.Location = new Point(6, 142);
             dgvData.Name = "dgvData";
             dgvData.ReadOnly = true;
             dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvData.Size = new Size(291, 408);
+            dgvData.Size = new Size(287, 392);
             dgvData.TabIndex = 1;
             dgvData.CellContentClick += dgvData_CellContentClick;
             // 
@@ -926,16 +912,30 @@ namespace Frontend.Forms
             Username.Name = "Username";
             Username.ReadOnly = true;
             // 
+            // btnSavePerms
+            // 
+            btnSavePerms.BackColor = Color.Gold;
+            btnSavePerms.Enabled = false;
+            btnSavePerms.FlatStyle = FlatStyle.Flat;
+            btnSavePerms.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnSavePerms.ForeColor = Color.Black;
+            btnSavePerms.Location = new Point(189, 19);
+            btnSavePerms.Name = "btnSavePerms";
+            btnSavePerms.Size = new Size(104, 23);
+            btnSavePerms.TabIndex = 16;
+            btnSavePerms.Text = "Save Changes";
+            btnSavePerms.UseVisualStyleBackColor = false;
+            btnSavePerms.Click += btnSavePerms_Click;
+            // 
             // cmbValue
             // 
             cmbValue.BackColor = Color.WhiteSmoke;
-            cmbValue.Dock = DockStyle.Top;
             cmbValue.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbValue.ForeColor = Color.Black;
             cmbValue.FormattingEnabled = true;
-            cmbValue.Location = new Point(3, 19);
+            cmbValue.Location = new Point(6, 77);
             cmbValue.Name = "cmbValue";
-            cmbValue.Size = new Size(297, 23);
+            cmbValue.Size = new Size(287, 23);
             cmbValue.TabIndex = 3;
             // 
             // err
@@ -958,14 +958,15 @@ namespace Frontend.Forms
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.Black;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1179, 569);
             Controls.Add(pnlConnection);
             Controls.Add(pnlButtons);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MaximizeBox = false;
             MinimumSize = new Size(816, 490);
             Name = "frmStart";
             StartPosition = FormStartPosition.CenterScreen;
@@ -976,7 +977,6 @@ namespace Frontend.Forms
             ((System.ComponentModel.ISupportInitialize)pbConnection).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbLogo).EndInit();
             pnlConnection.ResumeLayout(false);
-            pnlConnection.PerformLayout();
             grpPermissions.ResumeLayout(false);
             grpPermissions.PerformLayout();
             grpScan.ResumeLayout(false);

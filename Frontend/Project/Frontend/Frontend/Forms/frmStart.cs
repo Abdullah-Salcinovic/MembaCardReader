@@ -53,7 +53,7 @@ namespace Frontend.Forms
 
         private bool Connected;
 
-        private Panel CurrentPanel;
+       
 
 
 
@@ -76,7 +76,7 @@ namespace Frontend.Forms
 
 
 
-            this.CurrentPanel = this.pnlConnection;
+       
 
 
 
@@ -132,7 +132,6 @@ namespace Frontend.Forms
             
           
 
-            this.CurrentPanel = this.pnlConnection;
 
 
             ScanPorts();
@@ -288,11 +287,11 @@ namespace Frontend.Forms
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
-        {
+        {          
 
             ManageConnection();
 
-
+   
         }
 
         private async void ManageConnection()
@@ -355,7 +354,7 @@ namespace Frontend.Forms
                         this.btnScanPort.Enabled = false;
                         this.pbConnection.Image = Resources.SharedResources.Green;
                         this.Connected = true;
-
+                        this.btnScan.Enabled = true;
                     }
                 }
                 catch (Exception)
@@ -384,7 +383,8 @@ namespace Frontend.Forms
                 this.btnConnect.Text = "Connect";
                 this.lblConnectionStatus.Text = "Disconnected";
                 this.Connected = false;
-                this.CurrentPanel = pnlConnection;
+                this.btnScan.Enabled = false;
+              
 
                 this.cmbPort.Enabled = true;
                 this.btnScanPort.Enabled = true;
@@ -431,19 +431,23 @@ namespace Frontend.Forms
         private void HandleEdit()
         {
 
-          
-
+            this.btnSavePerms.Enabled = this.cbEdit.Checked;
+           
 
         }
 
         private async void btnScan_Click(object sender, EventArgs e)
         {
-            ScanCode();
-            if (txtId.Text != System.String.Empty && txtId.Text != null)
+            if (Connected)
             {
-                await GetAsync($"/customer?id={txtId.Text}", sharedClient);
-            }
 
+                ScanCode();
+                if (txtId.Text != System.String.Empty && txtId.Text != null)
+                {
+                    await GetAsync($"/customer?id={txtId.Text}", sharedClient);
+                }
+
+            }
 
 
         }
@@ -529,20 +533,31 @@ namespace Frontend.Forms
 
         private async Task Put2Async(string endpoint, HttpClient httpClient, CustomerGetAll requestData)
         {
-            var jsonContent = JsonConvert.SerializeObject(requestData);
 
-            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
-            using HttpResponseMessage response = await httpClient.PutAsync($"/api{endpoint}", content);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                MessageBox.Show("User updated successfully");
+                var jsonContent = JsonConvert.SerializeObject(requestData);
+
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                using HttpResponseMessage response = await httpClient.PutAsync($"/api{endpoint}", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("User updated successfully");
+                }
+                else
+                {
+                    MessageBox.Show($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+
+               
             }
+
+           
         }
 
 
@@ -555,8 +570,6 @@ namespace Frontend.Forms
 
             try
             {
-
-
 
                 this.OpenPort!.WriteLine(SCN.ID);
 
@@ -645,28 +658,7 @@ namespace Frontend.Forms
 
         }
 
-        private async void btnSaveChanges_Click(object sender, EventArgs e)
-        {
-            if (ValidateInput())
-            {
-                var customer = new CustomerPutRes()
-                {
-                    Id = this.scndID,
-                    Name = this.txtName.Text,
-                    DateOfBirth = this.dtpDoB.Value,
-                    Email = this.txtEmail.Text,
-                    ExpirationDate = this.dtpValid.Value,
-                    Phone = this.txtNumber.Text,
-                    Sex = this.cmbSex.Text,
-                    Subscription = this.cmbSubscription.Text
-                };
 
-                await PutAsync($"/customera/{customer.Id}", sharedClient, customer);
-
-                SaveChanges();
-            }
-
-        }
 
         private void Clear()
         {
@@ -800,6 +792,27 @@ namespace Frontend.Forms
                 };
 
                 await Put2Async($"/customer/{data.Id}", sharedClient, data);
+
+
+                if (ValidateInput())
+                {
+                    var customer = new CustomerPutRes()
+                    {
+                        Id = this.scndID,
+                        Name = this.txtName.Text,
+                        DateOfBirth = this.dtpDoB.Value,
+                        Email = this.txtEmail.Text,
+                        ExpirationDate = this.dtpValid.Value,
+                        Phone = this.txtNumber.Text,
+                        Sex = this.cmbSex.Text,
+                        Subscription = this.cmbSubscription.Text
+                    };
+
+                    await PutAsync($"/customera/{customer.Id}", sharedClient, customer);
+
+                    SaveChanges();
+                }
+
             }
 
             this.cbEdit.Checked = false;
