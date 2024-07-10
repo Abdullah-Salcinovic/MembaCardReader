@@ -80,14 +80,6 @@ namespace Frontend.Resources {
             }
         }
 
-        internal static System.Drawing.Bitmap Loading
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Loading", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
 
         internal static System.Drawing.Bitmap LeftPnl
         {
