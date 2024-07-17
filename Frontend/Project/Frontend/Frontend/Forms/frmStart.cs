@@ -53,7 +53,7 @@ namespace Frontend.Forms
 
         private bool Connected;
 
-       
+
 
 
 
@@ -76,7 +76,7 @@ namespace Frontend.Forms
 
 
 
-       
+
 
 
 
@@ -129,8 +129,8 @@ namespace Frontend.Forms
             this.cmbValue.DataSource = this.SearchFilters;
 
             HandleEdit();
-            
-          
+
+
 
 
 
@@ -176,7 +176,7 @@ namespace Frontend.Forms
                         ChangeFormText("Please wait...");
 
 
-                       
+
 
 
 
@@ -287,11 +287,11 @@ namespace Frontend.Forms
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
-        {          
+        {
 
             ManageConnection();
 
-   
+
         }
 
         private async void ManageConnection()
@@ -326,7 +326,7 @@ namespace Frontend.Forms
 
                     ChangeFormText("Please wait...");
 
-                   
+
                     await Task.Run(() =>
                     {
 
@@ -349,7 +349,7 @@ namespace Frontend.Forms
                         this.btnConnect.Text = "Disconnect";
                         this.lblConnectionStatus.Text = "Connected";
 
-                    
+
                         this.cmbPort.Enabled = false;
                         this.btnScanPort.Enabled = false;
                         this.pbConnection.Image = Resources.SharedResources.Green;
@@ -379,12 +379,12 @@ namespace Frontend.Forms
                     this.OpenPort.Dispose();
                 }
 
-               
+
                 this.btnConnect.Text = "Connect";
                 this.lblConnectionStatus.Text = "Disconnected";
                 this.Connected = false;
                 this.btnScan.Enabled = false;
-              
+
 
                 this.cmbPort.Enabled = true;
                 this.btnScanPort.Enabled = true;
@@ -432,7 +432,7 @@ namespace Frontend.Forms
         {
 
             this.btnSavePerms.Enabled = this.cbEdit.Checked;
-           
+
 
         }
 
@@ -554,10 +554,10 @@ namespace Frontend.Forms
             catch (Exception)
             {
 
-               
+
             }
 
-           
+
         }
 
 
@@ -769,7 +769,7 @@ namespace Frontend.Forms
             }
         }
 
-       
+
         private async void btnSavePerms_Click(object sender, EventArgs e)
         {
             if (cbEdit.Checked == true)
