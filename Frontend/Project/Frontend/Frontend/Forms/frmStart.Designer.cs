@@ -34,6 +34,7 @@ namespace Frontend.Forms
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStart));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             pnlButtons = new Panel();
             pbConnection = new PictureBox();
             lblConnectionStatus = new Label();
@@ -45,6 +46,7 @@ namespace Frontend.Forms
             pnlConnection = new Panel();
             grpPermissions = new GroupBox();
             grpScan = new GroupBox();
+            btnDelete = new Button();
             grpInfo = new GroupBox();
             tblInfo = new TableLayoutPanel();
             lblName = new Label();
@@ -240,7 +242,6 @@ namespace Frontend.Forms
             // pnlConnection
             // 
             pnlConnection.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pnlConnection.AutoSize = true;
             pnlConnection.BackColor = Color.FromArgb(66, 66, 86);
             pnlConnection.Controls.Add(grpPermissions);
             pnlConnection.Controls.Add(grpdgv);
@@ -284,6 +285,7 @@ namespace Frontend.Forms
             // grpScan
             // 
             grpScan.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpScan.Controls.Add(btnDelete);
             grpScan.Controls.Add(grpInfo);
             grpScan.Controls.Add(lblId);
             grpScan.Controls.Add(txtId);
@@ -295,6 +297,20 @@ namespace Frontend.Forms
             grpScan.TabIndex = 1;
             grpScan.TabStop = false;
             grpScan.Text = "Scan";
+            // 
+            // btnDelete
+            // 
+            btnDelete.BackColor = Color.Gold;
+            btnDelete.FlatStyle = FlatStyle.Flat;
+            btnDelete.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnDelete.ForeColor = Color.Black;
+            btnDelete.Location = new Point(8, 136);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(111, 23);
+            btnDelete.TabIndex = 19;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // grpInfo
             // 
@@ -409,6 +425,7 @@ namespace Frontend.Forms
             cmbSubscription.Name = "cmbSubscription";
             cmbSubscription.Size = new Size(342, 23);
             cmbSubscription.TabIndex = 6;
+            cmbSubscription.SelectedIndexChanged += cmbSubscription_SelectedIndexChanged;
             // 
             // lblEMail
             // 
@@ -495,6 +512,7 @@ namespace Frontend.Forms
             txtId.ReadOnly = true;
             txtId.Size = new Size(113, 23);
             txtId.TabIndex = 17;
+            txtId.TextChanged += txtId_TextChanged;
             // 
             // btnScan
             // 
@@ -599,6 +617,7 @@ namespace Frontend.Forms
             pbCreality.SizeMode = PictureBoxSizeMode.StretchImage;
             pbCreality.TabIndex = 9;
             pbCreality.TabStop = false;
+            pbCreality.Click += pbCreality_Click;
             // 
             // lblElectronics
             // 
@@ -765,6 +784,7 @@ namespace Frontend.Forms
             numStdFil.Name = "numStdFil";
             numStdFil.Size = new Size(120, 23);
             numStdFil.TabIndex = 24;
+            numStdFil.ValueChanged += numStdFil_ValueChanged;
             // 
             // txtSelect
             // 
@@ -888,6 +908,15 @@ namespace Frontend.Forms
             dgvData.BackgroundColor = Color.FromArgb(100, 100, 120);
             dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvData.Columns.AddRange(new DataGridViewColumn[] { Id, Username });
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgvData.DefaultCellStyle = dataGridViewCellStyle1;
+            dgvData.GridColor = Color.Black;
             dgvData.Location = new Point(6, 142);
             dgvData.Name = "dgvData";
             dgvData.ReadOnly = true;
@@ -899,7 +928,7 @@ namespace Frontend.Forms
             // Id
             // 
             Id.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Id.DataPropertyName = "Id";
+            Id.DataPropertyName = "UserId";
             Id.HeaderText = "Id";
             Id.Name = "Id";
             Id.ReadOnly = true;
@@ -1002,7 +1031,6 @@ namespace Frontend.Forms
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
             ((System.ComponentModel.ISupportInitialize)err).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -1080,5 +1108,6 @@ namespace Frontend.Forms
         private GroupBox grpdgv;
         private TableLayoutPanel tblInfo;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Button btnDelete;
     }
 }

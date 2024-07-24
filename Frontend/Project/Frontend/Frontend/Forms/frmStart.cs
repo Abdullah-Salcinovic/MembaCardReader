@@ -19,6 +19,8 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Net.Http;
 using System.Drawing.Drawing2D;
 using System.Reflection.Metadata;
+using Microsoft.VisualBasic.ApplicationServices;
+using System.Xml.Linq;
 
 namespace Frontend.Forms
 {
@@ -29,19 +31,22 @@ namespace Frontend.Forms
     {
         private static HttpClient sharedClient = new()
         {
-            BaseAddress = new Uri("http://192.168.1.138:5974")
+            BaseAddress = new Uri("http://192.168.1.203:5974")
         };
+
+        private string uri = "http://192.168.1.203:5974";
 
         private string slctdID;
         private string slctdName;
         private string scndID;
+
+        private int resID;
 
         private int Loading;
 
         private const float Rotating_Angle = 10.0f;
 
         private readonly Point PanelLoc = new Point(248, 12);
-
 
         private List<string> PortNames;
 
@@ -53,18 +58,11 @@ namespace Frontend.Forms
 
         private bool Connected;
 
-       
-
-
-
         private List<string> SearchFilters;
-
 
         private List<string> Sexes;
 
         private List<string> Subscriptions;
-
-
 
         public frmStart()
         {
@@ -73,12 +71,6 @@ namespace Frontend.Forms
             this.dgvData.AutoGenerateColumns = false;
 
             this.BaudIdeal = new List<int>();
-
-
-
-       
-
-
 
             this.Sexes = new List<string>()
             {
@@ -91,7 +83,6 @@ namespace Frontend.Forms
                 "Basic",
                 "Student",
                 "Premium"
-
             };
 
             this.SearchFilters = new List<string>()
@@ -107,13 +98,20 @@ namespace Frontend.Forms
             this.ValidPorts = new List<COM_Scanner>();
             this.Connected = false;
 
-
         }
 
-        private void frmStart_Load(object sender, EventArgs e)
+        private async void frmStart_Load(object sender, EventArgs e)
         {
-
-
+            try
+            {
+                using var httpClient = new HttpClient();
+                var users = await GetAllUsersAsync(httpClient);
+                dgvData.DataSource = users;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error");
+            }
 
             foreach (Control item in this.Controls)
             {
@@ -123,16 +121,11 @@ namespace Frontend.Forms
                 }
             }
 
-
             this.cmbSex.DataSource = this.Sexes;
             this.cmbSubscription.DataSource = this.Subscriptions;
             this.cmbValue.DataSource = this.SearchFilters;
 
             HandleEdit();
-            
-          
-
-
 
             ScanPorts();
         }
@@ -151,8 +144,6 @@ namespace Frontend.Forms
             {
                 SerialPort tempSerialPort = new SerialPort(portName);
 
-
-
                 try
                 {
 
@@ -164,21 +155,13 @@ namespace Frontend.Forms
                             tempSerialPort.Close();
                         }
 
-
                         tempSerialPort.BaudRate = baud;
 
-
                         tempSerialPort.Open();
-
 
                         tempSerialPort.WriteLine(SCN.ID);
 
                         ChangeFormText("Please wait...");
-
-
-                       
-
-
 
                         await Task.Run(() =>
                         {
@@ -287,11 +270,11 @@ namespace Frontend.Forms
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
-        {          
+        {
 
             ManageConnection();
 
-   
+
         }
 
         private async void ManageConnection()
@@ -326,7 +309,7 @@ namespace Frontend.Forms
 
                     ChangeFormText("Please wait...");
 
-                   
+
                     await Task.Run(() =>
                     {
 
@@ -349,12 +332,13 @@ namespace Frontend.Forms
                         this.btnConnect.Text = "Disconnect";
                         this.lblConnectionStatus.Text = "Connected";
 
-                    
+
                         this.cmbPort.Enabled = false;
                         this.btnScanPort.Enabled = false;
                         this.pbConnection.Image = Resources.SharedResources.Green;
                         this.Connected = true;
                         this.btnScan.Enabled = true;
+                        
                     }
                 }
                 catch (Exception)
@@ -379,12 +363,12 @@ namespace Frontend.Forms
                     this.OpenPort.Dispose();
                 }
 
-               
+
                 this.btnConnect.Text = "Connect";
                 this.lblConnectionStatus.Text = "Disconnected";
                 this.Connected = false;
                 this.btnScan.Enabled = false;
-              
+
 
                 this.cmbPort.Enabled = true;
                 this.btnScanPort.Enabled = true;
@@ -396,8 +380,6 @@ namespace Frontend.Forms
             }
 
         }
-
-
 
         private void cmbPort_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -432,7 +414,7 @@ namespace Frontend.Forms
         {
 
             this.btnSavePerms.Enabled = this.cbEdit.Checked;
-           
+
 
         }
 
@@ -444,7 +426,16 @@ namespace Frontend.Forms
                 ScanCode();
                 if (txtId.Text != System.String.Empty && txtId.Text != null)
                 {
-                    await GetAsync($"/customer?id={txtId.Text}", sharedClient);
+                    try
+                    {
+                        using var httpClient = new HttpClient();
+                        var users = await GetAllUsersAsync(httpClient);
+                        dgvData.DataSource = users;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}", "Error");
+                    }
                 }
 
             }
@@ -487,31 +478,108 @@ namespace Frontend.Forms
 
         }
 
-        private async Task GetAllAsync(string endpoint, HttpClient httpClient)
+        private async Task<bool> UpdateUserAsync(UpdateUserRequest user, HttpClient httpClient)
         {
-            try
-            {
-                using HttpResponseMessage response = await httpClient.GetAsync($"/api{endpoint}");
-
-                var jsonResponse = await response.Content.ReadAsStringAsync();
-
-                var data = JsonConvert.DeserializeObject<CustomerGetAllResponse>(jsonResponse);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    dgvData.DataSource = data?.Customers;
-                }
-                else
-                {
-                    MessageBox.Show($"Error: {response.StatusCode} - {response.ReasonPhrase}", "Database error");
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("The server appears to be unresponsive.", "Error");
-            }
-
+            var jsonContent = JsonConvert.SerializeObject(user);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            var response = await httpClient.PutAsync($"{uri}/api/User/{user.UserId}", content);
+            return response.IsSuccessStatusCode;
         }
+
+        private async Task<UserResponse?> GetUserByIdAsync(string id, HttpClient httpClient)
+        {
+            var response = await httpClient.GetAsync($"{uri}/api/User/{id}");
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            return response.IsSuccessStatusCode ? JsonConvert.DeserializeObject<UserResponse>(jsonResponse) : null;
+        }
+
+        private async Task<UserResponse?> CreateUserAsync(CreateUserRequest user, HttpClient httpClient)
+        {
+            var jsonContent = JsonConvert.SerializeObject(user);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync($"{uri}/api/User", content);
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            return response.IsSuccessStatusCode ? JsonConvert.DeserializeObject<UserResponse>(jsonResponse) : null;
+        }
+
+        private async Task<List<UserResponse>?> GetAllUsersAsync(HttpClient httpClient)
+        {
+            var response = await httpClient.GetAsync($"{uri}/api/User");
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            return response.IsSuccessStatusCode ? JsonConvert.DeserializeObject<List<UserResponse>>(jsonResponse) : new List<UserResponse>();
+        }
+
+        private async Task<List<UserResponse>?> GetUsersByNameAsync(string name, HttpClient httpClient)
+        {
+            var response = await httpClient.GetAsync($"{uri}/api/User/search?name={name}");
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            return response.IsSuccessStatusCode ? JsonConvert.DeserializeObject<List<UserResponse>>(jsonResponse) : new List<UserResponse>();
+        }
+
+        private async Task<List<UserResponse>?> GetUsersByIdAsync(string id, HttpClient httpClient)
+        {
+            var response = await httpClient.GetAsync($"{uri}/api/User/search?id={id}");
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            return response.IsSuccessStatusCode ? JsonConvert.DeserializeObject<List<UserResponse>>(jsonResponse) : new List<UserResponse>();
+        }
+
+        private async Task<List<UserResponse>?> DeleteUserAsync(string id, HttpClient httpClient)
+        {
+            var response = await httpClient.DeleteAsync($"{uri}/api/User/{id}");
+            MessageBox.Show(response.RequestMessage.ToString());
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            return response.IsSuccessStatusCode ? JsonConvert.DeserializeObject<List<UserResponse>>(jsonResponse) : new List<UserResponse>();
+        }
+
+        private async Task<List<UserResponse>?> DeleteResourceAsync(int id, HttpClient httpClient)
+        {
+            var response = await httpClient.DeleteAsync($"{uri}/api/Resource/{id}");
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            return response.IsSuccessStatusCode ? JsonConvert.DeserializeObject<List<UserResponse>>(jsonResponse) : new List<UserResponse>();
+        }
+
+        private void PopulateFormFields(UserResponse user)
+        {
+            this.txtSelect.Text = $"{user.Name} ({user.UserId})";
+            this.txtId.Text = user.UserId;
+            this.txtName.Text = user.Name;
+            this.cmbSex.SelectedItem = user.Sex;
+            this.dtpDoB.Value = user.DateOfBirth;
+            this.txtNumber.Text = user.PhoneNumber;
+            this.txtEmail.Text = user.Email;
+            this.cmbSubscription.SelectedItem = user.SubscriptionType;
+            this.dtpValid.Value = user.ValidUntil ?? DateTime.Now;
+
+            // Populate resources area
+            if (user.Resources != null && user.Resources.Count > 0)
+            {
+                var resource = user.Resources[0];
+                resID = resource.ResourceId;
+                this.numStdFil.Text = resource.StandardFilament.ToString();
+                this.numResin.Text = resource.Resin.ToString();
+                this.numCNCMill.Text = resource.Cncmill.ToString();
+                this.numLsrCut.Text = resource.LaserCutter.ToString();
+                this.numPremFil.Text = resource.PremiumFilament.ToString();
+                SubChange(user.SubscriptionType);
+            }
+        }
+
+        private void UpdateResourcesArea(UpdateUserRequest user)
+        {
+            // Update the resources area with the user's details.
+            if (user.Resources != null && user.Resources.Count > 0)
+            {
+                var resource = user.Resources[0];
+                resID = resource.ResourceId;
+                this.numStdFil.Text = resource.StandardFilament.ToString();
+                this.numResin.Text = resource.Resin.ToString();
+                this.numCNCMill.Text = resource.Cncmill.ToString();
+                this.numLsrCut.Text = resource.LaserCutter.ToString();
+                this.numPremFil.Text = resource.PremiumFilament.ToString();
+                SubChange(user.SubscriptionType);
+            }
+        }
+
 
         private async Task PutAsync(string endpoint, HttpClient httpClient, CustomerPutRes requestData)
         {
@@ -554,10 +622,10 @@ namespace Frontend.Forms
             catch (Exception)
             {
 
-               
+
             }
 
-           
+
         }
 
 
@@ -625,6 +693,7 @@ namespace Frontend.Forms
                     {
 
                         this.txtId.Text = rez;
+                        HandleScannedID(rez);
                     }
 
 
@@ -650,6 +719,48 @@ namespace Frontend.Forms
             this.btnScan.Enabled = true;
         }
 
+        private async void HandleScannedID(string scannedID)
+        {
+            try
+            {
+                using var httpClient = new HttpClient();
+                scannedID = scannedID.Replace("\0", "");
+                var user = await GetUserByIdAsync(scannedID, httpClient);
+                if (user != null)
+                {
+                    PopulateFormFields(user);
+                }
+                else
+                {
+                    var newUser = await CreateUserAsync(new CreateUserRequest
+                    {
+                        UserId = scannedID,
+                        Name = "New User", // Default values
+                        Sex = "Unknown",
+                        DateOfBirth = DateTime.Now,
+                        Resources = new List<CreateResourceRequest>
+                    {
+                        new CreateResourceRequest() // Default resource values
+                    }
+                    }, httpClient);
+                    if (newUser != null)
+                    {
+                        PopulateFormFields(newUser);
+                        dgvData.DataSource = await GetAllUsersAsync(httpClient);
+                        MessageBox.Show("New user created successfully");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to create new user", "Error");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error");
+            }
+        }
+
 
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -669,11 +780,9 @@ namespace Frontend.Forms
 
             this.txtId.Text = string.Empty;
             this.txtName.Text = string.Empty;
-            this.cmbSex.SelectedItem = null;
             this.dtpDoB.Value = DateTime.Now;
             this.txtNumber.Text = string.Empty;
             this.txtEmail.Text = string.Empty;
-            this.cmbSubscription.SelectedItem = null;
             this.dtpValid.Value = DateTime.Now;
 
 
@@ -769,7 +878,7 @@ namespace Frontend.Forms
             }
         }
 
-       
+
         private async void btnSavePerms_Click(object sender, EventArgs e)
         {
             if (cbEdit.Checked == true)
@@ -791,61 +900,101 @@ namespace Frontend.Forms
                     Electronics = this.pbElectronics.Image == Resources.SharedResources.Green
                 };
 
-                await Put2Async($"/customer/{data.Id}", sharedClient, data);
+                //await Put2Async($"/customer/{data.Id}", sharedClient, data);
 
-
-                if (ValidateInput())
+                try
                 {
-                    var customer = new CustomerPutRes()
+                    var updatedUser = new UpdateUserRequest
                     {
-                        Id = this.scndID,
-                        Name = this.txtName.Text,
-                        DateOfBirth = this.dtpDoB.Value,
-                        Email = this.txtEmail.Text,
-                        ExpirationDate = this.dtpValid.Value,
-                        Phone = this.txtNumber.Text,
-                        Sex = this.cmbSex.Text,
-                        Subscription = this.cmbSubscription.Text
+                        UserId = txtId.Text,
+                        Name = txtName.Text,
+                        Sex = cmbSex.SelectedItem.ToString(),
+                        DateOfBirth = dtpDoB.Value,
+                        PhoneNumber = txtNumber.Text,
+                        Email = txtEmail.Text,
+                        SubscriptionType = cmbSubscription.SelectedItem.ToString(),
+                        ValidUntil = dtpValid.Value,
+                        Resources = new List<UpdateResourceRequest>
+                    {
+                        new UpdateResourceRequest
+                        {
+                            ResourceId = resID,
+                            StandardFilament = int.Parse(numStdFil.Text),
+                            Resin = int.Parse(numResin.Text),
+                            Cncmill = decimal.Parse(numCNCMill.Text),
+                            LaserCutter = decimal.Parse(numLsrCut.Text),
+                            PremiumFilament = int.Parse(numPremFil.Text),
+                        }
+                    }
                     };
+                    this.txtSelect.Text = $"{updatedUser.Name} ({updatedUser.UserId})";
+                    SubChange(cmbSubscription.Text);
 
-                    await PutAsync($"/customera/{customer.Id}", sharedClient, customer);
-
-                    SaveChanges();
+                    using var httpClient = new HttpClient();
+                    var response = await UpdateUserAsync(updatedUser, httpClient);
+                    if (response)
+                    {
+                        MessageBox.Show("User updated successfully");
+                        UpdateResourcesArea(updatedUser);
+                        dgvData.DataSource = await GetAllUsersAsync(httpClient);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to update user");
+                    }
                 }
-
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}", "Error");
+                }
             }
-
             this.cbEdit.Checked = false;
         }
 
         private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.RowIndex < dgvData.RowCount && e.ColumnIndex >= 0 && e.ColumnIndex <= 1)
-            {
-                var data = dgvData.SelectedRows[0].DataBoundItem as CustomerGetAll;
-                this.slctdID = data!.Id!;
-                this.slctdName = data!.Name!;
-                this.txtSelect.Text = $"{data?.Name} ({data!.Id!})";
-                this.numStdFil.Value = decimal.Parse(data!.Filament!);
-                this.numResin.Value = decimal.Parse(data!.Resin!);
-                this.numCNCMill.Value = decimal.Parse(data!.Cncmill!);
-                this.numLsrCut.Value = decimal.Parse(data!.LaserCutter!);
-                this.numPremFil.Value = decimal.Parse(data!.PremiumFilament!);
+            var data = dgvData.SelectedRows[0].DataBoundItem as UserResponse;
+            this.txtSelect.Text = $"{data.Name} ({data.UserId})";
+            this.txtId.Text = data!.UserId!;
+            this.txtName.Text = data!.Name!;
+            this.txtSelect.Text = $"{data?.Name} ({data!.UserId!})";
+            this.txtNumber.Text = data!.PhoneNumber!;
+            this.txtEmail.Text = data!.Email!;
+            this.cmbSex.SelectedItem = data!.Sex!;
+            this.cmbSubscription.SelectedItem = data!.SubscriptionType!;
+            this.numStdFil.Value = data!.Resources!.Last().StandardFilament!;
+            this.numResin.Value = data!.Resources!.Last().Resin!;
+            this.numCNCMill.Value = data!.Resources!.Last().Cncmill!;
+            this.numLsrCut.Value = data!.Resources!.Last().LaserCutter!;
+            this.numPremFil.Value = data!.Resources!.Last().PremiumFilament!;
 
-                this.pbCreality.Image = (data.CrealityPrinters) ? Resources.SharedResources.Green : Resources.SharedResources.Red;
-                this.pbRaise3D.Image = (data.Raise3D) ? Resources.SharedResources.Green : Resources.SharedResources.Red;
-                this.pbLCD.Image = (data.Lcdprinters) ? Resources.SharedResources.Green : Resources.SharedResources.Red;
-                this.pbTools.Image = (data.Tools) ? Resources.SharedResources.Green : Resources.SharedResources.Red;
-                this.pbComputers.Image = (data.Computers) ? Resources.SharedResources.Green : Resources.SharedResources.Red;
-                this.pbElectronics.Image = (data.Electronics) ? Resources.SharedResources.Green : Resources.SharedResources.Red;
-
-            }
-
+            SubChange(data!.SubscriptionType!);
         }
 
-        private void txtValue_TextChanged(object sender, EventArgs e)
+        private async void txtValue_TextChanged(object sender, EventArgs e)
         {
+            try
+            {
+                if (cmbValue.Text == "Filter by Name")
+                {
+                    string name = txtValue.Text;
+                    using var httpClient = new HttpClient();
+                    var users = await GetUsersByNameAsync(name, httpClient);
+                    dgvData.DataSource = users;
+                }
+                else if (cmbValue.Text == "Filter by Id")
+                {
+                    string id = txtValue.Text;
+                    using var httpClient = new HttpClient();
+                    var users = await GetUsersByIdAsync(id, httpClient);
+                    dgvData.DataSource = users;
+                }
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error");
+            }
         }
 
 
@@ -907,10 +1056,84 @@ namespace Frontend.Forms
 
         }
 
-       
+        private void txtId_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numStdFil_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbCreality_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNumber_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SubChange(string subscription)
+        {
+            if (cmbSubscription.Text == "Basic")
+            {
+                this.pbCreality.Image = Resources.SharedResources.Green;
+                this.pbRaise3D.Image = Resources.SharedResources.Red;
+                this.pbLCD.Image = Resources.SharedResources.Red;
+                this.pbTools.Image = Resources.SharedResources.Red;
+                this.pbComputers.Image = Resources.SharedResources.Red;
+                this.pbElectronics.Image = Resources.SharedResources.Green;
+            }
+            else if (cmbSubscription.Text == "Student")
+            {
+                this.pbCreality.Image = Resources.SharedResources.Green;
+                this.pbRaise3D.Image = Resources.SharedResources.Red;
+                this.pbLCD.Image = Resources.SharedResources.Red;
+                this.pbTools.Image = Resources.SharedResources.Green;
+                this.pbComputers.Image = Resources.SharedResources.Green;
+                this.pbElectronics.Image = Resources.SharedResources.Green;
+            }
+            else
+            {
+                this.pbCreality.Image = Resources.SharedResources.Green;
+                this.pbRaise3D.Image = Resources.SharedResources.Green;
+                this.pbLCD.Image = Resources.SharedResources.Green;
+                this.pbTools.Image = Resources.SharedResources.Green;
+                this.pbComputers.Image = Resources.SharedResources.Green;
+                this.pbElectronics.Image = Resources.SharedResources.Green;
+            }
+        }
+
+        private void cmbSubscription_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SubChange(this.cmbSubscription.Text);
+        }
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var deletedUserId = txtId.Text;
+                using var httpClient = new HttpClient();
+                var users = await DeleteUserAsync(deletedUserId, httpClient);
+                if (users != null)
+                {
+                    dgvData.DataSource = users;
+                    dgvData.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("User deletion failed or no users returned.", "Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error");
+            }
+        }
+
     }
-
-
-
-
 }
